@@ -1,9 +1,11 @@
 import React from 'react'
+import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import '@/styles/globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { getPayloadClient } from '@/lib/payload'
+import { jsonLdHtml } from '@/lib/seo'
 import type {
   NavCategory,
   NavProcedure,
@@ -12,6 +14,8 @@ import type {
   SiteInfo,
 } from '@/components/layout/nav-types'
 import type { Category, Procedure } from '@/payload-types'
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 const serif = Cormorant_Garamond({
   subsets: ['latin', 'latin-ext'],
@@ -28,9 +32,85 @@ const sans = DM_Sans({
   display: 'swap',
 })
 
-export const metadata = {
-  description: 'Maravo Clinic — Estetică medicală și dermatologie.',
-  title: 'Maravo Clinic',
+const DEFAULT_DESCRIPTION =
+  'Maravo Clinic Timișoara — clinică de estetică medicală și dermatologie premium. Proceduri injectabile, tratamente faciale, aparatură de ultimă generație. Programează o consultație.'
+
+const OG_IMAGE = `${BASE_URL}/logo-gold.png`
+
+export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
+  // NOTE: a plain string title (no `title.template`) on purpose — per-page titles
+  // already include the "Maravo Clinic" brand (via defaultMetaTitle or explicit
+  // titles), so a global template would double the brand. A plain string here acts
+  // purely as the fallback for pages that don't set their own title.
+  title: 'Maravo Clinic Timișoara | Clinică Estetică Premium',
+  description: DEFAULT_DESCRIPTION,
+  alternates: {
+    canonical: BASE_URL,
+  },
+  icons: {
+    icon: '/favicon.webp',
+    shortcut: '/favicon.webp',
+    apple: '/logo-gold.png',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'Maravo Clinic',
+    locale: 'ro_RO',
+    url: BASE_URL,
+    title: 'Maravo Clinic Timișoara | Clinică Estetică Premium',
+    description: DEFAULT_DESCRIPTION,
+    images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Maravo Clinic Timișoara | Clinică Estetică Premium',
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#2E2018',
+}
+
+/**
+ * Builds the site-wide MedicalClinic schema.org JSON-LD object from site settings.
+ * Empty fields are omitted rather than emitted as null.
+ */
+function buildClinicJsonLd(site: SiteInfo): Record<string, unknown> {
+  const address: Record<string, unknown> = {
+    '@type': 'PostalAddress',
+    addressLocality: 'Timișoara',
+    addressCountry: 'RO',
+  }
+  if (site.address) address.streetAddress = site.address
+
+  const obj: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalClinic',
+    name: site.clinicName || 'Maravo Clinic',
+    url: BASE_URL,
+    image: OG_IMAGE,
+    logo: OG_IMAGE,
+    medicalSpecialty: 'Dermatology',
+    areaServed: 'Timișoara',
+    address,
+  }
+
+  const telephone = site.phone || process.env.CLINIC_PHONE
+  if (telephone) obj.telephone = telephone
+  if (site.email) obj.email = site.email
+
+  if (site.hours.length > 0) {
+    obj.openingHours = site.hours.map((h) => `${h.day} ${h.value}`.trim())
+  }
+
+  if (site.socials.length > 0) {
+    obj.sameAs = site.socials.map((s) => s.url)
+  }
+
+  return obj
 }
 
 /** Default nav links when CMS navigation global is empty */
@@ -155,10 +235,15 @@ async function fetchNavData() {
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   const { siteInfo, categories, procedures, navLinks, footerColumns } = await fetchNavData()
+  const clinicJsonLd = buildClinicJsonLd(siteInfo)
 
   return (
     <html lang="ro" className={`${serif.variable} ${sans.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdHtml(clinicJsonLd) }}
+        />
         <Header
           categories={categories}
           procedures={procedures}
