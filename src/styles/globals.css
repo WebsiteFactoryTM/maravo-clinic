@@ -5,6 +5,7 @@
 
 /* Brand palette and font utilities via @theme */
 @theme {
+  /* Note: Tailwind's built-in bg-black = #000, NOT brand --black (#241812). Use var(--black) in CSS for the espresso near-black. */
   --color-cream: var(--cream);
   --color-taupe: var(--taupe);
   --color-gold: var(--gold);

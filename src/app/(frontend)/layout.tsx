@@ -28,7 +28,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="ro" className={`${serif.variable} ${sans.variable}`}>
       <body>
-        <main>{children}</main>
+        <div>{children}</div>
       </body>
     </html>
   )
