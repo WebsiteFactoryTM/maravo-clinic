@@ -528,6 +528,314 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   .footer-cols { display: contents; }
 }
 
+/* ══════════════════════════════════════════════
+   CTA BUTTONS  (CtaButtons.tsx)
+══════════════════════════════════════════════ */
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.cta-buttons--stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+.cta-buttons--stacked .btn-primary,
+.cta-buttons--stacked .btn-dark,
+.cta-buttons--stacked .btn-outline {
+  text-align: center;
+  display: block;
+}
+
+/* ══════════════════════════════════════════════
+   PICTOGRAM ROW  (PictogramRow.tsx)
+══════════════════════════════════════════════ */
+.pictogram-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--taupe);
+  font-family: var(--sans);
+}
+.picto-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 20px;
+  background: var(--cream);
+  flex: 1 1 120px;
+  text-align: center;
+  min-width: 100px;
+}
+.picto-cell__glyph {
+  font-size: 22px;
+  color: var(--gold);
+  line-height: 1;
+}
+.picto-cell__label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.picto-cell__value {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.3;
+}
+@media (min-width: 768px) {
+  .picto-cell {
+    padding: 22px 28px;
+    flex: 1 1 140px;
+  }
+  .picto-cell__value {
+    font-size: 17px;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   INVASIVENESS BADGE  (InvasivenessBadge.tsx)
+══════════════════════════════════════════════ */
+.invasiveness-badge {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 99px;
+  border: 1px solid transparent;
+  line-height: 1.4;
+}
+.invasiveness-badge--non-invaziv {
+  background: rgba(201,169,110,0.1);
+  border-color: rgba(201,169,110,0.3);
+  color: var(--gold-dark);
+}
+.invasiveness-badge--minim-invaziv {
+  background: rgba(201,169,110,0.22);
+  border-color: var(--gold);
+  color: var(--charcoal);
+}
+.invasiveness-badge--invaziv {
+  background: rgba(46,32,24,0.08);
+  border-color: rgba(46,32,24,0.25);
+  color: var(--charcoal);
+}
+
+/* ══════════════════════════════════════════════
+   FAQ ACCORDION  (FaqAccordion.tsx)
+══════════════════════════════════════════════ */
+.faq-accordion {
+  font-family: var(--sans);
+  display: flex;
+  flex-direction: column;
+}
+.faq-item {
+  border-bottom: 1px solid var(--cream-dark);
+}
+.faq-item__heading {
+  margin: 0;
+}
+.faq-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: color 0.2s;
+}
+.faq-item__trigger:hover {
+  color: var(--gold-dark);
+}
+.faq-item__trigger:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.faq-item__question {
+  flex: 1;
+}
+.faq-item__icon {
+  flex-shrink: 0;
+  font-size: 20px;
+  color: var(--gold);
+  line-height: 1;
+  font-weight: 300;
+  width: 20px;
+  text-align: center;
+}
+.faq-item__panel {
+  padding-bottom: 18px;
+}
+.faq-item__panel[hidden] {
+  display: none;
+}
+.faq-item__answer {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.faq-item--open .faq-item__trigger {
+  color: var(--black);
+}
+
+/* ══════════════════════════════════════════════
+   PROCEDURE CARD  (ProcedureCard.tsx)
+══════════════════════════════════════════════ */
+.proc-card--linked {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.proc-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--cream-dark);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.proc-card__img {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.proc-card--linked:hover .proc-card__img {
+  transform: scale(1.04);
+}
+.proc-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--cream-dark) 0%, var(--taupe) 100%);
+}
+.proc-card__icon {
+  font-size: 32px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.proc-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 2px;
+}
+.proc-card__excerpt {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.proc-card__pain {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ══════════════════════════════════════════════
+   EQUIPMENT CARD  (EquipmentCard.tsx)
+══════════════════════════════════════════════ */
+.equip-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.equip-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 28px rgba(201,169,110,0.12);
+  transform: translateY(-2px);
+}
+.equip-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--cream-dark);
+  overflow: hidden;
+}
+.equip-card__img {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.equip-card:hover .equip-card__img {
+  transform: scale(1.04);
+}
+.equip-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--cream-dark) 0%, var(--taupe) 100%);
+}
+.equip-card__icon {
+  font-size: 36px;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.equip-card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.equip-card__name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.3;
+}
+.equip-card__manufacturer {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.equip-card__purpose {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @media (min-width: 1024px) {
   #navbar { padding: 0 60px; }
   .nav-desktop { gap: 44px; }
