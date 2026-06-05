@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import ProcedureExplorer from '@/components/procedure/ProcedureExplorer'
+import BodyMap from '@/components/home/BodyMap'
+import type { BodyMapProcedure } from '@/components/home/BodyMap'
 import type { Category, Procedure, Media } from '@/payload-types'
 
 export const revalidate = 3600
@@ -59,6 +61,21 @@ export default async function ProcedureHubPage() {
     ]
   })
 
+  // Build body-map items — include bodyZones for zone-navigator mapping.
+  const bodyMapItems: BodyMapProcedure[] = procedures.flatMap((proc) => {
+    const cat = resolveCategory(proc.category)
+    if (!cat || !cat.slug) return []
+    return [
+      {
+        id: proc.id,
+        title: proc.title,
+        slug: proc.slug ?? '',
+        categorySlug: cat.slug,
+        bodyZones: (proc.bodyZones as BodyMapProcedure['bodyZones']) ?? null,
+      },
+    ]
+  })
+
   const categoryPills = categories
     .filter((c) => c.slug)
     .map((c) => ({
@@ -107,11 +124,17 @@ export default async function ProcedureHubPage() {
         </section>
       )}
 
+      {/* Interactive body-map zone navigator */}
+      <section className="proc-hub__bodymap" aria-labelledby="bodymap-heading">
+        <h2 className="proc-hub__section-title" id="bodymap-heading">
+          Explorează după zonă
+        </h2>
+        <BodyMap procedures={bodyMapItems} />
+      </section>
+
       {/* Interactive searchable/filterable grid */}
       <section className="proc-hub__explorer">
         <h2 className="proc-hub__section-title">Toate procedurile</h2>
-        {/* BODYMAP PLACEHOLDER — Task 19 will mount the interactive BodyMap component here */}
-        {/* <BodyMap procedures={explorerItems} /> */}
         <ProcedureExplorer procedures={explorerItems} categories={categoryPills} />
       </section>
     </main>
