@@ -1,6 +1,8 @@
 import React from 'react'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import '@/styles/globals.css'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
 
 const serif = Cormorant_Garamond({
   subsets: ['latin', 'latin-ext'],
@@ -28,7 +30,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="ro" className={`${serif.variable} ${sans.variable}`}>
       <body>
-        <div>{children}</div>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   )
