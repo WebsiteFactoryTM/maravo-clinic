@@ -41,6 +41,8 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
     const el = ref.current
     if (!el) return
 
+    let rafId: number
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
@@ -55,16 +57,19 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
             // ease-out quad
             const eased = 1 - (1 - progress) * (1 - progress)
             setDisplayed(Math.round(eased * target))
-            if (progress < 1) requestAnimationFrame(tick)
+            if (progress < 1) rafId = requestAnimationFrame(tick)
           }
-          requestAnimationFrame(tick)
+          rafId = requestAnimationFrame(tick)
           observer.disconnect()
         }
       },
       { threshold: 0.25 },
     )
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(rafId)
+    }
   }, [num])
 
   return (

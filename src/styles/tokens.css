@@ -210,8 +210,9 @@ button { font-family: inherit; cursor: pointer; }
 .popular-header { margin-bottom: 36px; }
 .popular-title { font-family: var(--serif); font-size: clamp(28px, 6vw, 48px); font-weight: 300; color: var(--black); line-height: 1.15; }
 .popular-title em { font-style: italic; color: var(--text-muted); }
-.popular-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; scroll-snap-type: x mandatory; }
+.popular-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; scroll-snap-type: x mandatory; list-style: none; }
 .popular-scroll::-webkit-scrollbar { display: none; }
+.pop-card-li { display: contents; }
 .pop-card {
   flex-shrink: 0; scroll-snap-align: start;
   width: 200px; background: var(--white); border: 1px solid var(--cream-dark);
@@ -345,6 +346,14 @@ button { font-family: inherit; cursor: pointer; }
 .no-results { grid-column: 1/-1; text-align: center; padding: 48px 20px; font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--text-muted); }
 
 /* ══════════════════════════════════════════════
+   EQUIPMENT GRID  (homepage section)
+══════════════════════════════════════════════ */
+.equipment-grid { padding: 0 24px 64px; gap: 16px; background: var(--cream); }
+.equipment-cta { text-align: center; padding-bottom: 48px; }
+.equipment-cta .blog-all { display: inline-flex; }
+.about-cta { margin-top: 40px; }
+
+/* ══════════════════════════════════════════════
    FEATURED TREATMENTS
 ══════════════════════════════════════════════ */
 #featured { padding: 64px 24px; background: var(--cream-dark); }
@@ -385,6 +394,7 @@ button { font-family: inherit; cursor: pointer; }
 .about-visual-inner::before { content: ''; position: absolute; inset: -14px; border: 1px solid rgba(201,169,110,0.08); }
 .about-logo { width: 90px; opacity: 0.75; }
 .about-content { padding: 56px 24px; }
+.about-content--no-pb { padding-bottom: 0; }
 .about-title { font-family: var(--serif); font-size: clamp(28px, 6vw, 48px); font-weight: 300; color: var(--black); line-height: 1.2; margin-bottom: 20px; }
 .about-title em { font-style: italic; color: var(--text-muted); }
 .about-body { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 32px; }

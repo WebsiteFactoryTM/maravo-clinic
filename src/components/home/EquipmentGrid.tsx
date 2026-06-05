@@ -13,16 +13,13 @@ export default function EquipmentGrid({ equipment }: EquipmentGridProps) {
 
   return (
     <section id="equipment" aria-labelledby="equipment-heading">
-      <div className="about-content" style={{ paddingBottom: 0 }}>
+      <div className="about-content about-content--no-pb">
         <span className="section-tag">Tehnologie de ultimă generație</span>
         <h2 className="about-title fade-up" id="equipment-heading">
           Aparatură <em>certificată medical</em>
         </h2>
       </div>
-      <div
-        className="procedures-grid"
-        style={{ padding: '0 24px 64px', gap: 16, background: 'var(--cream)' }}
-      >
+      <div className="procedures-grid equipment-grid">
         {equipment.map((eq) => (
           <EquipmentCard
             key={eq.id}
@@ -34,12 +31,11 @@ export default function EquipmentGrid({ equipment }: EquipmentGridProps) {
           />
         ))}
       </div>
-      <div style={{ textAlign: 'center', paddingBottom: '48px' }}>
+      <div className="equipment-cta">
         <Link
           href="/aparatura"
           className="blog-all"
           aria-label="Vezi toată aparatura"
-          style={{ display: 'inline-flex' }}
         >
           Toată aparatura →
         </Link>

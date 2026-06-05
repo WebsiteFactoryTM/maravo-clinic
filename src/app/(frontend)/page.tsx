@@ -72,6 +72,13 @@ async function fetchHomeData() {
             where: { status: { equals: 'published' } },
             depth: 2,
             limit: 0,
+            select: {
+              name: true,
+              slug: true,
+              manufacturer: true,
+              purpose: true,
+              photo: true,
+            },
           })
           .catch(() => ({ docs: [] })),
         payload

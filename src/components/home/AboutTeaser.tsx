@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
 import { resolveMedia } from '@/lib/media'
+import ParsedHeading from '@/components/ui/ParsedHeading'
 
 interface AboutTeaserProps {
   heading?: string | null
@@ -17,26 +18,6 @@ export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) 
     'Maravo Clinic este destinația premium pentru tratamente estetice din Timișoara. Combinăm tehnologia medicală de ultimă generație cu expertiza clinicienilor noștri pentru rezultate excepționale.'
 
   const resolvedImage = resolveMedia(image)
-
-  // Render heading with line breaks and italic via *…*
-  function renderHeading(raw: string) {
-    const lines = raw.split('\n')
-    return lines.map((line, i) => {
-      const parts = line.split(/(\*[^*]+\*)/)
-      return (
-        <React.Fragment key={i}>
-          {parts.map((part, j) =>
-            part.startsWith('*') && part.endsWith('*') ? (
-              <em key={j}>{part.slice(1, -1)}</em>
-            ) : (
-              part
-            ),
-          )}
-          {i < lines.length - 1 && <br />}
-        </React.Fragment>
-      )
-    })
-  }
 
   return (
     <section id="about">
@@ -59,7 +40,7 @@ export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) 
       </div>
       <div className="about-content">
         <span className="section-tag">Despre Maravo Clinic</span>
-        <h2 className="about-title fade-up">{renderHeading(resolvedHeading)}</h2>
+        <ParsedHeading as="h2" className="about-title fade-up" raw={resolvedHeading} />
         <p className="about-body fade-up">{resolvedBody}</p>
         <div className="about-pillars">
           <div className="about-pillar fade-up">
@@ -87,7 +68,7 @@ export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) 
             </div>
           </div>
         </div>
-        <div style={{ marginTop: '40px' }}>
+        <div className="about-cta">
           <Link href="/despre" className="btn-primary">
             Despre noi →
           </Link>

@@ -53,7 +53,7 @@ export default function BlogCarousel({ posts }: BlogCarouselProps) {
 
           return (
             <article key={post.id} className="blog-card fade-up">
-              <Link href={href} aria-label={post.title}>
+              <Link href={href}>
                 <div className="blog-card-img">
                   {cover?.url ? (
                     <Image
