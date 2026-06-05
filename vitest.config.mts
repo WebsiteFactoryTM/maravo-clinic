@@ -12,6 +12,7 @@ export default defineConfig({
     include: [
       'tests/int/**/*.int.spec.ts',
       'tests/integration/**/*.test.ts',
+      'tests/unit/**/*.test.ts',
     ],
     testTimeout: 30000,
     globals: true,
