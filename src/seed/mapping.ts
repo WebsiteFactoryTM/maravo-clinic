@@ -89,20 +89,20 @@ const RULES: Array<{ test: (t: string) => boolean; mapping: ProcedureMapping }> 
   },
   {
     test: (t) =>
-      t.includes('radiofrecventa') ||
-      (t.includes('remodelare') && (t.includes('rf') || t.includes('radiofrecv'))),
+      t.includes('radiofrecventa') && t.includes('faciale'),
     mapping: {
-      category: 'corp',
-      bodyZones: ['abdomen', 'brate', 'picioare'],
+      category: 'fata',
+      bodyZones: ['fata'],
       equipmentSlug: 'nuera-tight-lumenis',
     },
   },
   {
     test: (t) =>
-      t.includes('radiofrecventa') && t.includes('faciale'),
+      t.includes('radiofrecventa') ||
+      (t.includes('remodelare') && (t.includes('rf') || t.includes('radiofrecv'))),
     mapping: {
-      category: 'fata',
-      bodyZones: ['fata'],
+      category: 'corp',
+      bodyZones: ['abdomen', 'brate', 'picioare'],
       equipmentSlug: 'nuera-tight-lumenis',
     },
   },
