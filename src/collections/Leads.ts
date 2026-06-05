@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { notifyLead } from '../hooks/notifyLead'
 
 export const Leads: CollectionConfig = {
   slug: 'leads',
@@ -12,6 +13,9 @@ export const Leads: CollectionConfig = {
     create: () => true,
     update: ({ req }) => !!req.user,
     delete: ({ req }) => !!req.user,
+  },
+  hooks: {
+    afterChange: [notifyLead],
   },
   fields: [
     { name: 'name', type: 'text', required: true },
