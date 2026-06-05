@@ -6,17 +6,28 @@
  *
  * Body scroll is locked while open.
  * Escape key and overlay click close the menu.
+ *
+ * Categories and procedures are CMS-driven, passed from layout server component.
  */
 
 import React, { useEffect, useRef, useState } from 'react'
-import { CATEGORIES, PROCEDURES, NAV_LINKS, procedureHref } from './nav-data'
+import type { NavCategory, NavProcedure, NavLink } from './nav-types'
 
 interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
+  categories: NavCategory[]
+  procedures: NavProcedure[]
+  navLinks: NavLink[]
 }
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({
+  isOpen,
+  onClose,
+  categories,
+  procedures,
+  navLinks,
+}: MobileMenuProps) {
   const [accordionOpen, setAccordionOpen] = useState(false)
   // Ref to the first focusable element inside the drawer (the Proceduri button).
   const firstFocusRef = useRef<HTMLButtonElement>(null)
@@ -90,19 +101,19 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             id="mob-accordion"
           >
             <div id="mob-acc-content">
-              {CATEGORIES.map((cat) => {
-                const procs = PROCEDURES.filter((p) => p.cats.includes(cat.id))
+              {categories.map((cat) => {
+                const catProcs = procedures.filter((p) => p.categorySlug === cat.slug)
                 return (
-                  <div key={cat.id} className="mob-acc-cat">
-                    <div className="mob-acc-cat-title">{cat.label}</div>
-                    {procs.map((proc) => (
+                  <div key={cat.slug} className="mob-acc-cat">
+                    <div className="mob-acc-cat-title">{cat.name}</div>
+                    {catProcs.map((proc) => (
                       <a
-                        key={proc.name}
-                        href={procedureHref(proc)}
+                        key={proc.id}
+                        href={`/proceduri/${proc.categorySlug}/${proc.slug}`}
                         className="mob-acc-item"
                         onClick={onClose}
                       >
-                        {proc.name}
+                        {proc.title}
                       </a>
                     ))}
                   </div>
@@ -112,7 +123,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </div>
 
           {/* Static nav links */}
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a key={link.href} href={link.href} className="mob-link" onClick={onClose}>
               {link.label}
             </a>

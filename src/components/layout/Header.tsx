@@ -11,15 +11,23 @@
  *  - Hamburger button (mobile)
  *  - Scroll listener → `.scrolled` class at 60px
  *  - Orchestrates MegaMenu and MobileMenu open state
+ *
+ * Props are fetched server-side in layout.tsx and passed down.
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import MegaMenu from './MegaMenu'
 import MobileMenu from './MobileMenu'
-import { NAV_LINKS } from './nav-data'
+import type { NavCategory, NavProcedure, NavLink } from './nav-types'
 
-export default function Header() {
+interface HeaderProps {
+  categories: NavCategory[]
+  procedures: NavProcedure[]
+  navLinks: NavLink[]
+}
+
+export default function Header({ categories, procedures, navLinks }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -114,7 +122,7 @@ export default function Header() {
               Proceduri <span style={{ fontSize: '9px', opacity: 0.6 }}>▼</span>
             </button>
           </li>
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <li key={link.href}>
               <a href={link.href}>{link.label}</a>
             </li>
@@ -146,10 +154,18 @@ export default function Header() {
         isOpen={megaOpen}
         onClose={closeMega}
         registerTriggerHandlers={registerTriggerHandlers}
+        categories={categories}
+        procedures={procedures}
       />
 
       {/* Mobile drawer */}
-      <MobileMenu isOpen={mobileOpen} onClose={closeMobile} />
+      <MobileMenu
+        isOpen={mobileOpen}
+        onClose={closeMobile}
+        categories={categories}
+        procedures={procedures}
+        navLinks={navLinks}
+      />
     </>
   )
 }

@@ -40,9 +40,9 @@ test.describe('Layout Shell', () => {
     await expect(megaMenu).toHaveClass(/visible/)
     await expect(trigger).toHaveAttribute('aria-expanded', 'true')
 
-    // Category buttons present
+    // Category buttons present (count is CMS-driven, just ensure ≥1)
     const catBtns = megaMenu.locator('.mega-cat-btn')
-    await expect(catBtns).toHaveCount(5)
+    await expect(catBtns.first()).toBeVisible()
 
     // Procedure items visible
     await expect(megaMenu.locator('.mega-proc-item').first()).toBeVisible()
@@ -95,9 +95,9 @@ test.describe('Layout Shell', () => {
     const accordion = page.locator('#mob-accordion')
     await expect(accordion).toHaveClass(/open/)
 
-    // Categories and procedures rendered
+    // Categories and procedures rendered (count is CMS-driven, just ensure ≥1)
     const cats = accordion.locator('.mob-acc-cat-title')
-    await expect(cats).toHaveCount(5)
+    await expect(cats.first()).toBeVisible()
     await expect(accordion.locator('.mob-acc-item').first()).toBeVisible()
   })
 

@@ -1,19 +1,55 @@
 /**
  * Footer — server/plain component.
- * Ported from <footer> markup in Homepage.html (lines 377-418).
- * Uses placeholder NAP/links; CMS wiring is Task 17.
+ * CMS-driven: receives siteInfo and footerColumns from layout.tsx.
+ * Graceful fallbacks when globals are empty or not yet seeded.
  */
 
 import React from 'react'
+import type { SiteInfo, FooterColumn } from './nav-types'
 
-export default function Footer() {
+interface FooterProps {
+  siteInfo: SiteInfo
+  footerColumns: FooterColumn[]
+}
+
+/** Default footer columns when the navigation global has no footerColumns */
+const DEFAULT_FOOTER_COLUMNS: FooterColumn[] = [
+  {
+    title: 'Tratamente',
+    links: [
+      { label: 'Epilare definitivă', href: '/proceduri' },
+      { label: 'HIFU', href: '/proceduri' },
+      { label: 'Acid hialuronic', href: '/proceduri' },
+      { label: 'Botox', href: '/proceduri' },
+      { label: 'HydraFacial', href: '/proceduri' },
+      { label: 'Mezoterapie', href: '/proceduri' },
+    ],
+  },
+  {
+    title: 'Clinică',
+    links: [
+      { label: 'Despre noi', href: '/despre' },
+      { label: 'Aparatură', href: '/aparatura' },
+      { label: 'Tarife', href: '/tarife' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'GDPR', href: '/gdpr' },
+    ],
+  },
+]
+
+export default function Footer({ siteInfo, footerColumns }: FooterProps) {
+  const cols = footerColumns.length > 0 ? footerColumns : DEFAULT_FOOTER_COLUMNS
+
+  const phone = siteInfo.phone ?? process.env.CLINIC_PHONE ?? null
+  const whatsapp = siteInfo.whatsapp ?? process.env.WHATSAPP_NUMBER ?? null
+
   return (
     <footer>
       <div className="footer-grid-wrap">
         {/* Brand */}
         <div className="footer-brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-gold.png" className="footer-logo" alt="Maravo Clinic" />
+          <img src="/logo-gold.png" className="footer-logo" alt={siteInfo.clinicName} />
           <p className="footer-tagline">
             Clinică estetică premium în Timișoara. Frumusețe și sănătate prin tehnologie medicală
             certificată.
@@ -22,46 +58,85 @@ export default function Footer() {
 
         {/* Link columns */}
         <div className="footer-cols">
-          {/* Tratamente */}
-          <div>
-            <div className="footer-col-title">Tratamente</div>
-            <ul className="footer-links">
-              <li><a href="#">Epilare definitivă Timișoara</a></li>
-              <li><a href="#">HIFU Timișoara</a></li>
-              <li><a href="#">Acid hialuronic</a></li>
-              <li><a href="#">Botox Timișoara</a></li>
-              <li><a href="#">HydraFacial</a></li>
-              <li><a href="#">Mezoterapie</a></li>
-            </ul>
-          </div>
+          {cols.map((col) => (
+            <div key={col.title}>
+              <div className="footer-col-title">{col.title}</div>
+              <ul className="footer-links">
+                {col.links.map((link) => (
+                  <li key={link.href + link.label}>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-          {/* Clinică */}
-          <div>
-            <div className="footer-col-title">Clinică</div>
-            <ul className="footer-links">
-              <li><a href="/despre">Despre noi</a></li>
-              <li><a href="/aparatura">Aparatură</a></li>
-              <li><a href="/tarife">Tarife</a></li>
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="/gdpr">GDPR</a></li>
-            </ul>
-          </div>
-
-          {/* Contact (NAP) */}
+          {/* Contact (NAP) — always rendered */}
           <div>
             <div className="footer-col-title">Contact</div>
-            <div className="footer-contact-item">Timișoara, România</div>
-            <div className="footer-contact-item">+40 XXX XXX XXX</div>
-            <div className="footer-contact-item">contact@maravoclinic.ro</div>
-            <div className="footer-contact-item">Lun–Vin: 9:00–19:00</div>
+            {siteInfo.address && (
+              <div className="footer-contact-item">{siteInfo.address}</div>
+            )}
+            {!siteInfo.address && (
+              <div className="footer-contact-item">Timișoara, România</div>
+            )}
+            {phone && (
+              <div className="footer-contact-item">
+                <a href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>
+              </div>
+            )}
+            {siteInfo.email && (
+              <div className="footer-contact-item">
+                <a href={`mailto:${siteInfo.email}`}>{siteInfo.email}</a>
+              </div>
+            )}
+            {siteInfo.hours.length > 0
+              ? siteInfo.hours.map((h) => (
+                  <div key={h.day} className="footer-contact-item">
+                    {h.day}: {h.value}
+                  </div>
+                ))
+              : null}
           </div>
         </div>
+
+        {/* Socials */}
+        {siteInfo.socials.length > 0 && (
+          <div className="footer-socials">
+            {siteInfo.socials.map((s) => (
+              <a
+                key={s.platform}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                aria-label={s.platform}
+              >
+                {s.platform}
+              </a>
+            ))}
+          </div>
+        )}
+
+        {/* WhatsApp CTA */}
+        {whatsapp && (
+          <div className="footer-whatsapp">
+            <a
+              href={`https://wa.me/${whatsapp.replace(/[+\s]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-whatsapp-link"
+            >
+              WhatsApp
+            </a>
+          </div>
+        )}
       </div>
 
       {/* Bottom bar */}
       <div className="footer-bottom">
         <div className="footer-copy">
-          © {new Date().getFullYear()} Maravo Clinic. Toate drepturile rezervate.
+          © {new Date().getFullYear()} {siteInfo.clinicName}. Toate drepturile rezervate.
         </div>
         <div className="footer-seo">
           Clinică estetică Timișoara · Epilare definitivă Timișoara · HIFU Timișoara · Botox

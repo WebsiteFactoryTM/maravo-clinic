@@ -8,10 +8,12 @@
  * The 200ms leave-timer hover logic lives here because MegaMenu owns its
  * own mouse events; Header passes the button's mouseenter/leave handlers
  * back via `onTriggerMouseEnter` / `onTriggerMouseLeave`.
+ *
+ * Categories and procedures are CMS-driven, passed from layout server component.
  */
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
-import { CATEGORIES, PROCEDURES, procedureHref } from './nav-data'
+import type { NavCategory, NavProcedure } from './nav-types'
 
 interface MegaMenuProps {
   isOpen: boolean
@@ -21,13 +23,30 @@ interface MegaMenuProps {
     onMouseEnter: () => void
     onMouseLeave: () => void
   }) => void
+  categories: NavCategory[]
+  procedures: NavProcedure[]
 }
 
-export default function MegaMenu({ isOpen, onClose, registerTriggerHandlers }: MegaMenuProps) {
-  const [activeCat, setActiveCat] = useState('fata')
+export default function MegaMenu({
+  isOpen,
+  onClose,
+  registerTriggerHandlers,
+  categories,
+  procedures,
+}: MegaMenuProps) {
+  // Default active category to the first CMS category (or empty string if none)
+  const firstCatSlug = categories[0]?.slug ?? ''
+  const [activeCat, setActiveCat] = useState(firstCatSlug)
   const [searchTerm, setSearchTerm] = useState('')
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+
+  // Keep activeCat in sync if categories load after mount
+  useEffect(() => {
+    if (!activeCat && firstCatSlug) {
+      setActiveCat(firstCatSlug)
+    }
+  }, [firstCatSlug, activeCat])
 
   const clearLeaveTimer = useCallback(() => {
     if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current)
@@ -72,9 +91,10 @@ export default function MegaMenu({ isOpen, onClose, registerTriggerHandlers }: M
     return () => document.removeEventListener('keydown', handler)
   }, [isOpen, onClose])
 
-  const filtered = PROCEDURES.filter((p) => {
-    const catMatch = p.cats.includes(activeCat)
-    const searchMatch = !searchTerm || p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter procedures by active category + search term
+  const filtered = procedures.filter((p) => {
+    const catMatch = p.categorySlug === activeCat
+    const searchMatch = !searchTerm || p.title.toLowerCase().includes(searchTerm.toLowerCase())
     return catMatch && searchMatch
   })
 
@@ -97,16 +117,16 @@ export default function MegaMenu({ isOpen, onClose, registerTriggerHandlers }: M
       <div className="mega-inner">
         {/* Left column — category list */}
         <div className="mega-cats">
-          {CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <button
-              key={cat.id}
-              className={`mega-cat-btn${activeCat === cat.id ? ' active' : ''}`}
-              data-cat={cat.id}
-              onMouseEnter={() => setActiveCat(cat.id)}
-              onClick={() => setActiveCat(cat.id)}
+              key={cat.slug}
+              className={`mega-cat-btn${activeCat === cat.slug ? ' active' : ''}`}
+              data-cat={cat.slug}
+              onMouseEnter={() => setActiveCat(cat.slug)}
+              onClick={() => setActiveCat(cat.slug)}
             >
-              <span className="mega-cat-icon">{cat.icon}</span>
-              {cat.label}
+              {cat.icon && <span className="mega-cat-icon">{cat.icon}</span>}
+              {cat.name}
             </button>
           ))}
         </div>
@@ -132,12 +152,12 @@ export default function MegaMenu({ isOpen, onClose, registerTriggerHandlers }: M
             ) : (
               filtered.map((proc) => (
                 <a
-                  key={proc.name}
-                  href={procedureHref(proc)}
+                  key={proc.id}
+                  href={`/proceduri/${proc.categorySlug}/${proc.slug}`}
                   className="mega-proc-item"
                   onClick={onClose}
                 >
-                  {proc.name}
+                  {proc.title}
                 </a>
               ))
             )}
