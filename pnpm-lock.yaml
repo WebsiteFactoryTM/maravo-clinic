@@ -23,9 +23,6 @@ importers:
       '@payloadcms/ui':
         specifier: 3.85.0
         version: 3.85.0(@types/react@19.2.14)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(@playwright/test@1.59.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.85.0(graphql@16.14.1)(typescript@6.0.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3)
-      cross-env:
-        specifier: 10.1.0
-        version: 10.1.0
       dotenv:
         specifier: 16.4.7
         version: 16.4.7
@@ -72,6 +69,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 4.5.2
         version: 4.5.2(vite@7.3.5(@types/node@24.12.3)(sass@1.77.4)(tsx@4.22.4))
+      cross-env:
+        specifier: 10.1.0
+        version: 10.1.0
       eslint:
         specifier: ^9.16.0
         version: 9.39.4
