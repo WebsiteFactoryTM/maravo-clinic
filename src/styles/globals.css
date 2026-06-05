@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 where to scan for class usage */
+@source "../../**/*.{ts,tsx}";
+
+/* Brand palette and font utilities via @theme */
+@theme {
+  --color-cream: var(--cream);
+  --color-taupe: var(--taupe);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-espresso: var(--charcoal);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --font-family-serif: var(--serif);
+  --font-family-sans: var(--sans);
+}
+
+@import "./tokens.css";
