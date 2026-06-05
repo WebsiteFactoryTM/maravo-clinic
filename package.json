@@ -14,6 +14,7 @@
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "seed": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seed.ts",
+    "seed:media": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seed-media.ts",
     "typecheck": "tsc --noEmit",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:watch": "cross-env NODE_OPTIONS=--no-deprecation vitest --config ./vitest.config.mts",

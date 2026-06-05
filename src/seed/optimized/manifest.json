@@ -1,0 +1,522 @@
+[
+  {
+    "source": "image00001.jpeg",
+    "output": "image00001.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 182892,
+    "sourceBytes": 13434711
+  },
+  {
+    "source": "image00002.jpeg",
+    "output": "image00002.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 108942,
+    "sourceBytes": 13980106
+  },
+  {
+    "source": "image00003.jpeg",
+    "output": "image00003.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 142810,
+    "sourceBytes": 14548816
+  },
+  {
+    "source": "image00004.jpeg",
+    "output": "image00004.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 150050,
+    "sourceBytes": 14686360
+  },
+  {
+    "source": "image00005.jpeg",
+    "output": "image00005.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 146728,
+    "sourceBytes": 14753640
+  },
+  {
+    "source": "image00006.jpeg",
+    "output": "image00006.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 141662,
+    "sourceBytes": 14529135
+  },
+  {
+    "source": "image00007.jpeg",
+    "output": "image00007.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 104798,
+    "sourceBytes": 12796969
+  },
+  {
+    "source": "image00008.jpeg",
+    "output": "image00008.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 139370,
+    "sourceBytes": 13366320
+  },
+  {
+    "source": "image00009.jpeg",
+    "output": "image00009.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 278206,
+    "sourceBytes": 14507413
+  },
+  {
+    "source": "image00010.jpeg",
+    "output": "image00010.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 269364,
+    "sourceBytes": 13539376
+  },
+  {
+    "source": "image00011.jpeg",
+    "output": "image00011.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 344460,
+    "sourceBytes": 10619307
+  },
+  {
+    "source": "image00012.jpeg",
+    "output": "image00012.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 279732,
+    "sourceBytes": 15214529
+  },
+  {
+    "source": "image00013.jpeg",
+    "output": "image00013.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 89746,
+    "sourceBytes": 5446682
+  },
+  {
+    "source": "image00014.jpeg",
+    "output": "image00014.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 74882,
+    "sourceBytes": 5287324
+  },
+  {
+    "source": "image00015.jpeg",
+    "output": "image00015.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 139208,
+    "sourceBytes": 14895237
+  },
+  {
+    "source": "image00016.jpeg",
+    "output": "image00016.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 80188,
+    "sourceBytes": 5412770
+  },
+  {
+    "source": "image00017.jpeg",
+    "output": "image00017.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 149484,
+    "sourceBytes": 10009503
+  },
+  {
+    "source": "image00018.jpeg",
+    "output": "image00018.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 80664,
+    "sourceBytes": 5657317
+  },
+  {
+    "source": "image00019.jpeg",
+    "output": "image00019.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 77696,
+    "sourceBytes": 5595932
+  },
+  {
+    "source": "image00020.jpeg",
+    "output": "image00020.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 81702,
+    "sourceBytes": 5594337
+  },
+  {
+    "source": "image00021.jpeg",
+    "output": "image00021.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 84558,
+    "sourceBytes": 5935663
+  },
+  {
+    "source": "image00022.jpeg",
+    "output": "image00022.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 117978,
+    "sourceBytes": 9949626
+  },
+  {
+    "source": "image00023.jpeg",
+    "output": "image00023.webp",
+    "width": 2000,
+    "height": 1125,
+    "bytes": 530106,
+    "sourceBytes": 13539617
+  },
+  {
+    "source": "image00024.jpeg",
+    "output": "image00024.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 92480,
+    "sourceBytes": 6774176
+  },
+  {
+    "source": "image00025.jpeg",
+    "output": "image00025.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 92532,
+    "sourceBytes": 6668458
+  },
+  {
+    "source": "image00026.jpeg",
+    "output": "image00026.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 91408,
+    "sourceBytes": 6615507
+  },
+  {
+    "source": "image00027.jpeg",
+    "output": "image00027.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 91408,
+    "sourceBytes": 6615507
+  },
+  {
+    "source": "image00028.jpeg",
+    "output": "image00028.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 75830,
+    "sourceBytes": 6085232
+  },
+  {
+    "source": "image00029.jpeg",
+    "output": "image00029.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 75384,
+    "sourceBytes": 6061012
+  },
+  {
+    "source": "image00030.jpeg",
+    "output": "image00030.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 74766,
+    "sourceBytes": 6078994
+  },
+  {
+    "source": "image00031.jpeg",
+    "output": "image00031.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 84496,
+    "sourceBytes": 6460607
+  },
+  {
+    "source": "image00032.jpeg",
+    "output": "image00032.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 191516,
+    "sourceBytes": 14131360
+  },
+  {
+    "source": "image00033.jpeg",
+    "output": "image00033.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 70706,
+    "sourceBytes": 5198345
+  },
+  {
+    "source": "image00034.jpeg",
+    "output": "image00034.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 65898,
+    "sourceBytes": 4811410
+  },
+  {
+    "source": "image00035.jpeg",
+    "output": "image00035.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 94878,
+    "sourceBytes": 6085857
+  },
+  {
+    "source": "image00036.jpeg",
+    "output": "image00036.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 87782,
+    "sourceBytes": 6611322
+  },
+  {
+    "source": "image00037.jpeg",
+    "output": "image00037.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 60702,
+    "sourceBytes": 5417359
+  },
+  {
+    "source": "image00038.jpeg",
+    "output": "image00038.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 74218,
+    "sourceBytes": 6036611
+  },
+  {
+    "source": "image00039.jpeg",
+    "output": "image00039.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 84958,
+    "sourceBytes": 6255841
+  },
+  {
+    "source": "image00040.jpeg",
+    "output": "image00040.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 79102,
+    "sourceBytes": 4720167
+  },
+  {
+    "source": "image00041.jpeg",
+    "output": "image00041.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 95584,
+    "sourceBytes": 5707253
+  },
+  {
+    "source": "image00042.jpeg",
+    "output": "image00042.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 86492,
+    "sourceBytes": 6088020
+  },
+  {
+    "source": "image00043.jpeg",
+    "output": "image00043.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 192022,
+    "sourceBytes": 10770963
+  },
+  {
+    "source": "image00044.jpeg",
+    "output": "image00044.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 154428,
+    "sourceBytes": 12216864
+  },
+  {
+    "source": "image00045.jpeg",
+    "output": "image00045.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 207152,
+    "sourceBytes": 10264674
+  },
+  {
+    "source": "image00046.jpeg",
+    "output": "image00046.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 191872,
+    "sourceBytes": 10505660
+  },
+  {
+    "source": "image00047.jpeg",
+    "output": "image00047.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 207152,
+    "sourceBytes": 10264674
+  },
+  {
+    "source": "image00048.jpeg",
+    "output": "image00048.webp",
+    "width": 2000,
+    "height": 2999,
+    "bytes": 236212,
+    "sourceBytes": 11066254
+  },
+  {
+    "source": "image00049.jpeg",
+    "output": "image00049.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 175044,
+    "sourceBytes": 10045242
+  },
+  {
+    "source": "image00050.jpeg",
+    "output": "image00050.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 211796,
+    "sourceBytes": 10551383
+  },
+  {
+    "source": "image00051.jpeg",
+    "output": "image00051.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 116462,
+    "sourceBytes": 9689012
+  },
+  {
+    "source": "image00052.jpeg",
+    "output": "image00052.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 125548,
+    "sourceBytes": 10056479
+  },
+  {
+    "source": "image00053.jpeg",
+    "output": "image00053.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 233060,
+    "sourceBytes": 10666283
+  },
+  {
+    "source": "image00054.jpeg",
+    "output": "image00054.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 217480,
+    "sourceBytes": 13714571
+  },
+  {
+    "source": "image00055.jpeg",
+    "output": "image00055.webp",
+    "width": 2000,
+    "height": 1433,
+    "bytes": 124182,
+    "sourceBytes": 4628573
+  },
+  {
+    "source": "image00056.jpeg",
+    "output": "image00056.webp",
+    "width": 2000,
+    "height": 1685,
+    "bytes": 122342,
+    "sourceBytes": 3073976
+  },
+  {
+    "source": "image00057.jpeg",
+    "output": "image00057.webp",
+    "width": 2000,
+    "height": 2998,
+    "bytes": 224966,
+    "sourceBytes": 10644992
+  },
+  {
+    "source": "image00058.jpeg",
+    "output": "image00058.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 183704,
+    "sourceBytes": 10657303
+  },
+  {
+    "source": "image00059.jpeg",
+    "output": "image00059.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 137948,
+    "sourceBytes": 6493272
+  },
+  {
+    "source": "image00060.jpeg",
+    "output": "image00060.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 139666,
+    "sourceBytes": 10400594
+  },
+  {
+    "source": "image00061.jpeg",
+    "output": "image00061.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 92142,
+    "sourceBytes": 9303591
+  },
+  {
+    "source": "image00062.jpeg",
+    "output": "image00062.webp",
+    "width": 2000,
+    "height": 798,
+    "bytes": 232288,
+    "sourceBytes": 11127766
+  },
+  {
+    "source": "image00063.jpeg",
+    "output": "image00063.webp",
+    "width": 2000,
+    "height": 1125,
+    "bytes": 615810,
+    "sourceBytes": 11513197
+  },
+  {
+    "source": "image00064.jpeg",
+    "output": "image00064.webp",
+    "width": 2000,
+    "height": 1125,
+    "bytes": 241794,
+    "sourceBytes": 11568624
+  },
+  {
+    "source": "image00065.jpeg",
+    "output": "image00065.webp",
+    "width": 2000,
+    "height": 1334,
+    "bytes": 197660,
+    "sourceBytes": 9476313
+  }
+]
