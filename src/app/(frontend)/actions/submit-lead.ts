@@ -13,7 +13,7 @@ export type SubmitLeadResult =
 const phoneRegex = /^[+\d][\d\s]{6,19}$/
 
 const leadSchema = z.object({
-  name: z.string().trim().min(2, 'Numele este obligatoriu.'),
+  name: z.string().trim().min(2, 'Numele este obligatoriu.').max(120, 'Nume prea lung'),
   phone: z
     .string()
     .trim()
@@ -27,8 +27,8 @@ const leadSchema = z.object({
     .optional()
     .or(z.literal('')),
   procedureInterest: z.union([z.string(), z.number()]).optional(),
-  message: z.string().trim().optional(),
-  source: z.string().optional(),
+  message: z.string().trim().max(2000, 'Mesaj prea lung (max. 2000 caractere)').optional(),
+  source: z.string().max(200).optional(),
   // Honeypot — must stay empty. Real users never see/fill this.
   company: z.string().optional(),
 })
@@ -61,6 +61,12 @@ export async function submitLead(formData: FormData): Promise<SubmitLeadResult> 
     company: (formData.get('company') as string | null) ?? '',
   }
 
+  // Honeypot triggered — pretend success, create nothing. Checked BEFORE
+  // validation so bots never receive field errors that reveal required fields.
+  if (raw.company && raw.company.trim() !== '') {
+    return { ok: true }
+  }
+
   const parsed = leadSchema.safeParse(raw)
   if (!parsed.success) {
     const flattened = parsed.error.flatten().fieldErrors
@@ -68,11 +74,6 @@ export async function submitLead(formData: FormData): Promise<SubmitLeadResult> 
   }
 
   const data = parsed.data
-
-  // Honeypot triggered — pretend success, create nothing.
-  if (data.company && data.company.trim() !== '') {
-    return { ok: true }
-  }
 
   const payload = await getPayloadClient()
   await payload.create({

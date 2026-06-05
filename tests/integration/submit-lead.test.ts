@@ -54,6 +54,28 @@ test('honeypot-filled submission returns ok but creates NOTHING', async () => {
   expect(await countLeads(name)).toBe(0)
 }, 30000)
 
+test('honeypot filled with empty name/phone still returns ok and creates NOTHING', async () => {
+  const name = `BotEmpty-${RUN}`
+  // Bot fills the honeypot but omits required fields — the trap must trigger
+  // BEFORE validation, so no field errors leak and nothing is created.
+  const result = await submitLead(fd({ name, company: 'spam-corp' }))
+  expect(result.ok).toBe(true)
+  expect(await countLeads(name)).toBe(0)
+}, 30000)
+
+test('over-long message returns errors and creates nothing', async () => {
+  const name = `LongMsg-${RUN}`
+  const message = 'a'.repeat(2001)
+  const result = await submitLead(
+    fd({ name, phone: '+40712345678', source: '/contact', message }),
+  )
+  expect(result.ok).toBe(false)
+  if (result.ok === false) {
+    expect(result.errors.message).toBeTruthy()
+  }
+  expect(await countLeads(name)).toBe(0)
+}, 30000)
+
 afterAll(async () => {
   const p = await getPayloadClient()
   await p
