@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { autoSlugField } from '../lib/autoSlugField'
 import { syncRelationship, cleanupRelationshipOnDelete } from '../hooks/syncRelationship'
+import { revalidateEquipment } from '../hooks/revalidate'
 
 export const Equipment: CollectionConfig = {
   slug: 'equipment',
@@ -16,6 +17,7 @@ export const Equipment: CollectionConfig = {
         otherCollection: 'procedures',
         otherField: 'relatedEquipment',
       }),
+      revalidateEquipment,
     ],
     afterDelete: [
       cleanupRelationshipOnDelete({

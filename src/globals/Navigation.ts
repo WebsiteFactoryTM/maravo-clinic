@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateNavigation } from '../hooks/revalidate'
 
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
   admin: { group: 'Setări' },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateNavigation],
+  },
   fields: [
     {
       name: 'mainMenu',

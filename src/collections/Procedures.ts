@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { autoSlugField } from '../lib/autoSlugField'
 import { syncRelationship, cleanupRelationshipOnDelete } from '../hooks/syncRelationship'
+import { revalidateProcedure } from '../hooks/revalidate'
 
 const ZONES = ['par', 'fata', 'gat', 'brate', 'abdomen', 'picioare'] as const
 
@@ -19,6 +20,7 @@ export const Procedures: CollectionConfig = {
         otherCollection: 'equipment',
         otherField: 'relatedProcedures',
       }),
+      revalidateProcedure,
     ],
     afterDelete: [
       cleanupRelationshipOnDelete({

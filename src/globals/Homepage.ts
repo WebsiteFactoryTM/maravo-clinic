@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateHomepage } from '../hooks/revalidate'
 
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
   admin: { group: 'Conținut' },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateHomepage],
+  },
   fields: [
     {
       name: 'heroTag',

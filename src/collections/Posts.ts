@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { autoSlugField } from '../lib/autoSlugField'
+import { revalidatePost } from '../hooks/revalidate'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -9,6 +10,9 @@ export const Posts: CollectionConfig = {
     group: 'Conținut',
   },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidatePost],
+  },
   fields: [
     {
       name: 'title',

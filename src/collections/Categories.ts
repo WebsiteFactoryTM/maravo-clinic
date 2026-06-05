@@ -1,5 +1,6 @@
 import type { CollectionConfig, FieldHook } from 'payload'
 import { slugify } from '../lib/slug'
+import { revalidateCategory } from '../hooks/revalidate'
 
 const autoSlug: FieldHook = ({ value, data }) =>
   (value as string | undefined) || slugify((data as { name?: string })?.name ?? '')
@@ -8,6 +9,9 @@ export const Categories: CollectionConfig = {
   slug: 'categories',
   admin: { useAsTitle: 'name', defaultColumns: ['name', 'order'], group: 'Conținut' },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateCategory],
+  },
   fields: [
     { name: 'name', type: 'text', required: true },
     {

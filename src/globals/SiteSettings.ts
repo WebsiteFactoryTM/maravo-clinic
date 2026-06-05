@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateSiteSettings } from '../hooks/revalidate'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   admin: { group: 'Setări' },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateSiteSettings],
+  },
   fields: [
     {
       name: 'clinicName',
