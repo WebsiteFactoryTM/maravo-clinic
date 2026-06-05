@@ -26,6 +26,12 @@
   --charcoal2: #3a2a20;
   --text: #2a2420;
   --text-muted: #8a7d72;
+  /* a11y (WCAG AA) variants of muted/gold for small text on LIGHT backgrounds.
+     --text-muted is kept for use on dark (espresso) surfaces where it passes;
+     on cream it only reaches ~3.5:1, so light-bg copy uses these darker tokens. */
+  --text-muted-light: #6b6055; /* ≥5.4:1 on cream */
+  --gold-light-bg: #856a3a; /* ≥4.5:1 on cream — for small gold labels on light */
+  --text-muted-dark: #b8a99a; /* ≥6.8:1 on espresso — for muted copy on dark */
   --white: #ffffff;
   /* Fonts resolved via next/font CSS variables (with prototype fallbacks) */
   --serif: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
@@ -41,7 +47,7 @@ a { text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
 /* ── UTILITIES ── */
-.section-tag { font-family: var(--sans); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+.section-tag { font-family: var(--sans); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light-bg); margin-bottom: 14px; display: block; }
 .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
@@ -60,8 +66,16 @@ button { font-family: inherit; cursor: pointer; }
 .nav-wordmark { font-family: var(--serif); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--white); transition: color 0.4s; line-height: 1.1; }
 .nav-wordmark small { display: block; font-family: var(--sans); font-size: 9px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
 #navbar.scrolled .nav-wordmark { color: var(--black); }
+/* On the solid (scrolled / inner-page) navbar the subtitle sits on cream; taupe
+   fails contrast there, so darken it to an AA-passing muted. */
+#navbar.scrolled .nav-wordmark small { color: var(--text-muted-light); }
 .nav-desktop { display: none; }
 .nav-cta { display: none; }
+/* The navbar is position:fixed and now opaque on every non-home page (see
+   Header.tsx). These page wrappers render content at the very top, so offset
+   them by the nav height to prevent the fixed bar from covering their headings.
+   (The homepage is intentionally excluded — its hero sits under the nav.) */
+.proc-hub, .cat-page, .tarife-page, .despre-page, .contact-page { padding-top: var(--nav-h); }
 .hamburger {
   background: none; border: none; padding: 8px; z-index: 201; color: var(--white); transition: color 0.4s;
   display: flex; flex-direction: column; gap: 5px; justify-content: center; align-items: flex-end;
@@ -230,7 +244,7 @@ button { font-family: inherit; cursor: pointer; }
 .marquee-strip { background: var(--black); padding: 16px 0; overflow: hidden; }
 .marquee-inner { display: flex; white-space: nowrap; animation: marquee 40s linear infinite; }
 .marquee-inner:hover { animation-play-state: paused; }
-.marquee-item { font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); padding: 0 28px; flex-shrink: 0; display: flex; align-items: center; gap: 28px; }
+.marquee-item { font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted-dark); padding: 0 28px; flex-shrink: 0; display: flex; align-items: center; gap: 28px; }
 .marquee-item::after { content: '◆'; font-size: 5px; color: var(--gold); }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -333,13 +347,13 @@ button { font-family: inherit; cursor: pointer; }
 .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,169,110,0.1); }
 .search-icon { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 18px; pointer-events: none; }
 .cat-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 36px; }
-.cat-pill { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--taupe); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.cat-pill { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--taupe); background: transparent; color: var(--text-muted-light); cursor: pointer; transition: all 0.2s; }
 .cat-pill:hover { border-color: var(--gold); color: var(--text); }
 .cat-pill.active { background: var(--charcoal); border-color: var(--charcoal); color: var(--white); }
 .procedures-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--taupe); }
 .proc-card { background: var(--cream); padding: 22px 20px; cursor: pointer; transition: background 0.2s; position: relative; }
 .proc-card:hover { background: var(--white); }
-.proc-card-cat { font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.proc-card-cat { font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light-bg); margin-bottom: 5px; }
 .proc-card-name { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--text); line-height: 1.3; padding-right: 24px; }
 .proc-card::after { content: '→'; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--gold); opacity: 0; transition: opacity 0.2s; }
 .proc-card:hover::after { opacity: 1; }
@@ -471,16 +485,21 @@ button { font-family: inherit; cursor: pointer; }
 footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .footer-brand { margin-bottom: 40px; }
 .footer-logo { height: 44px; margin-bottom: 16px; }
-.footer-tagline { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.7; max-width: 280px; }
+.footer-tagline { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--text-muted-dark); line-height: 1.7; max-width: 280px; }
 .footer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
 .footer-col-title { font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
 .footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.footer-links a { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--text-muted); transition: color 0.2s; }
+.footer-links a { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--text-muted-dark); transition: color 0.2s; }
 .footer-links a:hover { color: var(--taupe); }
-.footer-contact-item { font-family: var(--sans); font-size: 12px; font-weight: 300; color: var(--text-muted); margin-bottom: 9px; }
+.footer-contact-item { font-family: var(--sans); font-size: 12px; font-weight: 300; color: var(--text-muted-dark); margin-bottom: 9px; }
+.footer-contact-item a { color: inherit; }
+/* WhatsApp / social links inherit the dark --text by default, which is invisible
+   on the espresso footer — give them an explicit AA-passing color. */
+.footer-whatsapp-link, .footer-social-link { color: var(--text-muted-dark); transition: color 0.2s; }
+.footer-whatsapp-link:hover, .footer-social-link:hover { color: var(--gold); }
 .footer-bottom { border-top: 1px solid #3a2a1e; padding-top: 20px; }
-.footer-copy { font-family: var(--sans); font-size: 11px; color: rgba(138,125,114,0.5); font-weight: 300; margin-bottom: 6px; }
-.footer-seo { font-family: var(--sans); font-size: 10px; color: rgba(138,125,114,0.3); letter-spacing: 0.04em; line-height: 1.6; }
+.footer-copy { font-family: var(--sans); font-size: 11px; color: var(--text-muted-dark); font-weight: 300; margin-bottom: 6px; }
+.footer-seo { font-family: var(--sans); font-size: 10px; color: var(--text-muted-dark); letter-spacing: 0.04em; line-height: 1.6; }
 
 /* ══════════════════════════════════════════════
    DESKTOP OVERRIDES  ≥ 768px
@@ -497,7 +516,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
     text-transform: uppercase; color: rgba(255,255,255,0.65); background: none; border: none;
     padding: 0; cursor: pointer; transition: color 0.25s; display: flex; align-items: center; gap: 4px;
   }
-  #navbar.scrolled .nav-desktop a, #navbar.scrolled .nav-desktop button { color: var(--text-muted); }
+  #navbar.scrolled .nav-desktop a, #navbar.scrolled .nav-desktop button { color: var(--text-muted-light); }
   .nav-desktop a:hover, .nav-desktop button:hover, .nav-desktop .nav-active { color: var(--gold) !important; }
   .nav-cta { display: block; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--charcoal); background: var(--gold-light); padding: 11px 24px; border: 1px solid var(--gold); transition: background 0.3s; }
   .nav-cta:hover { background: var(--gold); color: var(--white); }
@@ -588,7 +607,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-muted-light);
   font-weight: 400;
 }
 .picto-cell__value {
@@ -753,7 +772,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   font-family: var(--sans);
   font-size: 13px;
   font-weight: 300;
-  color: var(--text-muted);
+  color: var(--text-muted-light);
   line-height: 1.65;
   margin-top: 4px;
   display: -webkit-box;
@@ -766,7 +785,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-muted-light);
   margin-top: 6px;
 }
 
@@ -831,13 +850,13 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-light-bg);
 }
 .equip-card__purpose {
   font-family: var(--sans);
   font-size: 13px;
   font-weight: 300;
-  color: var(--text-muted);
+  color: var(--text-muted-light);
   line-height: 1.65;
   margin-top: 4px;
   display: -webkit-box;
@@ -858,7 +877,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 ══════════════════════════════════════════════ */
 .breadcrumb { padding: 16px 24px; font-family: var(--sans); font-size: 12px; }
 .breadcrumb__list { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
-.breadcrumb__item a { color: var(--text-muted); transition: color 0.2s; }
+.breadcrumb__item a { color: var(--text-muted-light); transition: color 0.2s; }
 .breadcrumb__item a:hover { color: var(--gold); }
 .breadcrumb__item--current { color: var(--text); font-weight: 500; }
 .breadcrumb__sep { color: var(--taupe); }
@@ -1489,7 +1508,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .contact-page { background: var(--cream); }
 .contact-hero { padding: 56px 24px 24px; max-width: 760px; }
 .contact-hero__title { font-family: var(--serif); font-size: clamp(2rem, 7vw, 3rem); line-height: 1.05; color: var(--charcoal); margin-bottom: 16px; }
-.contact-hero__lead { color: var(--text-muted); max-width: 56ch; }
+.contact-hero__lead { color: var(--text-muted-light); max-width: 56ch; }
 
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding: 24px 24px 80px; }
 
@@ -1497,26 +1516,26 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .contact-form-section__title { font-family: var(--serif); font-size: 1.6rem; color: var(--charcoal); margin-bottom: 20px; }
 
 .contact-nap__row { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--cream-dark); }
-.contact-nap__label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.contact-nap__label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light-bg); }
 .contact-nap__row a { color: var(--text); border-bottom: 1px solid var(--taupe); }
 .contact-nap__row a:hover { color: var(--charcoal); }
 
 .contact-hours { margin-top: 24px; }
-.contact-hours__title { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.contact-hours__title { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light-bg); margin-bottom: 10px; }
 .contact-hours__list { display: flex; flex-direction: column; gap: 6px; }
 .contact-hours__row { display: flex; justify-content: space-between; gap: 16px; }
 .contact-hours__row dt { color: var(--text); }
-.contact-hours__row dd { color: var(--text-muted); }
+.contact-hours__row dd { color: var(--text-muted-light); }
 
 .contact-cta { margin-top: 28px; max-width: 360px; }
 
 .contact-map { margin-top: 28px; }
 .contact-map__frame { width: 100%; height: 260px; border: 0; display: block; }
-.contact-map__placeholder { margin-top: 28px; color: var(--text-muted); font-size: 0.95rem; }
+.contact-map__placeholder { margin-top: 28px; color: var(--text-muted-light); font-size: 0.95rem; }
 
 /* ── Lead form ── */
 .lead-form { display: flex; flex-direction: column; gap: 18px; }
-.lead-form__intro { color: var(--text-muted); font-size: 0.95rem; }
+.lead-form__intro { color: var(--text-muted-light); font-size: 0.95rem; }
 .lead-form__note { background: var(--cream-dark); padding: 10px 14px; font-size: 0.9rem; color: var(--text); }
 .lead-form__field { display: flex; flex-direction: column; gap: 6px; }
 .lead-form__field label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); }

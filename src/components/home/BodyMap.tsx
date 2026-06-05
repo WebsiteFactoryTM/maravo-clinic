@@ -107,7 +107,10 @@ export default function BodyMap({ procedures }: BodyMapProps) {
           className="body-svg"
           id="body-svg"
           aria-label="Hartă corporală interactivă — selectează o zonă"
-          role="img"
+          // role="group" (not "img"): this SVG is an interactive widget whose
+          // body parts are focusable buttons. An "img" role must not contain
+          // interactive descendants (axe: nested-interactive); "group" may.
+          role="group"
           data-active={activeZone}
         >
           <defs>

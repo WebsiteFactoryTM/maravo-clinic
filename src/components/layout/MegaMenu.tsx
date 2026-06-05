@@ -109,7 +109,10 @@ export default function MegaMenu({
       ref={menuRef}
       role="region"
       aria-label="Meniu proceduri"
-      aria-hidden={!isOpen}
+      // `inert` (React 19) removes the subtree from tab order AND the a11y tree
+      // when closed — this prevents the "aria-hidden element is focusable"
+      // violation that a bare aria-hidden would cause with focusable children.
+      inert={!isOpen}
       className={isOpen ? 'visible' : ''}
       onMouseEnter={clearLeaveTimer}
       onMouseLeave={scheduleClose}

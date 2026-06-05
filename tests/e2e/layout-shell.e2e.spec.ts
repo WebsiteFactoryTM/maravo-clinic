@@ -63,21 +63,22 @@ test.describe('Layout Shell', () => {
     // Desktop nav hidden on mobile
     await expect(page.locator('.nav-desktop')).toBeHidden()
 
-    // Mobile menu closed initially
+    // Mobile menu closed initially — `inert` (present when closed) removes the
+    // drawer from the tab order + a11y tree (replaces the old aria-hidden).
     const mobileMenu = page.locator('#mobile-menu')
     await expect(mobileMenu).not.toHaveClass(/open/)
-    await expect(mobileMenu).toHaveAttribute('aria-hidden', 'true')
+    await expect(mobileMenu).toHaveAttribute('inert', '')
 
     // Open
     await hamburger.click()
     await expect(mobileMenu).toHaveClass(/open/)
     await expect(hamburger).toHaveClass(/open/)
-    await expect(mobileMenu).toHaveAttribute('aria-hidden', 'false')
+    await expect(mobileMenu).not.toHaveAttribute('inert', /.*/)
 
     // Close via Escape
     await page.keyboard.press('Escape')
     await expect(mobileMenu).not.toHaveClass(/open/)
-    await expect(mobileMenu).toHaveAttribute('aria-hidden', 'true')
+    await expect(mobileMenu).toHaveAttribute('inert', '')
   })
 
   test('mobile — Proceduri accordion expands', async ({ page }) => {

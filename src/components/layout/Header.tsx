@@ -16,6 +16,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import MegaMenu from './MegaMenu'
 import MobileMenu from './MobileMenu'
@@ -31,6 +32,14 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
   const [scrolled, setScrolled] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  // The transparent (white-on-dark) navbar style only works over the homepage's
+  // dark hero. Every other page has a light (cream) background directly under the
+  // fixed navbar, where white nav text is unreadable (a11y color-contrast). So we
+  // force the solid navbar treatment on all non-home routes.
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const solid = scrolled || !isHome
 
   // Ref to the hamburger button — used to return focus when the mobile drawer closes.
   const hamburgerRef = useRef<HTMLButtonElement>(null)
@@ -71,7 +80,7 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
 
   return (
     <>
-      <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
+      <nav id="navbar" className={solid ? 'scrolled' : ''}>
         {/* Logo — intrinsic size 1959×1980 (≈1:1); display height constrained via CSS */}
         <a href="/" className="nav-logo">
           <Image

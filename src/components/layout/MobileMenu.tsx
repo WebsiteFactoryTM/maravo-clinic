@@ -71,7 +71,9 @@ export default function MobileMenu({
       {/* Drawer */}
       <div
         id="mobile-menu"
-        aria-hidden={!isOpen}
+        // `inert` (React 19) removes the closed drawer from the tab order and
+        // a11y tree, avoiding the "aria-hidden element is focusable" violation.
+        inert={!isOpen}
         className={isOpen ? 'open' : ''}
       >
         {/* Header */}
