@@ -1,0 +1,924 @@
+[
+  {
+    "title": "Injectare acid hialuronic buze",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "imediate",
+      "effectDuration": "4–12 luni.",
+      "repeatInterval": "6–12 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Injectarea cu acid hialuronic în buze este o procedură minim invazivă prin care se obține volum, contur și hidratare, adaptate trăsăturilor feței.",
+    "benefits": [
+      "volum adaptat fizionomiei",
+      "contur mai bine definit",
+      "corectarea asimetriilor",
+      "hidratare vizibilă"
+    ],
+    "faqCount": 2
+  },
+  {
+    "title": "Fire PDO contur buze",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "moderat",
+      "painLevel": 5,
+      "results": "imediate + progresive",
+      "effectDuration": "6–12 luni, în funcție de metabolism și stil de viață.",
+      "repeatInterval": "La 9–12 luni, pentru menținerea rezultatului.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Firele PDO pentru conturul buzelor sunt o procedură minim invazivă prin care se introduc fire resorbabile în zona buzelor, pentru a defini conturul, îmbunătăți forma și stimula producția de colagen.",
+    "benefits": [
+      "definirea conturului buzelor",
+      "efect discret de volum",
+      "stimulare colagen",
+      "îmbunătățirea calității pielii",
+      "rezultat natural, fără supracorecție"
+    ],
+    "faqCount": 3
+  },
+  {
+    "title": "Injectare botox riduri de expresie",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–60 min, în funcție de zone",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "3–6 luni.",
+      "repeatInterval": "4–6 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Injectarea cu botox pentru riduri de expresie relaxează temporar mușchii responsabili de formarea ridurilor.",
+    "benefits": [
+      "reducerea ridurilor",
+      "prevenirea formării lor",
+      "aspect mai odihnit",
+      "rezultat natural"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Injectare botox maseteri, bruxism",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min, în funcție de caz",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "4–6 luni.",
+      "repeatInterval": "La 4–6 luni, în funcție de evoluție.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Injectarea cu botox în mușchiul maseter este o procedură utilizată pentru relaxarea musculaturii implicate în bruxism, scrâșnitul dinților, și pentru reducerea tensiunii la nivelul mandibulei.",
+    "benefits": [
+      "reducerea bruxismului",
+      "diminuarea tensiunii musculare",
+      "ameliorarea durerilor de maxilar",
+      "subțierea zonei mandibulare, ca efect estetic"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Injectare botox gummy smile, zâmbet gingival",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "20–30 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "3–4 luni.",
+      "repeatInterval": "La 4–6 luni, pentru menținerea rezultatului.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Injectarea cu botox pentru gummy smile este o procedură prin care se reduce expunerea gingiei în timpul zâmbetului, prin relaxarea controlată a mușchilor care ridică buza superioară.",
+    "benefits": [
+      "reducerea expunerii gingivale",
+      "zâmbet mai armonios",
+      "procedură rapidă și minim invazivă",
+      "rezultat natural"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Injectare botox transpirație excesivă, hiperhidroză",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "4–6 luni.",
+      "repeatInterval": "La aproximativ 6 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Tratamentul hiperhidrozei cu botox este o procedură injectabilă prin care se reduce transpirația excesivă prin blocarea temporară a glandelor sudoripare.",
+    "benefits": [
+      "reducerea semnificativă a transpirației",
+      "confort crescut",
+      "efect rapid și eficient"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Volumetrie facială cu acid hialuronic, pomeți, mandibulă, menton, tâmple",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min, în funcție de complexitate",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "imediate",
+      "effectDuration": "6–18 luni.",
+      "repeatInterval": "12–18 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Volumetria facială este o procedură injectabilă prin care se redă volumul și se definește conturul feței, în zone precum pomeți, mandibulă, menton și tâmple.",
+    "benefits": [
+      "definirea conturului facial",
+      "efect de lifting fără chirurgie",
+      "armonizarea trăsăturilor",
+      "rezultat imediat"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Corecție cearcăne cu acid hialuronic",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min, în funcție de complexitate",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "imediate",
+      "effectDuration": "6–12 luni.",
+      "repeatInterval": "La 9–12 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Corecția cearcănelor cu acid hialuronic este o procedură injectabilă prin care se reduce adâncimea și aspectul obosit al zonei de sub ochi.",
+    "benefits": [
+      "aspect mai odihnit",
+      "iluminarea privirii",
+      "corecția volumului"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Injectare acid hialuronic șanțuri nazo-labiale, nazo-geniene",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "imediate",
+      "effectDuration": "6–12 luni.",
+      "repeatInterval": "La 9–12 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Corecția șanțurilor nazo-labiale este o procedură injectabilă care reduce liniile dintre nas și gură.",
+    "benefits": [
+      "netezirea șanțurilor",
+      "aspect mai tânăr",
+      "contur armonios"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Rinocorecție acid hialuronic",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "imediate",
+      "effectDuration": "9–18 luni.",
+      "repeatInterval": "12–18 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Rinocorecția fără operație este o procedură injectabilă prin care se corectează forma nasului.",
+    "benefits": [
+      "corecție rapidă",
+      "fără chirurgie",
+      "rezultat imediat"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Dizolvare acid hialuronic, hialuronidază",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "results": "rapide",
+      "effectDuration": "Permanent pentru fillerul dizolvat.",
+      "repeatInterval": "La nevoie.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Procedură prin care se dizolvă acidul hialuronic injectat anterior, pentru corectarea sau eliminarea acestuia.",
+    "benefits": [
+      "corecție rapidă",
+      "control asupra rezultatului",
+      "posibilitatea reluării tratamentului"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "PRP, terapia vampir",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "progresive",
+      "effectDuration": "6–12 luni.",
+      "repeatInterval": "Serii de 3–4 ședințe, apoi întreținere.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "PRP este o procedură care utilizează plasma proprie pentru regenerarea pielii și stimularea colagenului.",
+    "benefits": [
+      "regenerare naturală",
+      "îmbunătățirea texturii pielii",
+      "stimulare colagen"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Injectare colagen pentru regenerare și fermitate",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "6–12 luni, în funcție de tipul pielii și stilul de viață.",
+      "repeatInterval": "De obicei, 2–3 ședințe inițiale, apoi întreținere periodică.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Injectarea colagenului este o procedură de biostimulare care îmbunătățește calitatea pielii prin stimularea producției naturale de colagen.",
+    "benefits": [
+      "stimularea producției de colagen",
+      "îmbunătățirea fermității pielii",
+      "hidratare profundă",
+      "uniformizarea texturii pielii",
+      "rezultat natural, progresiv"
+    ],
+    "faqCount": 2
+  },
+  {
+    "title": "Mezoterapie facială",
+    "complete": true,
+    "mapping": {
+      "category": "fata",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "Câteva luni.",
+      "repeatInterval": "Serii de 3–5 ședințe.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Mezoterapia este o procedură injectabilă prin care se introduc substanțe active pentru hidratarea și revitalizarea pielii.",
+    "benefits": [
+      "hidratare profundă",
+      "revitalizare",
+      "aspect luminos"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Polinucleotide",
+    "complete": true,
+    "mapping": {
+      "category": "fata",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "results": "progresive",
+      "effectDuration": "Câteva luni.",
+      "repeatInterval": "Serii de tratament.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Polinucleotidele sunt tratamente injectabile care susțin regenerarea pielii, hidratarea și îmbunătățirea calității dermului.",
+    "benefits": [
+      "hidratare",
+      "regenerare",
+      "aspect luminos"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Sculptra, biostimulator de colagen",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "progresive",
+      "effectDuration": "Până la 24 luni.",
+      "repeatInterval": "2–3 ședințe inițiale, apoi întreținere.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Sculptra este un tratament injectabil care stimulează producția naturală de colagen, îmbunătățind fermitatea și volumul pielii.",
+    "benefits": [
+      "stimulare colagen",
+      "efect natural progresiv",
+      "îmbunătățirea calității pielii"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "HarmonyCa, lifting și biostimulare",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "results": "imediate + progresive",
+      "effectDuration": "12–18 luni.",
+      "repeatInterval": "12–18 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "HarmonyCa combină efectul de volum imediat cu stimularea colagenului pe termen lung.",
+    "benefits": [
+      "efect imediat",
+      "stimulare colagen",
+      "contur îmbunătățit"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Radiesse, volum și biostimulare",
+    "complete": true,
+    "mapping": {
+      "category": "injectabile",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "results": "imediate + progresive",
+      "effectDuration": "12–18 luni.",
+      "repeatInterval": "12–18 luni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Radiesse este un tratament injectabil care oferă volum imediat și stimulează colagenul.",
+    "benefits": [
+      "volum imediat",
+      "lifting discret",
+      "stimulare colagen"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Lanluma X, volum corporal și biostimulare",
+    "complete": true,
+    "mapping": {
+      "category": "corp",
+      "bodyZones": [
+        "abdomen",
+        "brate",
+        "picioare"
+      ]
+    },
+    "meta": {
+      "duration": "60 min",
+      "painLabel": "moderat",
+      "results": "progresive",
+      "effectDuration": "Până la 24 luni.",
+      "repeatInterval": "Serii inițiale.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Lanluma este un tratament injectabil utilizat pentru volum corporal și stimulare colagen.",
+    "benefits": [
+      "volum natural",
+      "stimulare colagen",
+      "efect progresiv"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Lipoliză injectabilă",
+    "complete": true,
+    "mapping": {
+      "category": "corp",
+      "bodyZones": [
+        "abdomen",
+        "brate"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "moderat",
+      "painLevel": 5,
+      "results": "progresive",
+      "effectDuration": "De durată, cu stil de viață echilibrat.",
+      "repeatInterval": "2–4 ședințe, la interval de câteva săptămâni.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Lipoliza injectabilă este o procedură prin care se reduc depozitele de grăsime localizată prin distrugerea celulelor adipoase.",
+    "benefits": [
+      "reducerea grăsimii localizate",
+      "îmbunătățirea conturului",
+      "procedură minim invazivă"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Tratament regenerare păr",
+    "complete": true,
+    "mapping": {
+      "category": "par",
+      "bodyZones": [
+        "par"
+      ]
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "Câteva luni.",
+      "repeatInterval": "Serii de 3–6 ședințe.",
+      "invasiveness": "minim-invaziv"
+    },
+    "excerpt": "Tratament injectabil care stimulează foliculii de păr și îmbunătățește densitatea acestuia.",
+    "benefits": [
+      "stimulare creștere păr",
+      "îmbunătățire densitate",
+      "revitalizare scalp"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Dermapen 4, microneedling medical",
+    "complete": true,
+    "mapping": {
+      "category": "fata",
+      "bodyZones": [
+        "fata"
+      ],
+      "equipmentSlug": "dermapen-4"
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "progresive",
+      "effectDuration": "De durată, cu întreținere.",
+      "repeatInterval": "3–5 ședințe.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Microneedling-ul este o procedură care stimulează regenerarea pielii prin microperforații controlate.",
+    "benefits": [
+      "regenerare piele",
+      "uniformizare textură",
+      "stimulare colagen"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "HydraFacial Syndeo",
+    "complete": true,
+    "mapping": {
+      "category": "fata",
+      "bodyZones": [
+        "fata"
+      ],
+      "equipmentSlug": "hydrafacial-syndeo"
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "painLevel": 1,
+      "results": "imediate",
+      "effectDuration": "Câteva săptămâni.",
+      "repeatInterval": "La 4–6 săptămâni.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "HydraFacial este un tratament de curățare, exfoliere și hidratare profundă.",
+    "benefits": [
+      "curățare profundă",
+      "hidratare",
+      "glow imediat"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Epilare definitivă laser",
+    "complete": true,
+    "mapping": {
+      "category": "laser",
+      "bodyZones": [
+        "fata",
+        "brate",
+        "abdomen",
+        "picioare"
+      ],
+      "equipmentSlug": "clarity-ii"
+    },
+    "meta": {
+      "duration": "15–120 min, în funcție de zonă",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "progresive",
+      "effectDuration": "De lungă durată, cu întreținere.",
+      "repeatInterval": "6–8 ședințe inițiale.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Epilarea definitivă laser utilizează tehnologie medicală cu două lungimi de undă: Alexandrite 755 nm (gold standard pentru epilare) și Nd:YAG 1064 nm, pentru distrugerea selectivă a foliculului pilos.",
+    "benefits": [
+      "Alexandrite pur – eficiență ridicată",
+      "tratament adaptat tuturor tipurilor de piele",
+      "distrugere selectivă a foliculului",
+      "confort crescut prin răcire cu Zimmer Cryo 7"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Tratament vascular laser, cuperoză, vase sparte",
+    "complete": true,
+    "mapping": {
+      "category": "laser",
+      "bodyZones": [
+        "fata",
+        "picioare"
+      ],
+      "equipmentSlug": "clarity-ii"
+    },
+    "meta": {
+      "duration": "15–60 min",
+      "painLabel": "minim",
+      "painLevel": 3,
+      "results": "progresive",
+      "effectDuration": "De durată.",
+      "repeatInterval": "2–4 ședințe.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Tratamentul vascular laser utilizează în principal lungimea de undă Nd:YAG 1064 nm, care acționează selectiv asupra hemoglobinei.",
+    "benefits": [
+      "acțiune selectivă pe vase",
+      "penetrare profundă",
+      "tratament sigur și predictibil",
+      "confort cu Zimmer Cryo 7"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Tratament onicomicoză laser, ciuperca unghiei",
+    "complete": true,
+    "mapping": {
+      "category": "laser",
+      "bodyZones": [
+        "picioare"
+      ],
+      "equipmentSlug": "clarity-ii"
+    },
+    "meta": {
+      "duration": "20–30 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "Permanent, dacă infecția este eliminată.",
+      "repeatInterval": "Mai multe ședințe.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Tratamentul laser pentru onicomicoză utilizează energie termică controlată pentru a inhiba și distruge fungii din structura unghiei.",
+    "benefits": [
+      "tratament local, fără efecte sistemice",
+      "acțiune directă asupra fungilor",
+      "procedură sigură"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Tratament veruci plantare laser",
+    "complete": true,
+    "mapping": {
+      "category": "laser",
+      "bodyZones": [
+        "picioare"
+      ],
+      "equipmentSlug": "clarity-ii"
+    },
+    "meta": {
+      "duration": "20–30 min",
+      "painLabel": "moderat",
+      "painLevel": 5,
+      "results": "progresive",
+      "effectDuration": "Permanent pentru leziune.",
+      "repeatInterval": "La nevoie.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Tratamentul laser pentru veruci distruge țesutul infectat cu HPV prin energie concentrată.",
+    "benefits": [
+      "distrugere precisă",
+      "risc redus de recidivă",
+      "fără incizie"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Rejuvenare facială laser",
+    "complete": true,
+    "mapping": {
+      "category": "laser",
+      "bodyZones": [
+        "fata"
+      ],
+      "equipmentSlug": "clarity-ii"
+    },
+    "meta": {
+      "duration": "45–60 min",
+      "painLabel": "minim",
+      "results": "progresive",
+      "effectDuration": "Câteva luni.",
+      "repeatInterval": "Serii de ședințe.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Rejuvenarea laser stimulează colagenul prin microîncălzire controlată în derm, utilizând combinația de lungimi de undă pentru rezultate progresive și sigure.",
+    "benefits": [
+      "stimulare colagen",
+      "piele mai netedă",
+      "tratament sigur și predictibil",
+      "confort cu Zimmer Cryo 7"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "Tratament pete pigmentare laser",
+    "complete": true,
+    "mapping": {
+      "category": "laser",
+      "bodyZones": [
+        "fata",
+        "brate"
+      ],
+      "equipmentSlug": "clarity-ii"
+    },
+    "meta": {
+      "duration": "20–60 min",
+      "painLabel": "minim",
+      "results": "progresive",
+      "effectDuration": "De durată, cu protecție solară.",
+      "repeatInterval": "2–4 ședințe.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Tratamentul laser pentru pete pigmentare acționează asupra melaninei, determinând fragmentarea pigmentului și eliminarea acestuia.",
+    "benefits": [
+      "acțiune selectivă pe pigment",
+      "uniformizare ten",
+      "tratament sigur și predictibil",
+      "confort cu Zimmer Cryo 7"
+    ],
+    "faqCount": 5
+  },
+  {
+    "title": "HIFU lifting facial și corporal",
+    "complete": true,
+    "mapping": {
+      "category": "corp",
+      "bodyZones": [
+        "fata",
+        "gat",
+        "abdomen"
+      ],
+      "equipmentSlug": "hifu-liftera-asterasys"
+    },
+    "meta": {
+      "duration": "30–240 min, în funcție de zone",
+      "painLabel": "moderat",
+      "painLevel": 5,
+      "results": "progresive",
+      "effectDuration": "6–12 luni, în funcție de vârstă și stil de viață.",
+      "repeatInterval": "De obicei, 1–2 ori pe an.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "HIFU, High Intensity Focused Ultrasound, este o procedură medicală care utilizează ultrasunete focalizate de mare intensitate (MFU) pentru a stimula colagenul în profunzime și a produce un efect de lifting.",
+    "benefits": [
+      "efect de lifting prin acțiune în profunzime, SMAS",
+      "stimulare intensă de colagen",
+      "tratament non-invaziv, fără timp de recuperare",
+      "precizie ridicată datorită tehnologiei Liftera",
+      "procedură sigură și predictibilă"
+    ],
+    "faqCount": 2
+  },
+  {
+    "title": "Remodelare corporală radiofrecvență, RF",
+    "complete": true,
+    "mapping": {
+      "category": "corp",
+      "bodyZones": [
+        "abdomen",
+        "brate",
+        "picioare"
+      ],
+      "equipmentSlug": "nuera-tight-lumenis"
+    },
+    "meta": {
+      "duration": "20–120 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "Câteva luni, cu întreținere periodică.",
+      "repeatInterval": "Serii de 4–8 ședințe, în funcție de obiectiv.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Remodelarea corporală prin radiofrecvență este o procedură medicală care utilizează energie RF bipolară controlată pentru a încălzi țesuturile în profunzime, stimulând colagenul și îmbunătățind fermitatea pielii.",
+    "benefits": [
+      "creșterea fermității pielii",
+      "reducerea aspectului de celulită",
+      "remodelare corporală vizibilă",
+      "stimulare colagen",
+      "încălzire uniformă și controlată, fără puncte de supraîncălzire"
+    ],
+    "faqCount": 1
+  },
+  {
+    "title": "Drenaj limfatic, presoterapie",
+    "complete": true,
+    "mapping": {
+      "category": "corp",
+      "bodyZones": [
+        "picioare",
+        "abdomen"
+      ],
+      "equipmentSlug": "btl-lymphastim"
+    },
+    "meta": {
+      "duration": "30–45 min",
+      "painLevel": 0,
+      "results": "imediate",
+      "effectDuration": "Câteva zile, în funcție de stilul de viață și retenția de lichide.",
+      "repeatInterval": "De obicei, 1–2 ședințe pe săptămână sau în funcție de protocol.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Drenajul limfatic prin presoterapie este o procedură medicală care utilizează compresie pneumatică secvențială pentru a stimula circulația limfatică și eliminarea retenției de lichide.",
+    "benefits": [
+      "reducerea retenției de lichide",
+      "ameliorarea senzației de picioare grele",
+      "stimularea circulației limfatice",
+      "efect relaxant",
+      "susținerea proceselor de remodelare corporală"
+    ],
+    "faqCount": 3
+  },
+  {
+    "title": "Crioterapie leziuni cutanate",
+    "complete": true,
+    "mapping": {
+      "category": "corp",
+      "bodyZones": [
+        "fata",
+        "picioare"
+      ],
+      "equipmentSlug": "cryopen-o"
+    },
+    "meta": {
+      "duration": "10–20 min",
+      "painLabel": "minim",
+      "painLevel": 2,
+      "results": "progresive",
+      "effectDuration": "Permanent pentru leziunea tratată.",
+      "repeatInterval": "La nevoie, în funcție de tipul și dimensiunea leziunii.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Crioterapia este o procedură medicală prin care leziunile cutanate benigne sunt eliminate prin înghețare controlată, utilizând temperaturi foarte scăzute.",
+    "benefits": [
+      "eliminare rapidă și eficientă",
+      "precizie ridicată în tratament",
+      "fără incizie sau sutură",
+      "risc redus de cicatrici",
+      "procedură sigură și predictibilă"
+    ],
+    "faqCount": 3
+  },
+  {
+    "title": "Consultație",
+    "complete": true,
+    "mapping": {
+      "category": "fata",
+      "bodyZones": [
+        "fata"
+      ]
+    },
+    "meta": {
+      "duration": "30 min",
+      "painLevel": 0,
+      "results": "orientative",
+      "effectDuration": "Nu se aplică.",
+      "repeatInterval": "La nevoie.",
+      "invasiveness": "non-invaziv"
+    },
+    "excerpt": "Consultația este etapa în care se evaluează nevoile pacientului și se stabilește planul de tratament.",
+    "benefits": [
+      "plan personalizat",
+      "evaluare corectă",
+      "recomandări sigure"
+    ],
+    "faqCount": 5
+  }
+]
