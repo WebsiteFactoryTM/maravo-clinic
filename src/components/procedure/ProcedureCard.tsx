@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
+import { resolveMedia } from '@/lib/media'
 
 interface ProcedureCardCategory {
   name: string
@@ -20,11 +21,6 @@ interface ProcedureCardProps {
   featuredImage?: Media | number | null
   meta?: ProcedureCardMeta | null
   icon?: string | null
-}
-
-function resolveMedia(img: Media | number | null | undefined): Media | null {
-  if (!img || typeof img === 'number') return null
-  return img
 }
 
 export default function ProcedureCard({

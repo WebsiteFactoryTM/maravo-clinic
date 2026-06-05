@@ -7,6 +7,8 @@ import ProcedureCard from '@/components/procedure/ProcedureCard'
 import { defaultMetaTitle, defaultMetaDescription } from '@/lib/seo'
 import type { Category, Procedure, Media } from '@/payload-types'
 
+export const revalidate = 3600
+
 interface PageProps {
   params: Promise<{ categorie: string }>
 }
@@ -15,7 +17,7 @@ export async function generateStaticParams() {
   const payload = await getPayloadClient()
   const result = await payload.find({
     collection: 'categories',
-    limit: 100,
+    limit: 0,
   })
   return result.docs
     .filter((cat) => cat.slug)

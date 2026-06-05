@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
+import { resolveMedia } from '@/lib/media'
 
 interface EquipmentCardProps {
   name: string
@@ -9,11 +10,6 @@ interface EquipmentCardProps {
   manufacturer?: string | null
   purpose?: string | null
   photo?: Media | number | null
-}
-
-function resolveMedia(img: Media | number | null | undefined): Media | null {
-  if (!img || typeof img === 'number') return null
-  return img
 }
 
 export default function EquipmentCard({

@@ -5,6 +5,8 @@ import { getPayloadClient } from '@/lib/payload'
 import ProcedureExplorer from '@/components/procedure/ProcedureExplorer'
 import type { Category, Procedure, Media } from '@/payload-types'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: 'Proceduri estetice Timișoara — Maravo Clinic',
   description:
@@ -22,13 +24,13 @@ export default async function ProcedureHubPage() {
   const [categoriesResult, proceduresResult] = await Promise.all([
     payload.find({
       collection: 'categories',
-      limit: 100,
+      limit: 0,
       sort: 'order',
     }),
     payload.find({
       collection: 'procedures',
       where: { status: { equals: 'published' } },
-      limit: 300,
+      limit: 0,
       depth: 1,
     }),
   ])
@@ -46,7 +48,7 @@ export default async function ProcedureHubPage() {
         id: proc.id,
         title: proc.title,
         slug: proc.slug ?? '',
-        excerpt: proc.excerpt,
+        excerpt: proc.excerpt ?? '',
         icon: proc.icon ?? null,
         featuredImage: proc.featuredImage as Media | number | null | undefined,
         meta: proc.meta

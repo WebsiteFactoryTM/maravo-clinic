@@ -16,8 +16,12 @@ import {
   procedureJsonLd,
   faqJsonLd,
   breadcrumbJsonLd,
+  jsonLdHtml,
 } from '@/lib/seo'
+import { resolveMedia } from '@/lib/media'
 import type { Category, Procedure, Equipment, Media, SiteSetting } from '@/payload-types'
+
+export const revalidate = 3600
 
 interface PageProps {
   params: Promise<{ categorie: string; slug: string }>
@@ -38,11 +42,6 @@ function resolveEquipment(eq: number | Equipment): Equipment | null {
 function resolveProcedure(p: number | Procedure): Procedure | null {
   if (typeof p === 'number') return null
   return p
-}
-
-function resolveMedia(m: number | Media | null | undefined): Media | null {
-  if (!m || typeof m === 'number') return null
-  return m
 }
 
 /** Guard: richText root is non-empty if it has at least one child node */
@@ -68,7 +67,7 @@ export async function generateStaticParams() {
   const result = await payload.find({
     collection: 'procedures',
     where: { status: { equals: 'published' } },
-    limit: 1000,
+    limit: 0,
     depth: 1,
   })
   return result.docs.flatMap((proc) => {
@@ -191,17 +190,17 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
       {/* JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProcedure) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml(jsonLdProcedure) }}
       />
       {jsonLdFaq && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdHtml(jsonLdFaq) }}
         />
       )}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml(jsonLdBreadcrumb) }}
       />
 
       <main className="proc-detail">

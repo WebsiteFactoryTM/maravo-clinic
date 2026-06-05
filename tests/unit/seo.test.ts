@@ -1,4 +1,4 @@
-import { defaultMetaTitle, defaultMetaDescription, procedureJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../src/lib/seo'
+import { defaultMetaTitle, defaultMetaDescription, procedureJsonLd, faqJsonLd, breadcrumbJsonLd, jsonLdHtml } from '../../src/lib/seo'
 import { test, expect } from 'vitest'
 
 // --- defaultMetaTitle ---
@@ -91,4 +91,22 @@ test('breadcrumb JSON-LD with single crumb has position 1', () => {
   const ld = breadcrumbJsonLd([{ name: 'Home', url: 'https://m/' }])
   expect(ld.itemListElement).toHaveLength(1)
   expect(ld.itemListElement[0].position).toBe(1)
+})
+
+// --- jsonLdHtml ---
+
+test('jsonLdHtml does not contain literal </script> when input has <', () => {
+  const result = jsonLdHtml({ name: 'a</script><b' })
+  expect(result).not.toContain('</script>')
+})
+
+test('jsonLdHtml escapes < to \\u003c', () => {
+  const result = jsonLdHtml({ name: 'a</script><b' })
+  expect(result).toContain('\\u003c')
+})
+
+test('jsonLdHtml output is valid JSON that round-trips to original object', () => {
+  const original = { name: 'a</script><b' }
+  const result = jsonLdHtml(original)
+  expect(JSON.parse(result)).toEqual(original)
 })

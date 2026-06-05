@@ -37,6 +37,16 @@ export const defaultMetaTitle = (t: string): string =>
 export const defaultMetaDescription = (excerpt: string): string =>
   excerpt.length <= 155 ? excerpt : excerpt.slice(0, 152).trimEnd() + '…'
 
+// ── JSON-LD safe serialiser ───────────────────────────────────────────────────
+
+/**
+ * Serialize an object for safe embedding inside a <script type="application/ld+json"> tag.
+ * Escaping `<` to the valid JSON unicode escape `<` prevents `</script>` and
+ * `<!--` from terminating or altering the script element while remaining valid JSON-LD.
+ */
+export const jsonLdHtml = (obj: unknown): string =>
+  JSON.stringify(obj).replace(/</g, '\\u003c')
+
 // ── JSON-LD builders ──────────────────────────────────────────────────────────
 
 /**
