@@ -14,6 +14,10 @@ import { Procedures } from './collections/Procedures'
 import { Posts } from './collections/Posts'
 import { Leads } from './collections/Leads'
 
+import { SiteSettings } from './globals/SiteSettings'
+import { Homepage } from './globals/Homepage'
+import { Navigation } from './globals/Navigation'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -25,6 +29,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Categories, Equipment, Procedures, Posts, Leads],
+  globals: [SiteSettings, Homepage, Navigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
