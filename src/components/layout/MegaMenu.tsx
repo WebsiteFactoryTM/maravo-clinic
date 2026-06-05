@@ -78,11 +78,16 @@ export default function MegaMenu({ isOpen, onClose, registerTriggerHandlers }: M
     return catMatch && searchMatch
   })
 
+  // Reset search term whenever the menu closes so reopening shows an unfiltered list.
+  useEffect(() => {
+    if (!isOpen) setSearchTerm('')
+  }, [isOpen])
+
   return (
     <div
       id="mega-menu"
       ref={menuRef}
-      role="dialog"
+      role="region"
       aria-label="Meniu proceduri"
       aria-hidden={!isOpen}
       className={isOpen ? 'visible' : ''}
@@ -139,14 +144,7 @@ export default function MegaMenu({ isOpen, onClose, registerTriggerHandlers }: M
           </div>
 
           <div className="mega-footer">
-            <span
-              style={{
-                fontFamily: 'var(--sans)',
-                fontSize: '12px',
-                color: 'var(--text-muted)',
-                fontWeight: 300,
-              }}
-            >
+            <span className="mega-footer-note">
               Timișoara · Clinică estetică certificată medical
             </span>
             <a

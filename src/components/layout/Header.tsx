@@ -24,9 +24,8 @@ export default function Header() {
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Ref to the trigger button — needed so outside-click handler in MegaMenu
-  // can exclude it (matching the vanilla: `e.target !== navProcBtn`).
-  const triggerBtnRef = useRef<HTMLButtonElement>(null)
+  // Ref to the hamburger button — used to return focus when the mobile drawer closes.
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
 
   // Handlers registered by MegaMenu for the trigger button's hover events
   const triggerHandlersRef = useRef<{
@@ -50,21 +49,28 @@ export default function Header() {
 
   const openMega = useCallback(() => setMegaOpen(true), [])
   const closeMega = useCallback(() => setMegaOpen(false), [])
-  // Track whether hover opened the menu so the click handler can decide to close vs. leave open.
-  const hoverOpenedRef = useRef(false)
 
-  const closeMobile = useCallback(() => setMobileOpen(false), [])
+  // Snapshot of megaOpen captured at mousedown — used by the click handler to
+  // decide toggle direction without being confused by the mouseenter that fires
+  // just before the click event during a pointer-click sequence.
+  const megaOpenAtMouseDownRef = useRef(false)
+
+  const closeMobile = useCallback(() => {
+    setMobileOpen(false)
+    // Return focus to the hamburger button when the drawer closes.
+    hamburgerRef.current?.focus()
+  }, [])
 
   return (
     <>
       <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
-        {/* Logo */}
+        {/* Logo — intrinsic size 1959×1980 (≈1:1); display height constrained via CSS */}
         <a href="/" className="nav-logo">
           <Image
             src="/logo-gold.png"
             alt="Maravo Clinic"
-            width={46}
-            height={46}
+            width={1959}
+            height={1980}
             style={{ height: '40px', width: 'auto' }}
             priority
           />
@@ -77,25 +83,28 @@ export default function Header() {
         <ul className="nav-desktop" id="nav-desktop">
           <li>
             <button
-              ref={triggerBtnRef}
               id="nav-proceduri-btn"
               className={`nav-proc-trigger${megaOpen ? ' nav-active' : ''}`}
               aria-expanded={megaOpen}
+              aria-controls="mega-menu"
+              onMouseDown={() => {
+                // Capture the open state *before* any mouseenter side-effects
+                // change it; the click handler reads this snapshot.
+                megaOpenAtMouseDownRef.current = megaOpen
+              }}
               onClick={(e) => {
                 e.stopPropagation()
-                // If hover already opened the menu, a click should close it
-                // (and mark that hover is no longer responsible).
-                // If hover didn't open it (keyboard/direct click), toggle normally.
-                if (hoverOpenedRef.current) {
-                  hoverOpenedRef.current = false
+                // Toggle based on what the state was when the button was pressed,
+                // not what it is now (which may have been changed by the
+                // browser-synthesised mouseenter that fires before click).
+                if (megaOpenAtMouseDownRef.current) {
                   closeMega()
                 } else {
-                  setMegaOpen((prev) => !prev)
+                  openMega()
                 }
               }}
               onMouseEnter={() => {
                 triggerHandlersRef.current?.onMouseEnter()
-                hoverOpenedRef.current = true
                 openMega()
               }}
               onMouseLeave={() => {
@@ -119,6 +128,7 @@ export default function Header() {
 
         {/* Hamburger */}
         <button
+          ref={hamburgerRef}
           className={`hamburger${mobileOpen ? ' open' : ''}`}
           id="hamburger"
           aria-label="Meniu"

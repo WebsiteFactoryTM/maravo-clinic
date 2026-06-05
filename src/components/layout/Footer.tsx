@@ -61,7 +61,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="footer-bottom">
         <div className="footer-copy">
-          © 2025 Maravo Clinic Timișoara. Toate drepturile rezervate.
+          © {new Date().getFullYear()} Maravo Clinic. Toate drepturile rezervate.
         </div>
         <div className="footer-seo">
           Clinică estetică Timișoara · Epilare definitivă Timișoara · HIFU Timișoara · Botox

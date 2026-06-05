@@ -169,6 +169,7 @@ button { font-family: inherit; cursor: pointer; }
 .mega-footer { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--cream-dark); display: flex; justify-content: space-between; align-items: center; }
 .mega-footer-link { font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 6px; transition: gap 0.2s; }
 .mega-footer-link:hover { gap: 10px; }
+.mega-footer-note { font-family: var(--sans); font-size: 12px; color: var(--text-muted); font-weight: 300; }
 .mega-no-results { grid-column: 1/-1; padding: 30px; text-align: center; font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--text-muted); }
 
 /* ══════════════════════════════════════════════

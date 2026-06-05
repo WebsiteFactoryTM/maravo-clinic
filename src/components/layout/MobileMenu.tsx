@@ -8,7 +8,7 @@
  * Escape key and overlay click close the menu.
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CATEGORIES, PROCEDURES, NAV_LINKS, procedureHref } from './nav-data'
 
 interface MobileMenuProps {
@@ -18,11 +18,16 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const [accordionOpen, setAccordionOpen] = useState(false)
+  // Ref to the first focusable element inside the drawer (the Proceduri button).
+  const firstFocusRef = useRef<HTMLButtonElement>(null)
 
-  // Lock body scroll when open
+  // Lock body scroll when open; move focus into drawer on open.
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      // Defer focus so the drawer has finished its CSS transition enter frame.
+      const tid = setTimeout(() => firstFocusRef.current?.focus(), 50)
+      return () => clearTimeout(tid)
     } else {
       document.body.style.overflow = ''
       // Reset accordion on close
@@ -69,8 +74,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <nav className="mob-links">
           {/* Proceduri accordion trigger */}
           <button
+            ref={firstFocusRef}
             className={`mob-link${accordionOpen ? ' open' : ''}`}
             id="mob-proceduri-btn"
+            aria-expanded={accordionOpen}
+            aria-controls="mob-accordion"
             onClick={() => setAccordionOpen((prev) => !prev)}
           >
             Proceduri <span className="mob-arrow">›</span>

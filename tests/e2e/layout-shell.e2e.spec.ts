@@ -100,4 +100,50 @@ test.describe('Layout Shell', () => {
     await expect(cats).toHaveCount(5)
     await expect(accordion.locator('.mob-acc-item').first()).toBeVisible()
   })
+
+  test('mobile — accordion aria-expanded toggles correctly', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto(BASE)
+
+    await page.locator('#hamburger').click()
+    await expect(page.locator('#mobile-menu')).toHaveClass(/open/)
+
+    const mobProcBtn = page.locator('#mob-proceduri-btn')
+
+    // Initially collapsed
+    await expect(mobProcBtn).toHaveAttribute('aria-expanded', 'false')
+    await expect(mobProcBtn).toHaveAttribute('aria-controls', 'mob-accordion')
+
+    // Expand
+    await mobProcBtn.click()
+    await expect(mobProcBtn).toHaveAttribute('aria-expanded', 'true')
+    await expect(page.locator('#mob-accordion')).toHaveClass(/open/)
+
+    // Collapse
+    await mobProcBtn.click()
+    await expect(mobProcBtn).toHaveAttribute('aria-expanded', 'false')
+    await expect(page.locator('#mob-accordion')).not.toHaveClass(/open/)
+  })
+
+  test('desktop — hover→leave→click reopens mega-menu on first click', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    await page.goto(BASE)
+
+    const trigger = page.locator('#nav-proceduri-btn')
+    const megaMenu = page.locator('#mega-menu')
+
+    // Hover to open via hover
+    await trigger.hover()
+    await expect(megaMenu).toHaveClass(/visible/)
+
+    // Move mouse well below the mega-menu panel so both the trigger and menu
+    // fire mouseleave, letting the 200ms close timer fire.
+    await page.mouse.move(640, 750)
+    await page.waitForTimeout(400)
+    await expect(megaMenu).not.toHaveClass(/visible/)
+
+    // First click after hover→leave must reopen (not silently no-op)
+    await trigger.click()
+    await expect(megaMenu).toHaveClass(/visible/)
+  })
 })
