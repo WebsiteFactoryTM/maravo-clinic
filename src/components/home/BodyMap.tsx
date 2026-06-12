@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useCallback, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -20,55 +21,66 @@ interface ZoneConfig {
   label: string
   desc: string
   ariaLabel: string
-  hotspot: { top: string; left: string }
+  /** Side the connector label sits on (desktop). */
+  side: 'left' | 'right'
+  /** Vertical position (% of the silhouette height) of the connector + dot. */
+  top: number
 }
 
-// ── Static zone configuration (ported from maravo-ux-ui/app.js) ──────────
+// ── Static zone configuration ───────────────────────────────────────────────
+// `top` values are calibrated for the 550×1855 silhouette: the dots fall on
+// the head / face / neck / arm / waist / legs. Recalibrate if the image changes.
 
 const ZONE_ORDER: BodyZoneId[] = ['par', 'fata', 'gat', 'brate', 'abdomen', 'picioare']
 
 const ZONES: Record<BodyZoneId, ZoneConfig> = {
   par: {
     num: '01',
-    label: 'Scalp & Păr',
-    desc: 'Regenerare capilară',
-    ariaLabel: 'Scalp și păr',
-    hotspot: { top: '3.5%', left: '50%' },
+    label: 'Păr & Scalp',
+    desc: 'Regenerare capilară, anti-cădere',
+    ariaLabel: 'Păr și scalp',
+    side: 'left',
+    top: 4,
   },
   fata: {
     num: '02',
     label: 'Față',
-    desc: 'Rejuvenare & îngrijirea tenului',
+    desc: 'Rejuvenare, lifting, injectabile',
     ariaLabel: 'Față',
-    hotspot: { top: '9.5%', left: '50%' },
+    side: 'right',
+    top: 11,
   },
   gat: {
     num: '03',
     label: 'Gât & Décolteu',
     desc: 'Lifting & fermitate',
     ariaLabel: 'Gât și décolteu',
-    hotspot: { top: '18.5%', left: '50%' },
+    side: 'left',
+    top: 19,
   },
   brate: {
     num: '04',
     label: 'Brațe',
-    desc: 'Epilare & remodelare',
+    desc: 'Tonifiere, epilare, redefinire',
     ariaLabel: 'Brațe',
-    hotspot: { top: '41%', left: '29%' },
+    side: 'right',
+    top: 35,
   },
   abdomen: {
     num: '05',
-    label: 'Abdomen & Talie',
-    desc: 'Remodelare corporală',
-    ariaLabel: 'Abdomen și talie',
-    hotspot: { top: '50%', left: '50%' },
+    label: 'Abdomen',
+    desc: 'Remodelare, lipoliză, tonifiere',
+    ariaLabel: 'Abdomen',
+    side: 'left',
+    top: 45,
   },
   picioare: {
     num: '06',
     label: 'Picioare',
-    desc: 'Epilare & tratament vascular',
+    desc: 'Epilare, vascular, remodelare',
     ariaLabel: 'Picioare',
-    hotspot: { top: '80%', left: '58%' },
+    side: 'right',
+    top: 80,
   },
 }
 
@@ -82,232 +94,143 @@ interface BodyMapProps {
 
 export default function BodyMap({ procedures }: BodyMapProps) {
   const [activeZone, setActiveZone] = useState<BodyZoneId>('fata')
-  const panelRef = useRef<HTMLDivElement>(null)
+  const drawerRef = useRef<HTMLDivElement>(null)
 
-  const selectZone = useCallback(
-    (zone: BodyZoneId, scrollPanel = false) => {
-      if (!ZONES[zone]) return
-      setActiveZone(zone)
-      if (scrollPanel && panelRef.current && typeof window !== 'undefined' && window.innerWidth < 768) {
-        panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }
-    },
-    [],
-  )
+  const selectZone = useCallback((id: BodyZoneId) => {
+    setActiveZone(id)
+    // On mobile (where the figure sits above the drawer) bring the drawer into
+    // view after selecting. Desktop keeps everything in one viewport — no scroll.
+    if (
+      drawerRef.current &&
+      typeof window !== 'undefined' &&
+      window.innerWidth < 900
+    ) {
+      drawerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [])
 
-  const zoneData = ZONES[activeZone]
+  const zone = ZONES[activeZone]
   const zoneProcs = procedures.filter((p) => p.bodyZones?.includes(activeZone))
+  const count = zoneProcs.length
 
   return (
     <div className="bodymap">
-      {/* ── Body figure with SVG + hotspots ─── */}
-      <div className="bodymap-figure">
-        <svg
-          viewBox="0 0 240 600"
-          className="body-svg"
-          id="body-svg"
-          aria-label="Hartă corporală interactivă — selectează o zonă"
-          // role="group" (not "img"): this SVG is an interactive widget whose
-          // body parts are focusable buttons. An "img" role must not contain
-          // interactive descendants (axe: nested-interactive); "group" may.
-          role="group"
-          data-active={activeZone}
-        >
-          <defs>
-            <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#e9d9c2" />
-              <stop offset="100%" stopColor="#cdb295" />
-            </linearGradient>
-          </defs>
-          <g
-            className="body-group"
-            fill="url(#bodyGrad)"
-            stroke="rgba(201,169,110,0.55)"
-            strokeWidth="1"
-          >
-            {/* head */}
-            <ellipse
-              className={`bp${activeZone === 'fata' ? ' zone-active' : ''}`}
-              data-zone="fata"
-              cx="120"
-              cy="56"
-              rx="33"
-              ry="37"
-              onClick={() => selectZone('fata')}
-              role="button"
-              aria-label="Față"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('fata') : undefined}
-            />
-            {/* scalp cap — a subtle arc above head for the "par" zone */}
-            <ellipse
-              className={`bp${activeZone === 'par' ? ' zone-active' : ''}`}
-              data-zone="par"
-              cx="120"
-              cy="28"
-              rx="26"
-              ry="16"
-              onClick={() => selectZone('par')}
-              role="button"
-              aria-label="Scalp și păr"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('par') : undefined}
-            />
-            {/* neck */}
-            <path
-              className={`bp${activeZone === 'gat' ? ' zone-active' : ''}`}
-              data-zone="gat"
-              d="M108,88 L108,118 Q120,126 132,118 L132,88 Z"
-              onClick={() => selectZone('gat')}
-              role="button"
-              aria-label="Gât și décolteu"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('gat') : undefined}
-            />
-            {/* torso */}
-            <path
-              className={`bp${activeZone === 'abdomen' ? ' zone-active' : ''}`}
-              data-zone="abdomen"
-              d="M80,134 C92,120 148,120 160,134 L150,300 C140,313 100,313 90,300 Z"
-              onClick={() => selectZone('abdomen')}
-              role="button"
-              aria-label="Abdomen și talie"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('abdomen') : undefined}
-            />
-            {/* pelvis */}
-            <path
-              className={`bp${activeZone === 'abdomen' ? ' zone-active' : ''}`}
-              data-zone="abdomen"
-              d="M90,296 L150,296 L156,362 C150,378 90,378 84,362 Z"
-              onClick={() => selectZone('abdomen')}
-              role="button"
-              aria-label="Abdomen și talie"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('abdomen') : undefined}
-            />
-            {/* right arm */}
-            <path
-              className={`bp${activeZone === 'brate' ? ' zone-active' : ''}`}
-              data-zone="brate"
-              d="M156,140 C173,150 181,212 173,300 C171,313 160,313 158,300 C150,222 148,170 148,148 Z"
-              onClick={() => selectZone('brate')}
-              role="button"
-              aria-label="Brațe"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('brate') : undefined}
-            />
-            {/* left arm */}
-            <path
-              className={`bp${activeZone === 'brate' ? ' zone-active' : ''}`}
-              data-zone="brate"
-              d="M84,140 C67,150 59,212 67,300 C69,313 80,313 82,300 C90,222 92,170 92,148 Z"
-              onClick={() => selectZone('brate')}
-              role="button"
-              aria-label="Brațe"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('brate') : undefined}
-            />
-            {/* right leg */}
-            <path
-              className={`bp${activeZone === 'picioare' ? ' zone-active' : ''}`}
-              data-zone="picioare"
-              d="M122,362 L154,362 C157,424 151,502 147,578 C146,587 134,587 133,578 C130,502 124,432 120,378 Z"
-              onClick={() => selectZone('picioare')}
-              role="button"
-              aria-label="Picioare"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('picioare') : undefined}
-            />
-            {/* left leg */}
-            <path
-              className={`bp${activeZone === 'picioare' ? ' zone-active' : ''}`}
-              data-zone="picioare"
-              d="M118,362 L86,362 C83,424 89,502 93,578 C94,587 106,587 107,578 C110,502 116,432 120,378 Z"
-              onClick={() => selectZone('picioare')}
-              role="button"
-              aria-label="Picioare"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? selectZone('picioare') : undefined}
-            />
-          </g>
-        </svg>
+      {/* ── Stage: silhouette + decorative oval + desktop connectors ── */}
+      <div className="bm-stage">
+        <span className="bm-oval" aria-hidden="true" />
 
-        {/* Hotspot buttons — positioned over the figure */}
-        {ZONE_ORDER.map((zone) => {
-          const z = ZONES[zone]
+        <div className="bm-figure">
+          <Image
+            src="/body-figure.png"
+            alt="Siluetă feminină indicând zonele corpului pentru tratamente"
+            fill
+            sizes="(min-width: 768px) 320px, 240px"
+            draggable={false}
+            priority={false}
+          />
+        </div>
+
+        {/* Connector labels — visible on desktop (CSS-hidden < 768px). The dot
+            DOM order stays PUNCT → LINIE → TEXT on the right side (no
+            flex-direction: row-reverse) to avoid the text overlapping the figure. */}
+        <div className="bm-connectors">
+          {ZONE_ORDER.map((id) => {
+            const z = ZONES[id]
+            const active = id === activeZone
+            const text = (
+              <span className="zf-text">
+                <span className="zf-title">{z.label}</span>
+                <span className="zf-desc">{z.desc}</span>
+              </span>
+            )
+            return (
+              <button
+                key={id}
+                type="button"
+                className={`zflag zflag--${z.side}${active ? ' active' : ''}`}
+                style={{ top: `${z.top}%` }}
+                aria-label={z.ariaLabel}
+                aria-pressed={active}
+                onClick={() => selectZone(id)}
+              >
+                {z.side === 'left' ? (
+                  <>
+                    {text}
+                    <span className="zf-line" aria-hidden="true" />
+                    <span className="zf-dot" aria-hidden="true" />
+                  </>
+                ) : (
+                  <>
+                    <span className="zf-dot" aria-hidden="true" />
+                    <span className="zf-line" aria-hidden="true" />
+                    {text}
+                  </>
+                )}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ── Mobile zone list (CSS-hidden ≥ 768px) ── */}
+      <div className="bm-zonelist">
+        {ZONE_ORDER.map((id) => {
+          const z = ZONES[id]
+          const active = id === activeZone
           return (
             <button
-              key={zone}
-              className={`hotspot${activeZone === zone ? ' active' : ''}`}
-              data-zone={zone}
-              style={{ top: z.hotspot.top, left: z.hotspot.left }}
+              key={id}
+              type="button"
+              className={`bm-zoneitem${active ? ' active' : ''}`}
               aria-label={z.ariaLabel}
-              aria-pressed={activeZone === zone}
-              onClick={() => selectZone(zone)}
+              aria-pressed={active}
+              onClick={() => selectZone(id)}
             >
-              <span className="hs-dot" />
+              <span className="bm-zoneitem__num">{z.num}</span>
+              <span className="bm-zoneitem__text">
+                <span className="bm-zoneitem__title">{z.label}</span>
+                <span className="bm-zoneitem__desc">{z.desc}</span>
+              </span>
             </button>
           )
         })}
       </div>
 
-      {/* ── Info panel ─── */}
-      <div className="bodymap-panel" id="bodymap-panel" ref={panelRef}>
-        <div className="bmp-head">
-          <div className="bmp-zone-num">{zoneData.num}</div>
+      {/* ── Drawer ── */}
+      <div className="bm-drawer" ref={drawerRef}>
+        <div className="bm-drawer__head">
           <div>
-            <div className="bmp-zone-label">{zoneData.label}</div>
-            <div className="bmp-zone-desc">{zoneData.desc}</div>
+            <div className="bm-drawer__title">{zone.label}</div>
+            <div className="bm-drawer__desc">{zone.desc}</div>
           </div>
-          <div className="bmp-count">
-            <span>{zoneProcs.length}</span>
-            {zoneProcs.length === 1 ? 'procedură' : 'proceduri'}
+          <div className="bm-drawer__badge">
+            <span>{count}</span>
+            {count === 1 ? 'tratament' : 'tratamente'}
           </div>
         </div>
 
-        {/* Procedure list */}
         <div
-          className="bmp-procs"
+          className="bm-drawer__list"
           aria-live="polite"
-          aria-label={`Proceduri pentru zona ${zoneData.label}`}
+          aria-label={`Tratamente pentru zona ${zone.label}`}
         >
-          {zoneProcs.length > 0 ? (
+          {count > 0 ? (
             zoneProcs.map((proc) => (
               <Link
                 key={proc.id}
                 href={`/proceduri/${proc.categorySlug}/${proc.slug}`}
-                className="bmp-proc"
+                className="bm-drawer__row"
               >
-                <span className="bmp-proc-name">{proc.title}</span>
-                <span className="bmp-proc-arrow" aria-hidden="true">
+                <span className="bm-drawer__name">{proc.title}</span>
+                <span className="bm-drawer__arrow" aria-hidden="true">
                   →
                 </span>
               </Link>
             ))
           ) : (
-            <div className="bmp-proc" style={{ cursor: 'default' }}>
-              <span className="bmp-proc-name" style={{ fontStyle: 'italic', opacity: 0.6 }}>
-                Proceduri în curând pentru această zonă
-              </span>
-            </div>
+            <p className="bm-drawer__empty">Tratamente în curând pentru această zonă.</p>
           )}
         </div>
-
-        {/* Zone navigation chips */}
-        <nav className="bmp-zonenav" aria-label="Navigare zone corp">
-          {ZONE_ORDER.map((zone) => (
-            <button
-              key={zone}
-              className={`bmp-zonechip${activeZone === zone ? ' active' : ''}`}
-              data-zone={zone}
-              aria-pressed={activeZone === zone}
-              onClick={() => selectZone(zone, true)}
-            >
-              {ZONES[zone].label}
-            </button>
-          ))}
-        </nav>
       </div>
     </div>
   )

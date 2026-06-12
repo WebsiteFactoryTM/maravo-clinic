@@ -214,12 +214,15 @@ export default async function HomePage() {
       {/* 4. Body map / search hub */}
       <section id="search">
         <div className="search-header fade-up">
-          <span className="section-tag">Explorează după zonă · Atinge corpul</span>
+          <span className="section-tag">Explorează după zonă</span>
           <h2 className="search-title">
             Ce procedură
             <br />
             <em>cauți astăzi?</em>
           </h2>
+          <p className="search-intro">
+            Selectează o zonă a corpului pentru a descoperi tratamentele recomandate.
+          </p>
         </div>
         <FadeUp>
           <BodyMap procedures={bodyMapProcedures} />

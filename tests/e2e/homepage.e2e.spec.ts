@@ -25,7 +25,7 @@ test.describe('Homepage sections', () => {
   test('body map section exists', async ({ page }) => {
     await page.goto(BASE)
     await expect(page.locator('#search')).toBeAttached()
-    await expect(page.locator('.body-svg')).toBeAttached()
+    await expect(page.locator('.bm-figure')).toBeAttached()
   })
 
   test('stats section exists', async ({ page }) => {
