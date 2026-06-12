@@ -93,7 +93,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = proc.seo?.metaTitle ?? defaultMetaTitle(proc.title)
   const description =
-    proc.seo?.metaDescription ?? defaultMetaDescription(proc.excerpt)
+    proc.seo?.metaDescription ??
+    defaultMetaDescription(
+      proc.excerpt?.trim()
+        ? proc.excerpt
+        : `${proc.title} la Maravo Clinic Timișoara. Consultație și plan personalizat. Programează-te.`,
+    )
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
   const cat = resolveCategory(proc.category)

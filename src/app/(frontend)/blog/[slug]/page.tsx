@@ -78,7 +78,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = post.seo?.metaTitle ?? defaultMetaTitle(post.title)
   const description =
     post.seo?.metaDescription ??
-    defaultMetaDescription(post.excerpt ?? `${post.title} — Maravo Clinic Timișoara.`)
+    defaultMetaDescription(
+      post.excerpt?.trim() ? post.excerpt : `${post.title} — Maravo Clinic Timișoara.`,
+    )
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
   const canonical = `${siteUrl}/blog/${post.slug}`

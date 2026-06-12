@@ -111,7 +111,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = eq.seo?.metaTitle ?? defaultMetaTitle(eq.name)
   const description =
-    eq.seo?.metaDescription ?? defaultMetaDescription(eq.purpose ?? eq.name)
+    eq.seo?.metaDescription ??
+    defaultMetaDescription(
+      eq.purpose?.trim()
+        ? eq.purpose
+        : `${eq.name} la Maravo Clinic Timișoara — tratamente cu aparatură de ultimă generație.`,
+    )
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
   const canonicalUrl = `${siteUrl}/aparatura/${slug}`
