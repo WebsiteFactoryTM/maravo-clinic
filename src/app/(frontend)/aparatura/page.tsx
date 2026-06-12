@@ -1,16 +1,17 @@
 import React from 'react'
-import type { Metadata } from 'next'
+import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import { getPayloadClient } from '@/lib/payload'
 import EquipmentCard from '@/components/procedure/EquipmentCard'
 import type { Equipment, Media } from '@/payload-types'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Aparatură medicală estetică Timișoara — Maravo Clinic',
+export const metadata = buildMetadata({
+  title: defaultMetaTitle('Aparatură estetică Timișoara'),
   description:
-    'Descoperă aparatura medicală de ultimă generație folosită în cadrul Maravo Clinic Timișoara pentru tratamente estetice și dermatologice de înaltă calitate.',
-}
+    'Aparatură medicală de top la Maravo Clinic Timișoara: Lutronic Clarity II, HIFU, radiofrecvență, HydraFacial. Programează o consultație.',
+  path: '/aparatura',
+})
 
 export default async function EquipmentListPage() {
   const payload = await getPayloadClient()

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Metadata } from 'next'
+import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import { getPayloadClient } from '@/lib/payload'
 import { resolveMedia } from '@/lib/media'
 import BlogList from '@/components/blog/BlogList'
@@ -8,11 +8,12 @@ import type { Post } from '@/payload-types'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Blog estetică medicală Timișoara — Maravo Clinic',
+export const metadata = buildMetadata({
+  title: defaultMetaTitle('Blog estetică medicală Timișoara'),
   description:
-    'Articole, ghiduri și sfaturi despre tratamente estetice, îngrijirea pielii și frumusețe, de la specialiștii Maravo Clinic Timișoara.',
-}
+    'Articole, ghiduri și sfaturi despre tratamente estetice și îngrijirea pielii, de la specialiștii Maravo Clinic Timișoara.',
+  path: '/blog',
+})
 
 export default async function BlogPage() {
   const payload = await getPayloadClient()

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Metadata } from 'next'
+import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import { getPayloadClient } from '@/lib/payload'
 import type { Procedure, Equipment, Post, Category } from '@/payload-types'
 import type { BodyMapProcedure } from '@/components/home/BodyMap'
@@ -22,20 +22,12 @@ import FadeUp from '@/components/ui/FadeUp'
 export const revalidate = 3600
 
 // ── SEO metadata ─────────────────────────────────────────────────────────────
-export const metadata: Metadata = {
-  title: 'Maravo Clinic Timișoara | Clinică Estetică Premium',
+export const metadata = buildMetadata({
+  title: defaultMetaTitle('Clinică estetică Timișoara'),
   description:
-    'Clinica estetică de top din Timișoara. Epilare definitivă, botox, acid hialuronic, HIFU, laser Lutronic Clarity II. Rezervă consultație online.',
-  openGraph: {
-    title: 'Maravo Clinic Timișoara | Clinică Estetică Premium',
-    description:
-      'Clinica estetică de top din Timișoara. Epilare definitivă, botox, acid hialuronic, HIFU, laser Lutronic Clarity II. Rezervă consultație online.',
-    url: 'https://maravoclinic.ro',
-    siteName: 'Maravo Clinic',
-    locale: 'ro_RO',
-    type: 'website',
-  },
-}
+    'Clinică de estetică medicală premium în Timișoara: epilare definitivă, botox, acid hialuronic, HIFU, laser. Programează o consultație.',
+  path: '/',
+})
 
 // ── Data fetching ─────────────────────────────────────────────────────────────
 

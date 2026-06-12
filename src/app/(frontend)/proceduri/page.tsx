@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Metadata } from 'next'
+import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import ProcedureExplorer from '@/components/procedure/ProcedureExplorer'
@@ -9,11 +9,12 @@ import type { Category, Procedure, Media } from '@/payload-types'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Proceduri estetice Timișoara — Maravo Clinic',
+export const metadata = buildMetadata({
+  title: defaultMetaTitle('Proceduri estetice Timișoara'),
   description:
-    'Descoperă gama completă de proceduri estetice și dermatologice oferite de Maravo Clinic în Timișoara.',
-}
+    'Toate procedurile estetice și dermatologice Maravo Clinic Timișoara, pe categorii: față, corp, laser, injectabile. Programează o consultație.',
+  path: '/proceduri',
+})
 
 function resolveCategory(cat: number | Category): Category | null {
   if (typeof cat === 'number') return null
