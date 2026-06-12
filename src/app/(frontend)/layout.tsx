@@ -5,7 +5,8 @@ import '@/styles/globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { getPayloadClient } from '@/lib/payload'
-import { jsonLdHtml } from '@/lib/seo'
+import { jsonLdHtml, BASE_URL, OG_IMAGE } from '@/lib/seo'
+import { CLINIC } from '@/lib/clinic'
 import type {
   NavCategory,
   NavProcedure,
@@ -14,8 +15,6 @@ import type {
   SiteInfo,
 } from '@/components/layout/nav-types'
 import type { Category, Procedure } from '@/payload-types'
-
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 const serif = Cormorant_Garamond({
   subsets: ['latin', 'latin-ext'],
@@ -34,8 +33,6 @@ const sans = DM_Sans({
 
 const DEFAULT_DESCRIPTION =
   'Maravo Clinic Timișoara — clinică de estetică medicală și dermatologie premium. Proceduri injectabile, tratamente faciale, aparatură de ultimă generație. Programează o consultație.'
-
-const OG_IMAGE = `${BASE_URL}/logo-gold.png`
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -150,19 +147,17 @@ async function fetchNavData() {
     ])
 
     // ── Site settings ─────────────────────────────────────────────────────
+    const cmsHours = (siteSettingsRaw?.hours ?? []).flatMap((h) =>
+      h.day && h.value ? [{ day: h.day, value: h.value }] : [],
+    )
+
     const siteInfo: SiteInfo = {
-      clinicName: siteSettingsRaw?.clinicName || 'Maravo Clinic',
-      address: siteSettingsRaw?.address || null,
-      phone:
-        siteSettingsRaw?.phone ||
-        (process.env.CLINIC_PHONE ? process.env.CLINIC_PHONE : null),
-      whatsapp:
-        siteSettingsRaw?.whatsapp ||
-        (process.env.WHATSAPP_NUMBER ? process.env.WHATSAPP_NUMBER : null),
-      email: siteSettingsRaw?.email || null,
-      hours: (siteSettingsRaw?.hours ?? []).flatMap((h) =>
-        h.day && h.value ? [{ day: h.day, value: h.value }] : [],
-      ),
+      clinicName: siteSettingsRaw?.clinicName || CLINIC.name,
+      address: siteSettingsRaw?.address || CLINIC.addressFull,
+      phone: siteSettingsRaw?.phone || process.env.CLINIC_PHONE || CLINIC.phone,
+      whatsapp: siteSettingsRaw?.whatsapp || process.env.WHATSAPP_NUMBER || CLINIC.whatsapp,
+      email: siteSettingsRaw?.email || CLINIC.email,
+      hours: cmsHours.length > 0 ? cmsHours : CLINIC.hours.map((h) => ({ day: h.day, value: h.value })),
       socials: (siteSettingsRaw?.socials ?? []).flatMap((s) =>
         s.platform && s.url ? [{ platform: s.platform, url: s.url }] : [],
       ),
@@ -216,12 +211,12 @@ async function fetchNavData() {
     // Graceful fallback — render with env/defaults only
     return {
       siteInfo: {
-        clinicName: 'Maravo Clinic',
-        address: null,
-        phone: process.env.CLINIC_PHONE || null,
-        whatsapp: process.env.WHATSAPP_NUMBER || null,
-        email: null,
-        hours: [],
+        clinicName: CLINIC.name,
+        address: CLINIC.addressFull,
+        phone: process.env.CLINIC_PHONE || CLINIC.phone,
+        whatsapp: process.env.WHATSAPP_NUMBER || CLINIC.whatsapp,
+        email: CLINIC.email,
+        hours: CLINIC.hours.map((h) => ({ day: h.day, value: h.value })),
         socials: [],
       } satisfies SiteInfo,
       categories: [] as NavCategory[],

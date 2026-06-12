@@ -101,8 +101,8 @@ export function breadcrumbJsonLd(crumbs: BreadcrumbItem[]) {
 
 // ── Full page-metadata builder ────────────────────────────────────────────────
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-const OG_IMAGE = `${BASE_URL}/logo-gold.png`
+export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+export const OG_IMAGE = `${BASE_URL}/logo-gold.png`
 
 export interface BuildMetadataInput {
   /** Final title (already brand-stamped, e.g. via defaultMetaTitle). */
