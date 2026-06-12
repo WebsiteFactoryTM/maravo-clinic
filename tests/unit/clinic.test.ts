@@ -13,6 +13,10 @@ test('CLINIC.phoneHref is dial-safe (starts with + and has no whitespace)', () =
   expect(CLINIC.phoneHref).not.toMatch(/\s/)
 })
 
+test('CLINIC.whatsapp is a bare digit string (no + or whitespace)', () => {
+  expect(CLINIC.whatsapp).toMatch(/^\d+$/)
+})
+
 test('CLINIC.hours is a non-empty list of {day,value}', () => {
   expect(CLINIC.hours.length).toBeGreaterThan(0)
   expect(CLINIC.hours[0]).toHaveProperty('day')

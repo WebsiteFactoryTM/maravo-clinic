@@ -1,14 +1,17 @@
-// src/lib/clinic.ts
 // Single source of truth (in code) for Maravo Clinic's public business facts.
 // These are used as FALLBACK DEFAULTS only — CMS `site-settings` overrides them
 // at runtime. Sourced from the client's live site (maravoclinic.ro).
 
+const street = 'Strada Salcâmilor 14-16'
+const city = 'Timișoara'
+const county = 'Timiș'
+
 export const CLINIC = {
   name: 'Maravo Clinic',
-  city: 'Timișoara',
-  county: 'Timiș',
-  street: 'Strada Salcâmilor 14-16',
-  addressFull: 'Strada Salcâmilor 14-16, Timișoara, Timiș',
+  city,
+  county,
+  street,
+  addressFull: `${street}, ${city}, ${county}`,
   phone: '+40 775 393 323',
   phoneHref: '+40775393323',
   whatsapp: '40775393323',
