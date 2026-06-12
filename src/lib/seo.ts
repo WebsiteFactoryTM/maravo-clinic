@@ -1,5 +1,6 @@
 // SEO helpers: default meta generators and schema.org JSON-LD builders.
 // Pure functions, no external dependencies.
+import type { Metadata } from 'next'
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -95,5 +96,54 @@ export function breadcrumbJsonLd(crumbs: BreadcrumbItem[]) {
       name: c.name,
       item: c.url,
     })),
+  }
+}
+
+// ── Full page-metadata builder ────────────────────────────────────────────────
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const OG_IMAGE = `${BASE_URL}/logo-gold.png`
+
+export interface BuildMetadataInput {
+  /** Final title (already brand-stamped, e.g. via defaultMetaTitle). */
+  title: string
+  /** Raw description; truncated to ≤155 via defaultMetaDescription. */
+  description: string
+  /** Route path, e.g. '/despre' or '/' — canonical is BASE_URL + path. */
+  path: string
+  ogImage?: { url: string; alt?: string }
+  type?: 'website' | 'article'
+}
+
+/**
+ * Builds a complete Next.js Metadata object with a correct per-page canonical,
+ * OpenGraph and Twitter card. Use on pages that would otherwise inherit the
+ * root layout's canonical (which points at the homepage).
+ */
+export function buildMetadata(input: BuildMetadataInput): Metadata {
+  const { title, path, type = 'website' } = input
+  const description = defaultMetaDescription(input.description)
+  const canonical = path === '/' ? BASE_URL : `${BASE_URL}${path}`
+  const image = input.ogImage ?? { url: OG_IMAGE }
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type,
+      url: canonical,
+      siteName: 'Maravo Clinic',
+      locale: 'ro_RO',
+      title,
+      description,
+      images: [{ url: image.url, ...(image.alt ? { alt: image.alt } : {}) }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image.url],
+    },
   }
 }

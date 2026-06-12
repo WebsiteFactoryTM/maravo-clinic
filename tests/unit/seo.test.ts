@@ -1,4 +1,4 @@
-import { defaultMetaTitle, defaultMetaDescription, procedureJsonLd, faqJsonLd, breadcrumbJsonLd, jsonLdHtml } from '../../src/lib/seo'
+import { defaultMetaTitle, defaultMetaDescription, procedureJsonLd, faqJsonLd, breadcrumbJsonLd, jsonLdHtml, buildMetadata } from '../../src/lib/seo'
 import { test, expect } from 'vitest'
 
 // --- defaultMetaTitle ---
@@ -109,4 +109,41 @@ test('jsonLdHtml output is valid JSON that round-trips to original object', () =
   const original = { name: 'a</script><b' }
   const result = jsonLdHtml(original)
   expect(JSON.parse(result)).toEqual(original)
+})
+
+// --- buildMetadata ---
+test('buildMetadata canonical is absolute and ends with the path', () => {
+  const md = buildMetadata({ title: 'T', description: 'D', path: '/despre' })
+  const canonical = md.alternates?.canonical as string
+  expect(canonical).toMatch(/^https?:\/\//)
+  expect(canonical.endsWith('/despre')).toBe(true)
+})
+
+test('buildMetadata home path has no trailing slash', () => {
+  const canonical = buildMetadata({ title: 'T', description: 'D', path: '/' })
+    .alternates?.canonical as string
+  expect(canonical.endsWith('/')).toBe(false)
+})
+
+test('buildMetadata OpenGraph url mirrors canonical', () => {
+  const md = buildMetadata({ title: 'T', description: 'D', path: '/contact' })
+  expect((md.openGraph as { url?: string }).url).toBe(md.alternates?.canonical)
+})
+
+test('buildMetadata truncates description to <=155', () => {
+  const md = buildMetadata({ title: 'T', description: 'x'.repeat(300), path: '/' })
+  expect((md.description as string).length).toBeLessThanOrEqual(155)
+})
+
+test('buildMetadata mirrors title/description into OG and Twitter', () => {
+  const md = buildMetadata({ title: 'Hello', description: 'World', path: '/' })
+  expect((md.openGraph as { title?: string }).title).toBe('Hello')
+  expect((md.twitter as { description?: string }).description).toBe('World')
+})
+
+test('buildMetadata type defaults to website and passes article through', () => {
+  const web = buildMetadata({ title: 't', description: 'd', path: '/' })
+  const art = buildMetadata({ title: 't', description: 'd', path: '/b', type: 'article' })
+  expect((web.openGraph as { type?: string }).type).toBe('website')
+  expect((art.openGraph as { type?: string }).type).toBe('article')
 })
