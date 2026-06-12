@@ -1,24 +1,25 @@
 import React from 'react'
-import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import CtaButtons from '@/components/ui/CtaButtons'
 import type { SiteSetting } from '@/payload-types'
+import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
+import { CLINIC } from '@/lib/clinic'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Despre Maravo Clinic — Clinică estetică premium Timișoara',
+export const metadata = buildMetadata({
+  title: defaultMetaTitle('Despre — clinică estetică premium Timișoara'),
   description:
-    'Maravo Clinic — clinică de estetică medicală premium în Timișoara. Tehnologie certificată, medici specializați și protocoale personalizate pentru rezultate naturale.',
-}
+    'Maravo Clinic, clinică de estetică medicală premium în Timișoara. Echipă coordonată de Dr. Cristiana Voinescu, tehnologie certificată CE.',
+  path: '/despre',
+})
 
 /* ──────────────────────────────────────────────────────────────────────────
- * EDITABLE STATIC CONTENT (v1)
- * The original clinic presentation is a scanned PDF (not text-extractable),
- * so the copy below is tasteful, credible, generic-premium placeholder text
- * written from what we know about Maravo Clinic. The CLIENT SHOULD REVIEW /
- * REPLACE the constants below before launch. No specific unverifiable claims
- * (patient counts, doctor names, awards) are made.
+ * EDITABLE STATIC CONTENT (v2)
+ * Premium copy for Maravo Clinic. Verified facts published on the client's live
+ * site (maravoclinic.ro) are used: Dr. Cristiana Voinescu and the clinic NAP
+ * (see src/lib/clinic.ts). Doctor credentials are phrased conservatively — no
+ * specific certifications are asserted. CMS site-settings still override NAP.
  * ────────────────────────────────────────────────────────────────────────── */
 
 const ABOUT_CONTENT = {
@@ -64,11 +65,11 @@ export default async function DesprePage() {
     .findGlobal({ slug: 'site-settings' })
     .catch(() => null)) as SiteSetting | null
 
-  const clinicName = settings?.clinicName ?? 'Maravo Clinic'
-  const address = settings?.address ?? 'Timișoara, România'
-  const phone = settings?.phone ?? process.env.CLINIC_PHONE ?? ''
-  const whatsapp = settings?.whatsapp ?? process.env.WHATSAPP_NUMBER ?? ''
-  const email = settings?.email ?? ''
+  const clinicName = settings?.clinicName ?? CLINIC.name
+  const address = settings?.address ?? CLINIC.addressFull
+  const phone = settings?.phone ?? process.env.CLINIC_PHONE ?? CLINIC.phone
+  const whatsapp = settings?.whatsapp ?? process.env.WHATSAPP_NUMBER ?? CLINIC.whatsapp
+  const email = settings?.email ?? CLINIC.email
 
   return (
     <main className="despre-page">
@@ -114,13 +115,13 @@ export default async function DesprePage() {
           Echipa medicală
         </h2>
         <p>
-          Tratamentele de la {clinicName} sunt efectuate sau supervizate de medici cu specializare
-          în dermatologie și estetică medicală, alături de personal medical instruit pentru fiecare
-          tehnologie pe care o folosim. Investim constant în formare și în participarea la cursuri și
-          conferințe de profil, pentru a aduce cele mai actuale protocoale în beneficiul pacienților.
+          Echipa medicală {clinicName} este coordonată de{' '}
+          <strong>Dr. Cristiana Voinescu</strong>, alături de personal medical instruit pentru
+          fiecare tehnologie pe care o folosim. Fiecare tratament este efectuat sau supervizat de
+          medic, după o consultație în care stabilim împreună abordarea potrivită pentru tine.
+          Investim constant în formare și în participarea la cursuri și conferințe de profil, pentru
+          a aduce cele mai actuale protocoale de estetică medicală în Timișoara.
         </p>
-        {/* CLIENT TODO: înlocuiește cu numele și specializările reale ale medicilor,
-            după ce primim acordul echipei și datele oficiale. */}
       </section>
 
       {/* Certifications / technology */}
