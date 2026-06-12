@@ -1,18 +1,19 @@
 import React from 'react'
-import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import CtaButtons from '@/components/ui/CtaButtons'
 import LeadForm, { type ProcedureOption } from '@/components/forms/LeadForm'
-import { jsonLdHtml } from '@/lib/seo'
+import { buildMetadata, defaultMetaTitle, jsonLdHtml } from '@/lib/seo'
+import { CLINIC } from '@/lib/clinic'
 import type { Procedure, SiteSetting } from '@/payload-types'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Contact — Maravo Clinic Timișoara',
+export const metadata = buildMetadata({
+  title: defaultMetaTitle('Contact Timișoara'),
   description:
-    'Contactează Maravo Clinic din Timișoara: telefon, WhatsApp, adresă și program. Completează formularul și te contactăm pentru o programare.',
-}
+    'Programări și informații Maravo Clinic: Str. Salcâmilor 14–16, Timișoara, +40 775 393 323. Sună, scrie pe WhatsApp sau completează formularul.',
+  path: '/contact',
+})
 
 interface PageProps {
   searchParams: Promise<{ procedura?: string }>
@@ -26,12 +27,15 @@ export default async function ContactPage({ searchParams }: PageProps) {
     .findGlobal({ slug: 'site-settings' })
     .catch(() => null)) as SiteSetting | null
 
-  const clinicName = settings?.clinicName ?? 'Maravo Clinic'
-  const address = settings?.address ?? 'Timișoara, România'
-  const phone = settings?.phone ?? process.env.CLINIC_PHONE ?? ''
-  const whatsapp = settings?.whatsapp ?? process.env.WHATSAPP_NUMBER ?? ''
-  const email = settings?.email ?? ''
-  const hours = settings?.hours ?? []
+  const clinicName = settings?.clinicName ?? CLINIC.name
+  const address = settings?.address ?? CLINIC.addressFull
+  const phone = settings?.phone ?? process.env.CLINIC_PHONE ?? CLINIC.phone
+  const whatsapp = settings?.whatsapp ?? process.env.WHATSAPP_NUMBER ?? CLINIC.whatsapp
+  const email = settings?.email ?? CLINIC.email
+  const hours =
+    settings?.hours && settings.hours.length > 0
+      ? settings.hours.map((h) => ({ day: h.day ?? '', value: h.value ?? '' }))
+      : CLINIC.hours.map((h) => ({ day: h.day, value: h.value }))
   const mapsEmbedUrl = settings?.mapsEmbedUrl ?? ''
 
   // ?procedura=<slug> → prefill the lead form with that procedure.
@@ -94,8 +98,8 @@ export default async function ContactPage({ searchParams }: PageProps) {
         <span className="section-tag">Contact</span>
         <h1 className="contact-hero__title">Hai să ne cunoaștem</h1>
         <p className="contact-hero__lead">
-          Programări, întrebări sau consultații — suntem aici pentru tine. Sună-ne, scrie-ne pe
-          WhatsApp sau completează formularul de mai jos.
+          Programări, întrebări sau consultații la Maravo Clinic Timișoara — suntem aici pentru
+          tine. Sună-ne, scrie-ne pe WhatsApp sau completează formularul de mai jos.
         </p>
       </header>
 
@@ -132,7 +136,7 @@ export default async function ContactPage({ searchParams }: PageProps) {
               <h3 className="contact-hours__title">Program</h3>
               <dl className="contact-hours__list">
                 {hours.map((h, i) => (
-                  <div className="contact-hours__row" key={h.id ?? i}>
+                  <div className="contact-hours__row" key={i}>
                     <dt>{h.day}</dt>
                     <dd>{h.value}</dd>
                   </div>
