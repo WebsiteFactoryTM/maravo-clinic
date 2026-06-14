@@ -10,8 +10,9 @@ test.describe('Layout Shell', () => {
     // Navbar is present
     await expect(page.locator('#navbar')).toBeVisible()
 
-    // Logo wordmark
-    await expect(page.locator('.nav-wordmark')).toContainText('MARAVO')
+    // Logo only — wordmark removed (logo-only navbar by design)
+    await expect(page.locator('a.nav-logo img')).toBeVisible()
+    await expect(page.locator('.nav-wordmark')).toHaveCount(0)
 
     // Desktop nav is visible
     await expect(page.locator('.nav-desktop')).toBeVisible()

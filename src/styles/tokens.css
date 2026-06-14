@@ -1833,7 +1833,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .proc-detail__layout { max-width: 1180px; margin: 0 auto; padding: 24px 24px 32px; display: grid; grid-template-columns: 1fr; gap: 36px; }
 .proc-detail__title { font-family: var(--serif); font-size: clamp(30px, 7vw, 52px); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 16px; }
 .proc-detail__excerpt { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--text-muted-light); line-height: 1.8; margin-bottom: 24px; }
-.proc-rail__price { margin-top: 24px; padding: 18px 20px; background: var(--cream-dark); border: 1px solid var(--taupe); display: flex; flex-direction: column; gap: 4px; }
+.proc-rail__price { margin-top: 24px; padding: 18px 20px; background: var(--cream); border: 1px solid var(--taupe); display: flex; flex-direction: column; gap: 4px; }
 .proc-price__label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light-bg); }
 .proc-price__value { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--charcoal); }
 .proc-price__note { font-family: var(--sans); font-size: 12px; color: var(--text-muted-light); }

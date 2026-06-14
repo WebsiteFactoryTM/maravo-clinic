@@ -13,7 +13,8 @@ test.describe('UX overhaul — sitewide', () => {
     await page.goto('/')
     const fab = page.locator('a.wa-fab')
     await expect(fab).toBeVisible()
-    await expect(fab).toHaveAttribute('href', /wa\.me\/40775393323/)
+    // Number comes from CMS/env (siteInfo.whatsapp) — assert a wa.me deep link, not a fixed number.
+    await expect(fab).toHaveAttribute('href', /wa\.me\/\d{6,}/)
     await expect(fab).toHaveAttribute('aria-label', /WhatsApp/i)
   })
 
