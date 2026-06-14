@@ -258,10 +258,7 @@ export default async function EquipmentDetailPage({ params }: PageProps) {
         <header className="equip-detail__hero">
           <h1 className="equip-detail__title">{eq.name}</h1>
           {eq.manufacturer && (
-            <p className="equip-detail__manufacturer">
-              <span className="equip-detail__manufacturer-label">Producător: </span>
-              <strong>{eq.manufacturer}</strong>
-            </p>
+            <span className="equip-chip">{eq.manufacturer}</span>
           )}
         </header>
 

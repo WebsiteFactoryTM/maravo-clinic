@@ -1174,6 +1174,8 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   border-radius: 0;
   overflow: hidden;
   background: var(--cream-dark);
+  border: 1px solid var(--cream-dark);
+  position: relative;
 }
 .equip-detail__photo {
   width: 100%;
@@ -1190,7 +1192,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   .equip-detail__gallery { grid-template-columns: repeat(3, 1fr); }
 }
 .equip-detail__gallery-item { margin: 0; overflow: hidden; background: var(--cream-dark); }
-.equip-detail__gallery-img { width: 100%; height: auto; object-fit: cover; display: block; }
+.equip-detail__gallery-img { width: 100%; height: auto; object-fit: cover; display: block; transition: transform 0.5s ease; }
 .equip-detail__section {
   display: flex;
   flex-direction: column;
@@ -1862,3 +1864,10 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   .proc-rail { position: sticky; top: calc(var(--nav-h) + 20px); }
   .proc-detail .equip-grid, .proc-detail .proc-grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ══ EQUIPMENT POLISH ══ */
+.equip-chip { display: inline-block; margin-top: 12px; padding: 6px 14px; background: var(--cream-dark); border: 1px solid var(--taupe); border-radius: 999px; font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; color: var(--charcoal); }
+.equip-detail__photo-wrap::after { content: ''; position: absolute; top: 10px; right: 10px; width: 22px; height: 22px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.equip-detail__gallery-item:hover .equip-detail__gallery-img { transform: scale(1.05); }
+.equip-grid--listing .equip-card { transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+.equip-grid--listing .equip-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201,169,110,0.14); border-color: var(--gold); }
