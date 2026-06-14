@@ -1544,7 +1544,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
    BLOG (list + detail)
 ══════════════════════════════════════════════ */
 .blog-page { padding-top: var(--nav-h); }
-.blog-page__hero { padding: 56px 24px 24px; max-width: 880px; }
+.blog-page__hero { padding: 56px 24px 24px; max-width: 1100px; margin: 0 auto; }
 .blog-page__title {
   font-family: var(--serif);
   font-size: clamp(30px, 7vw, 52px);
@@ -1560,7 +1560,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   color: var(--text-muted);
   line-height: 1.85;
 }
-.blog-page__body { padding: 24px 24px 64px; }
+.blog-page__body { padding: 24px 24px 64px; max-width: 1100px; margin: 0 auto; }
 .blog-empty {
   padding: 48px 24px 96px;
   text-align: center;
