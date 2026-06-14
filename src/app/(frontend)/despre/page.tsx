@@ -1,9 +1,12 @@
 import React from 'react'
+import Image from 'next/image'
 import { getPayloadClient } from '@/lib/payload'
 import CtaButtons from '@/components/ui/CtaButtons'
+import FadeUp from '@/components/ui/FadeUp'
 import type { SiteSetting } from '@/payload-types'
 import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import { CLINIC } from '@/lib/clinic'
+import { FaShieldHeart, FaLeaf, FaUserGroup, FaSpa } from 'react-icons/fa6'
 
 export const revalidate = 3600
 
@@ -59,6 +62,8 @@ const ABOUT_CONTENT = {
   ],
 } as const
 
+const VALUE_ICONS = [FaShieldHeart, FaLeaf, FaUserGroup, FaSpa]
+
 export default async function DesprePage() {
   const payload = await getPayloadClient()
   const settings = (await payload
@@ -73,102 +78,121 @@ export default async function DesprePage() {
 
   return (
     <main className="despre-page">
-      <header className="despre-hero">
-        <span className="section-tag">Despre noi</span>
-        <h1 className="despre-hero__title">
-          Estetică medicală <em>premium</em> în inima Timișoarei
-        </h1>
-        <p className="despre-hero__lead">{ABOUT_CONTENT.heroLead}</p>
+      <header className="despre-hero despre-hero--split">
+        <div className="despre-hero__copy">
+          <span className="section-tag">Despre noi</span>
+          <h1 className="despre-hero__title">
+            Estetică medicală <em>premium</em> în inima Timișoarei
+          </h1>
+          <p className="despre-hero__lead">{ABOUT_CONTENT.heroLead}</p>
+        </div>
+        <div className="despre-hero__media">
+          <Image src="/img/about.webp" alt="Interior Maravo Clinic Timișoara" width={720} height={900} className="despre-hero__img" priority />
+        </div>
       </header>
 
       {/* Story / philosophy */}
-      <section className="despre-section" aria-labelledby="despre-poveste">
-        <h2 className="despre-section__title" id="despre-poveste">
-          Povestea & filozofia noastră
-        </h2>
-        {ABOUT_CONTENT.story.map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
-      </section>
+      <FadeUp>
+        <section className="despre-section" aria-labelledby="despre-poveste">
+          <h2 className="despre-section__title" id="despre-poveste">
+            Povestea & filozofia noastră
+          </h2>
+          {ABOUT_CONTENT.story.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </section>
+      </FadeUp>
 
       {/* Values / pillars */}
-      <section className="despre-section" aria-labelledby="despre-valori">
-        <h2 className="despre-section__title" id="despre-valori">
-          Valorile care ne ghidează
-        </h2>
-        <div className="despre-values">
-          {ABOUT_CONTENT.values.map((v, i) => (
-            <article className="despre-value" key={v.title}>
-              <span className="despre-value__num" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="despre-value__title">{v.title}</h3>
-              <p className="despre-value__text">{v.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <FadeUp>
+        <section className="despre-section" aria-labelledby="despre-valori">
+          <h2 className="despre-section__title" id="despre-valori">
+            Valorile care ne ghidează
+          </h2>
+          <div className="despre-values">
+            {ABOUT_CONTENT.values.map((v, i) => {
+              const Icon = VALUE_ICONS[i] ?? FaShieldHeart
+              return (
+                <article className="despre-value" key={v.title}>
+                  <span className="despre-value__icon" aria-hidden="true"><Icon /></span>
+                  <h3 className="despre-value__title">{v.title}</h3>
+                  <p className="despre-value__text">{v.text}</p>
+                </article>
+              )
+            })}
+          </div>
+        </section>
+      </FadeUp>
 
-      {/* Medical team (role-based, no fabricated names) */}
-      <section className="despre-section" aria-labelledby="despre-echipa">
-        <h2 className="despre-section__title" id="despre-echipa">
-          Echipa medicală
-        </h2>
-        <p>
-          Echipa medicală {clinicName} este coordonată de{' '}
-          <strong>Dr. Cristiana Voinescu</strong>, alături de personal medical instruit pentru
-          fiecare tehnologie pe care o folosim. Fiecare tratament este efectuat sau supervizat de
-          medic, după o consultație în care stabilim împreună abordarea potrivită pentru tine.
-          Investim constant în formare și în participarea la cursuri și conferințe de profil, pentru
-          a aduce cele mai actuale protocoale de estetică medicală în Timișoara.
-        </p>
-      </section>
+      {/* Doctor E-E-A-T block (replaces the plain "Echipa medicală" section) */}
+      <FadeUp>
+        <section className="despre-doctor" aria-labelledby="despre-doctor">
+          <div className="despre-doctor__media" aria-hidden="true">
+            <span className="despre-doctor__monogram">MV</span>
+          </div>
+          <div className="despre-doctor__body">
+            <span className="section-tag">Coordonator medical</span>
+            <h2 className="despre-section__title" id="despre-doctor">Dr. Cristiana Voinescu</h2>
+            <p>
+              Echipa medicală {clinicName} este coordonată de Dr. Cristiana Voinescu. Fiecare
+              tratament este efectuat sau supervizat de medic, în urma unei consultații în care
+              stabilim împreună abordarea potrivită. Investim constant în formare și în participarea
+              la cursuri și conferințe de profil, pentru a aduce cele mai actuale protocoale de
+              estetică medicală în Timișoara.
+            </p>
+          </div>
+        </section>
+      </FadeUp>
 
       {/* Certifications / technology */}
-      <section className="despre-section" aria-labelledby="despre-tehnologie">
-        <h2 className="despre-section__title" id="despre-tehnologie">
-          Tehnologie & certificări
-        </h2>
-        <p>
-          Lucrăm exclusiv cu aparatură medicală certificată CE și cu produse de la branduri
-          recunoscute la nivel internațional. Portofoliul nostru de echipamente acoperă o gamă largă
-          de nevoi estetice și dermatologice:
-        </p>
-        <ul className="despre-tech-list">
-          {ABOUT_CONTENT.technology.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+      <FadeUp>
+        <section className="despre-section" aria-labelledby="despre-tehnologie">
+          <h2 className="despre-section__title" id="despre-tehnologie">
+            Tehnologie & certificări
+          </h2>
+          <p>
+            Lucrăm exclusiv cu aparatură medicală certificată CE și cu produse de la branduri
+            recunoscute la nivel internațional. Portofoliul nostru de echipamente acoperă o gamă largă
+            de nevoi estetice și dermatologice:
+          </p>
+          <ul className="despre-tech-list">
+            {ABOUT_CONTENT.technology.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      </FadeUp>
 
       {/* Location / NAP */}
-      <section className="despre-nap" aria-labelledby="despre-locatie">
-        <div className="despre-nap__card">
-          <h2 className="despre-nap__title" id="despre-locatie">
-            Unde ne găsești
-          </h2>
-          <p className="despre-nap__row">
-            <span className="despre-nap__label">Clinică</span>
-            {clinicName}
-          </p>
-          <p className="despre-nap__row">
-            <span className="despre-nap__label">Adresă</span>
-            {address}
-          </p>
-          {phone && (
+      <FadeUp>
+        <section className="despre-nap" aria-labelledby="despre-locatie">
+          <div className="despre-nap__card">
+            <h2 className="despre-nap__title" id="despre-locatie">
+              Unde ne găsești
+            </h2>
             <p className="despre-nap__row">
-              <span className="despre-nap__label">Telefon</span>
-              <a href={`tel:${phone}`}>{phone}</a>
+              <span className="despre-nap__label">Clinică</span>
+              {clinicName}
             </p>
-          )}
-          {email && (
             <p className="despre-nap__row">
-              <span className="despre-nap__label">Email</span>
-              <a href={`mailto:${email}`}>{email}</a>
+              <span className="despre-nap__label">Adresă</span>
+              {address}
             </p>
-          )}
-        </div>
-      </section>
+            {phone && (
+              <p className="despre-nap__row">
+                <span className="despre-nap__label">Telefon</span>
+                <a href={`tel:${phone}`}>{phone}</a>
+              </p>
+            )}
+            {email && (
+              <p className="despre-nap__row">
+                <span className="despre-nap__label">Email</span>
+                <a href={`mailto:${email}`}>{email}</a>
+              </p>
+            )}
+          </div>
+        </section>
+      </FadeUp>
 
       {(whatsapp || phone) && (
         <section className="despre-cta" aria-label="Programează o consultație">
