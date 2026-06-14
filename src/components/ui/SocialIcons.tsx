@@ -1,12 +1,13 @@
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa6'
+import type { IconType } from 'react-icons'
 
 export interface SocialLink {
   platform: string
   url: string
 }
 
-const ICONS: Record<string, { Icon: React.ComponentType; label: string }> = {
+const ICONS: Record<string, { Icon: IconType; label: string }> = {
   facebook: { Icon: FaFacebookF, label: 'Facebook' },
   instagram: { Icon: FaInstagram, label: 'Instagram' },
   tiktok: { Icon: FaTiktok, label: 'TikTok' },

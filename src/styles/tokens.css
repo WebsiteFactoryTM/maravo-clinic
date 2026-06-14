@@ -1751,6 +1751,9 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   font-size: 16px; transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s;
 }
 .social-icons__link:hover { color: var(--cream); background: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+.social-icons__link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.footer-socials .social-icons__link { color: var(--text-muted-dark); border-color: rgba(210,187,163,0.35); }
+.footer-socials .social-icons__link:hover { color: var(--cream); background: var(--gold); border-color: var(--gold); }
 
 /* ── FLOATING WHATSAPP BUTTON (bottom-left, sitewide) ── */
 .wa-fab {
@@ -1762,6 +1765,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   transition: transform 0.25s, box-shadow 0.25s;
 }
 .wa-fab:hover { transform: scale(1.06); box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
+.wa-fab:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .wa-fab::before {
   content: ''; position: absolute; inset: 0; border-radius: 50%;
   border: 2px solid #25D366; animation: wa-pulse 2.4s ease-out infinite;
