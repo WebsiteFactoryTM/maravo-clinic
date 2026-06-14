@@ -42,7 +42,6 @@ export default function Footer({ siteInfo, footerColumns }: FooterProps) {
   const cols = footerColumns.length > 0 ? footerColumns : DEFAULT_FOOTER_COLUMNS
 
   const phone = siteInfo.phone ?? process.env.CLINIC_PHONE ?? null
-  const whatsapp = siteInfo.whatsapp ?? process.env.WHATSAPP_NUMBER ?? null
 
   return (
     <footer>
@@ -103,20 +102,6 @@ export default function Footer({ siteInfo, footerColumns }: FooterProps) {
 
         {/* Socials */}
         <SocialIcons socials={siteInfo.socials} className="footer-socials" />
-
-        {/* WhatsApp CTA */}
-        {whatsapp && (
-          <div className="footer-whatsapp">
-            <a
-              href={`https://wa.me/${whatsapp.replace(/[+\s]/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-whatsapp-link"
-            >
-              WhatsApp
-            </a>
-          </div>
-        )}
       </div>
 
       {/* Bottom bar */}
@@ -127,6 +112,12 @@ export default function Footer({ siteInfo, footerColumns }: FooterProps) {
         <div className="footer-seo">
           Clinică estetică Timișoara · Epilare definitivă Timișoara · HIFU Timișoara · Botox
           Timișoara · Acid hialuronic Timișoara
+        </div>
+        <div className="footer-credit">
+          Made with <span aria-hidden="true">🤍</span> by{' '}
+          <a href="https://websitefactory.ro" target="_blank" rel="noopener noreferrer">
+            Website Factory
+          </a>
         </div>
       </div>
     </footer>

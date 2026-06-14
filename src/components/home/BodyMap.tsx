@@ -98,13 +98,9 @@ export default function BodyMap({ procedures }: BodyMapProps) {
 
   const selectZone = useCallback((id: BodyZoneId) => {
     setActiveZone(id)
-    // On mobile (where the figure sits above the drawer) bring the drawer into
-    // view after selecting. Desktop keeps everything in one viewport — no scroll.
-    if (
-      drawerRef.current &&
-      typeof window !== 'undefined' &&
-      window.innerWidth < 768
-    ) {
+    // Selecting a zone (on the body or a connector) brings the filtered
+    // treatments list into view — on both mobile and desktop.
+    if (drawerRef.current && typeof window !== 'undefined') {
       drawerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [])
