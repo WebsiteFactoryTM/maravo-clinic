@@ -29,17 +29,15 @@ export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) 
               alt={resolvedImage.alt ?? 'Maravo Clinic'}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="about-logo"
-              style={{ objectFit: 'cover' }}
+              className="about-photo"
             />
           ) : (
             <Image
               src="/img/about.webp"
-              width={720}
-              height={900}
               alt="Interior Maravo Clinic Timișoara"
-              className="about-logo"
-              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="about-photo"
             />
           )}
         </div>

@@ -593,6 +593,7 @@ button { font-family: inherit; cursor: pointer; }
 .about-visual-inner { width: 140px; height: 200px; border: 1px solid rgba(201,169,110,0.2); display: flex; align-items: center; justify-content: center; position: relative; }
 .about-visual-inner::before { content: ''; position: absolute; inset: -14px; border: 1px solid rgba(201,169,110,0.08); }
 .about-logo { width: 90px; opacity: 0.75; }
+.about-photo { object-fit: cover; }
 .about-content { padding: 56px 24px; }
 .about-content--no-pb { padding-bottom: 0; }
 .about-title { font-family: var(--serif); font-size: clamp(28px, 6vw, 48px); font-weight: 300; color: var(--black); line-height: 1.2; margin-bottom: 20px; }
