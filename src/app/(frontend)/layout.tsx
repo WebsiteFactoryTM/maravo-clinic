@@ -5,6 +5,7 @@ import '@/styles/globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import WhatsAppFab from '@/components/ui/WhatsAppFab'
+import Reveal from '@/components/ui/Reveal'
 import { getPayloadClient } from '@/lib/payload'
 import { jsonLdHtml, BASE_URL, OG_IMAGE } from '@/lib/seo'
 import { CLINIC } from '@/lib/clinic'
@@ -247,6 +248,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           procedures={procedures}
           navLinks={navLinks}
         />
+        <Reveal />
         {children}
         <WhatsAppFab whatsapp={siteInfo.whatsapp} />
         <Footer
