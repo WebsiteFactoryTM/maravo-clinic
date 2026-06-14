@@ -592,7 +592,6 @@ button { font-family: inherit; cursor: pointer; }
 .about-visual { background: linear-gradient(135deg, #2a1e14 0%, #1e1610 50%, #100c08 100%); padding: 72px 24px; display: flex; align-items: center; justify-content: center; min-height: 280px; }
 .about-visual-inner { width: 140px; height: 200px; border: 1px solid rgba(201,169,110,0.2); display: flex; align-items: center; justify-content: center; position: relative; }
 .about-visual-inner::before { content: ''; position: absolute; inset: -14px; border: 1px solid rgba(201,169,110,0.08); }
-.about-logo { width: 90px; opacity: 0.75; }
 .about-photo { object-fit: cover; }
 .about-content { padding: 56px 24px; }
 .about-content--no-pb { padding-bottom: 0; }
@@ -682,8 +681,8 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .footer-contact-item a { color: inherit; }
 /* WhatsApp / social links inherit the dark --text by default, which is invisible
    on the espresso footer — give them an explicit AA-passing color. */
-.footer-whatsapp-link, .footer-social-link { color: var(--text-muted-dark); transition: color 0.2s; }
-.footer-whatsapp-link:hover, .footer-social-link:hover { color: var(--gold); }
+.footer-whatsapp-link { color: var(--text-muted-dark); transition: color 0.2s; }
+.footer-whatsapp-link:hover { color: var(--gold); }
 .footer-bottom { border-top: 1px solid #3a2a1e; padding-top: 20px; }
 .footer-copy { font-family: var(--sans); font-size: 11px; color: var(--text-muted-dark); font-weight: 300; margin-bottom: 6px; }
 .footer-seo { font-family: var(--sans); font-size: 10px; color: var(--text-muted-dark); letter-spacing: 0.04em; line-height: 1.6; }
@@ -745,7 +744,6 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   #about { display: grid; grid-template-columns: 1fr 1fr; }
   .about-visual { padding: 80px; min-height: 480px; }
   .about-visual-inner { width: 200px; height: 300px; }
-  .about-logo { width: 120px; }
   .about-content { padding: 80px 72px; }
   #blog { padding: 96px 60px; }
   .blog-grid { grid-template-columns: repeat(3, 1fr); }
