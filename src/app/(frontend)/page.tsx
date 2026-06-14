@@ -16,6 +16,7 @@ import AboutTeaser from '@/components/home/AboutTeaser'
 import BlogCarousel from '@/components/home/BlogCarousel'
 import Testimonials from '@/components/home/Testimonials'
 import BookingCTA from '@/components/home/BookingCTA'
+import TrustStrip from '@/components/home/TrustStrip'
 import FadeUp from '@/components/ui/FadeUp'
 
 // ── ISR: revalidate every hour (publish hooks in Task 14 trigger on-demand) ──
@@ -224,6 +225,11 @@ export default async function HomePage() {
       {/* 5. Equipment grid */}
       <FadeUp>
         <EquipmentGrid equipment={equipment} />
+      </FadeUp>
+
+      {/* 5b. Trust strip */}
+      <FadeUp>
+        <TrustStrip />
       </FadeUp>
 
       {/* 6. Stats (animated counters) */}

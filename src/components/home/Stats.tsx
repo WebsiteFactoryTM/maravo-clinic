@@ -13,10 +13,10 @@ interface StatsProps {
 }
 
 const DEFAULT_STATS: StatItem[] = [
-  { value: '34+', label: 'Proceduri avansate' },
-  { value: '1K+', label: 'Pacienți mulțumiți' },
-  { value: '5★', label: 'Rating Google' },
-  { value: '7', label: 'Tehnologii certificate' },
+  { value: '19+', label: 'Proceduri avansate' },
+  { value: '7', label: 'Tehnologii medicale' },
+  { value: '100%', label: 'Aparatură certificată CE' },
+  { value: '1:1', label: 'Consultație personalizată' },
 ]
 
 /**

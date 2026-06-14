@@ -1,20 +1,14 @@
 import React from 'react'
 
 const DEFAULT_ITEMS = [
-  'Epilare Definitivă',
-  'HIFU Timișoara',
-  'Acid Hialuronic',
-  'Botox',
-  'HydraFacial',
+  'Lutronic Clarity II',
+  'HIFU Lifting',
+  'Acid hialuronic',
+  'Toxină botulinică',
+  'Radiofrecvență',
   'Mezoterapie',
-  'Remodelare Corporală',
-  'Dermapen 4',
-  'PRP Terapia Vampir',
-  'Laser Clarity II',
-  'Fire Resorbabile PDO',
-  'BTL Lymphastim',
-  'Lipoliză',
-  'Biorevitalizare',
+  'HydraFacial',
+  'Epilare definitivă',
 ]
 
 interface MarqueeProps {

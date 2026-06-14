@@ -12,10 +12,10 @@ interface AboutTeaserProps {
 }
 
 export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) {
-  const resolvedHeading = heading ?? 'Medicina estetică\n*la standarde europene*\nîn inima Timișoarei'
+  const resolvedHeading = heading ?? 'O clinică unde medicina întâlnește estetica'
   const resolvedBody =
     body ??
-    'Maravo Clinic este destinația premium pentru tratamente estetice din Timișoara. Combinăm tehnologia medicală de ultimă generație cu expertiza clinicienilor noștri pentru rezultate excepționale.'
+    'La Maravo Clinic îmbinăm rigoarea medicală cu un simț estetic rafinat. Fiecare tratament pornește de la o consultație atentă și un plan construit pentru tine — rezultate naturale, siguranță și o experiență discretă, premium.'
 
   const resolvedImage = resolveMedia(image)
 
@@ -33,8 +33,14 @@ export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) 
               style={{ objectFit: 'cover' }}
             />
           ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src="/logo-gold.png" className="about-logo" alt="Maravo Clinic" />
+            <Image
+              src="/img/about.webp"
+              width={720}
+              height={900}
+              alt="Interior Maravo Clinic Timișoara"
+              className="about-logo"
+              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+            />
           )}
         </div>
       </div>

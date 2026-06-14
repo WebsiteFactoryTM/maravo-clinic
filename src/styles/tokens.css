@@ -1812,3 +1812,16 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 }
 @media (min-width: 768px) { .wa-fab { width: 60px; height: 60px; font-size: 33px; left: 24px; bottom: 24px; } }
 .contact-socials { margin-top: 24px; }
+
+/* ── TRUST STRIP ── */
+.trust-strip { background: var(--cream-dark); padding: 64px 24px; }
+.trust-strip__inner { max-width: 1100px; margin: 0 auto; }
+.trust-strip__title { font-family: var(--serif); font-size: clamp(26px, 5vw, 42px); font-weight: 300; color: var(--black); line-height: 1.15; margin-bottom: 36px; }
+.trust-strip__title em { font-style: italic; color: var(--text-muted); }
+.trust-strip__grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+.trust-pillar { padding: 4px 0; }
+.trust-pillar__icon { display: inline-flex; font-size: 28px; color: var(--gold); margin-bottom: 14px; }
+.trust-pillar__title { font-family: var(--serif); font-size: 19px; font-weight: 500; color: var(--charcoal); margin-bottom: 8px; }
+.trust-pillar__text { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--text-muted-light); line-height: 1.7; }
+@media (min-width: 640px) { .trust-strip__grid { grid-template-columns: repeat(2, 1fr); gap: 32px 40px; } }
+@media (min-width: 1024px) { .trust-strip__grid { grid-template-columns: repeat(4, 1fr); } }
