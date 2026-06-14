@@ -4,6 +4,7 @@ import CtaButtons from '@/components/ui/CtaButtons'
 import LeadForm, { type ProcedureOption } from '@/components/forms/LeadForm'
 import { buildMetadata, defaultMetaTitle, jsonLdHtml } from '@/lib/seo'
 import { CLINIC } from '@/lib/clinic'
+import SocialIcons from '@/components/ui/SocialIcons'
 import type { Procedure, SiteSetting } from '@/payload-types'
 
 export const revalidate = 3600
@@ -36,7 +37,7 @@ export default async function ContactPage({ searchParams }: PageProps) {
     settings?.hours && settings.hours.length > 0
       ? settings.hours.map((h) => ({ day: h.day ?? '', value: h.value ?? '' }))
       : CLINIC.hours.map((h) => ({ day: h.day, value: h.value }))
-  const mapsEmbedUrl = settings?.mapsEmbedUrl ?? ''
+  const mapsEmbedUrl = settings?.mapsEmbedUrl ?? CLINIC.mapsEmbedUrl
 
   // ?procedura=<slug> → prefill the lead form with that procedure.
   let prefillProcedure: { id: number; title: string } | null = null
@@ -144,6 +145,11 @@ export default async function ContactPage({ searchParams }: PageProps) {
               </dl>
             </div>
           )}
+
+          <div className="contact-socials">
+            <h3 className="contact-hours__title">Urmărește-ne</h3>
+            <SocialIcons socials={CLINIC.socials.map((s) => ({ platform: s.platform, url: s.url }))} />
+          </div>
 
           {(whatsapp || phone) && (
             <div className="contact-cta">

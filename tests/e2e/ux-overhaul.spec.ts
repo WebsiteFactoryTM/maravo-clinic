@@ -24,4 +24,10 @@ test.describe('UX overhaul — sitewide', () => {
     await expect(page.locator('.footer-socials a[aria-label="Instagram"]')).toBeVisible()
     await expect(page.locator('.footer-socials a[aria-label="TikTok"]')).toBeVisible()
   })
+
+  test('contact page shows a map embed and socials', async ({ page }) => {
+    await page.goto('/contact')
+    await expect(page.locator('iframe.contact-map__frame')).toHaveCount(1)
+    await expect(page.locator('.contact-socials a[aria-label="Instagram"]')).toBeVisible()
+  })
 })

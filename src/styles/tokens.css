@@ -1779,3 +1779,4 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   .wa-fab { transition: none; }
 }
 @media (min-width: 768px) { .wa-fab { width: 60px; height: 60px; font-size: 33px; left: 24px; bottom: 24px; } }
+.contact-socials { margin-top: 24px; }
