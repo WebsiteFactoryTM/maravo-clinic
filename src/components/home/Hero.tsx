@@ -31,7 +31,16 @@ export default function Hero({
 
   return (
     <section id="hero">
-      <div className="hero-bg-art" aria-hidden="true" />
+      <div className="hero-bg-art" aria-hidden="true">
+        <span className="hero-blob hero-blob--1" />
+        <span className="hero-blob hero-blob--2" />
+        <span className="hero-blob hero-blob--3" />
+        <span
+          className="hero-monogram"
+          style={{ backgroundImage: 'url(/favicon.webp)' }}
+        />
+        <span className="hero-grain" />
+      </div>
       <div className="hero-left">
         <div className="hero-tag">{resolvedTag}</div>
         <ParsedHeading as="h1" className="hero-h1" raw={resolvedTitle} />

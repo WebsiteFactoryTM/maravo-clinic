@@ -187,11 +187,43 @@ button { font-family: inherit; cursor: pointer; }
   min-height: 100svh; background: var(--charcoal);
   display: flex; flex-direction: column; position: relative; overflow: hidden;
 }
-/* Espresso-warm radial overlay — shifted from cold near-black */
-.hero-bg-art {
+.hero-bg-art { position: absolute; inset: 0; overflow: hidden; }
+.hero-blob {
+  position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5;
+  will-change: transform;
+}
+.hero-blob--1 {
+  width: 56vw; height: 56vw; top: -10%; right: -6%;
+  background: radial-gradient(circle, rgba(201,169,110,0.30), transparent 70%);
+  animation: hero-drift-1 18s ease-in-out infinite alternate;
+}
+.hero-blob--2 {
+  width: 48vw; height: 48vw; bottom: -12%; left: -10%;
+  background: radial-gradient(circle, rgba(210,187,163,0.20), transparent 70%);
+  animation: hero-drift-2 22s ease-in-out infinite alternate;
+}
+.hero-blob--3 {
+  width: 30vw; height: 30vw; top: 30%; left: 35%;
+  background: radial-gradient(circle, rgba(168,133,74,0.18), transparent 70%);
+  animation: hero-drift-3 26s ease-in-out infinite alternate;
+}
+.hero-monogram {
+  position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%);
+  width: min(70vw, 560px); aspect-ratio: 1; opacity: 0.05;
+  background-size: contain; background-repeat: no-repeat; background-position: center;
+  animation: hero-mono 40s linear infinite; will-change: transform;
+}
+.hero-grain {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 70% 40%, rgba(201,169,110,0.07) 0%, transparent 60%),
-              radial-gradient(ellipse at 20% 80%, rgba(210,187,163,0.05) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.45), transparent 60%);
+  mix-blend-mode: multiply;
+}
+@keyframes hero-drift-1 { from { transform: translate(0,0); } to { transform: translate(-6%, 5%); } }
+@keyframes hero-drift-2 { from { transform: translate(0,0); } to { transform: translate(7%, -4%); } }
+@keyframes hero-drift-3 { from { transform: translate(0,0) scale(1); } to { transform: translate(-4%, -6%) scale(1.1); } }
+@keyframes hero-mono { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob, .hero-monogram { animation: none; }
 }
 .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 100px 24px 60px; position: relative; z-index: 2; flex: 1; }
 .hero-tag { font-family: var(--sans); font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
