@@ -208,8 +208,8 @@ button { font-family: inherit; cursor: pointer; }
   animation: hero-drift-3 26s ease-in-out infinite alternate;
 }
 .hero-monogram {
-  position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%);
-  width: min(70vw, 560px); aspect-ratio: 1; opacity: 0.05;
+  position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%);
+  width: min(62vw, 360px); aspect-ratio: 1; opacity: 0.06;
   background-size: contain; background-repeat: no-repeat; background-position: center;
   animation: hero-mono 40s linear infinite; will-change: transform;
 }
@@ -246,7 +246,7 @@ button { font-family: inherit; cursor: pointer; }
 /* ══════════════════════════════════════════════
    POPULAR PROCEDURES
 ══════════════════════════════════════════════ */
-#popular { padding: 64px 24px; background: var(--cream); }
+#popular { padding: 36px 24px 56px; background: var(--cream); }
 .popular-header { margin-bottom: 36px; }
 .popular-title { font-family: var(--serif); font-size: clamp(28px, 6vw, 48px); font-weight: 300; color: var(--black); line-height: 1.15; }
 .popular-title em { font-style: italic; color: var(--text-muted); }
@@ -278,7 +278,7 @@ button { font-family: inherit; cursor: pointer; }
    BODY MAP  (interactive — connector silhouette)
 ══════════════════════════════════════════════ */
 .bodymap {
-  max-width: 1100px;
+  max-width: 880px;
   margin: 0 auto;
   position: relative;
 }
@@ -707,9 +707,10 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   .nav-cta { display: block; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--charcoal); background: var(--gold-light); padding: 11px 24px; border: 1px solid var(--gold); transition: background 0.3s; }
   .nav-cta:hover { background: var(--gold); color: var(--white); }
   .hero-left { padding: 140px 60px 90px; }
+  .hero-monogram { left: 62%; top: 50%; width: min(46vw, 520px); }
   .hero-badge { right: 60px; bottom: 60px; padding: 20px 24px; }
   .hero-badge-num { font-size: 38px; }
-  #popular { padding: 96px 60px; }
+  #popular { padding: 56px 60px 96px; }
   .popular-scroll { gap: 16px; }
   .pop-card { width: 220px; }
   .marquee-strip { padding: 18px 0; }
@@ -1828,15 +1829,15 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 @media (min-width: 1024px) { .trust-strip__grid { grid-template-columns: repeat(4, 1fr); } }
 
 /* ══ PROCEDURE DETAIL ══ */
-.proc-detail__layout { max-width: 1180px; margin: 0 auto; padding: 24px 24px 32px; display: grid; grid-template-columns: 1fr; gap: 36px; }
-.proc-detail__title { font-family: var(--serif); font-size: clamp(30px, 7vw, 52px); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 16px; }
+.proc-detail__layout { max-width: 1040px; margin: 0 auto; padding: 24px 24px 32px; display: grid; grid-template-columns: 1fr; gap: 32px; }
+.proc-detail__title { font-family: var(--serif); font-size: clamp(28px, 6vw, 40px); font-weight: 300; color: var(--black); line-height: 1.12; margin-bottom: 16px; }
 .proc-detail__excerpt { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--text-muted-light); line-height: 1.8; margin-bottom: 24px; }
 .proc-rail__price { margin-top: 24px; padding: 18px 20px; background: var(--cream); border: 1px solid var(--taupe); display: flex; flex-direction: column; gap: 4px; }
 .proc-price__label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light-bg); }
 .proc-price__value { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--charcoal); }
 .proc-price__note { font-family: var(--sans); font-size: 12px; color: var(--text-muted-light); }
 .proc-rail__cta { margin-top: 24px; }
-.proc-detail__content { display: flex; flex-direction: column; gap: 40px; }
+.proc-detail__content { display: flex; flex-direction: column; gap: 32px; }
 .proc-section { scroll-margin-top: calc(var(--nav-h) + 12px); }
 .proc-section__heading { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: clamp(22px, 4.5vw, 30px); font-weight: 400; color: var(--charcoal); line-height: 1.2; margin-bottom: 16px; padding-left: 14px; border-left: 3px solid var(--gold); }
 .proc-section__icon { display: inline-flex; font-size: 0.8em; color: var(--gold); }
@@ -1858,7 +1859,7 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .proc-detail .equip-grid, .proc-detail .proc-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 640px) { .proc-benefits { grid-template-columns: repeat(2, 1fr); } .proc-detail .equip-grid, .proc-detail .proc-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) {
-  .proc-detail__layout { grid-template-columns: 320px 1fr; gap: 56px; align-items: start; }
+  .proc-detail__layout { grid-template-columns: 300px 1fr; gap: 44px; align-items: start; }
   .proc-rail { position: sticky; top: calc(var(--nav-h) + 20px); }
   .proc-detail .equip-grid, .proc-detail .proc-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1884,3 +1885,50 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
   .despre-doctor { grid-template-columns: 260px 1fr; gap: 40px; }
 }
 .equip-grid--listing .equip-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201,169,110,0.14); border-color: var(--gold); }
+
+/* ══ BODYMAP REFINEMENTS ══ */
+/* Mobile: tappable dots ON the silhouette replace the old text zone-list. */
+.bm-zonelist { display: none; }
+.bm-dots { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.bm-dot {
+  position: absolute; left: 50%; transform: translate(-50%, -50%);
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--gold); color: var(--charcoal); border: 2px solid var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.22); cursor: pointer; pointer-events: auto;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+.bm-dot:hover { transform: translate(-50%, -50%) scale(1.1); }
+.bm-dot.active { background: var(--charcoal); color: var(--gold); transform: translate(-50%, -50%) scale(1.18); }
+.bm-dot:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.bm-drawer { scroll-margin-top: calc(var(--nav-h) + 12px); max-width: 640px; margin-left: auto; margin-right: auto; }
+@media (prefers-reduced-motion: reduce) { .bm-dot { transition: none; } }
+@media (min-width: 768px) {
+  /* Desktop uses the connector labels; hide the on-body dots. */
+  .bm-dots { display: none; }
+  /* Different variant for the procedures list under the body: two columns. */
+  .bm-drawer { max-width: 760px; }
+  .bm-drawer__list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; }
+  .bm-drawer__row { border-bottom: 1px solid var(--cream-dark); }
+}
+
+/* ══ BLOG FEATURED CARD ══ */
+.blog-featured {
+  display: grid; grid-template-columns: 1fr; gap: 0; margin-bottom: 40px;
+  background: var(--white); border: 1px solid var(--cream-dark); overflow: hidden;
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+.blog-featured:hover { border-color: var(--gold); box-shadow: 0 12px 38px rgba(201,169,110,0.14); }
+.blog-featured__img { position: relative; aspect-ratio: 16 / 9; background: var(--cream-dark); overflow: hidden; }
+.blog-featured__img .blog-card-img-inner { position: absolute; inset: 0; }
+.blog-featured__body { padding: 24px; }
+.blog-featured__title {
+  font-family: var(--serif); font-size: clamp(24px, 4vw, 34px); font-weight: 400;
+  color: var(--black); line-height: 1.2; margin: 8px 0 12px;
+}
+@media (min-width: 768px) {
+  .blog-featured { grid-template-columns: 1.3fr 1fr; }
+  .blog-featured__img { aspect-ratio: auto; height: 100%; min-height: 340px; }
+  .blog-featured__body { padding: 44px; align-self: center; }
+}

@@ -45,6 +45,7 @@ export default function BlogList({ posts }: BlogListProps) {
   const [active, setActive] = useState<string | null>(null)
 
   const visible = active ? posts.filter((p) => p.category === active) : posts
+  const [featured, ...rest] = visible
 
   return (
     <>
@@ -72,8 +73,38 @@ export default function BlogList({ posts }: BlogListProps) {
         </div>
       )}
 
+      {featured && (
+        <Link href={`/blog/${featured.slug}`} className="blog-featured">
+          <div className="blog-featured__img">
+            {featured.cover ? (
+              <Image
+                src={featured.cover.url}
+                alt={featured.cover.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 60vw"
+                style={{ objectFit: 'cover' }}
+                priority
+              />
+            ) : (
+              <div className={`blog-card-img-inner ${BG_CLASSES[0]}`} aria-hidden="true" />
+            )}
+          </div>
+          <div className="blog-featured__body">
+            {featured.category && <div className="blog-card-cat">{featured.category}</div>}
+            <h2 className="blog-featured__title">{featured.title}</h2>
+            {featured.excerpt && <p className="blog-card-excerpt">{featured.excerpt}</p>}
+            <div className="blog-card-meta">
+              {formatDate(featured.date) && (
+                <span className="blog-card-date">{formatDate(featured.date)}</span>
+              )}
+              <span className="blog-card-link">Citește →</span>
+            </div>
+          </div>
+        </Link>
+      )}
+
       <div className="blog-grid">
-        {visible.map((post, i) => {
+        {rest.map((post, i) => {
           const bgClass = BG_CLASSES[i % BG_CLASSES.length]
           const dateLabel = formatDate(post.date)
           return (

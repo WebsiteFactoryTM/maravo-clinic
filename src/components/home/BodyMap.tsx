@@ -103,9 +103,9 @@ export default function BodyMap({ procedures }: BodyMapProps) {
     if (
       drawerRef.current &&
       typeof window !== 'undefined' &&
-      window.innerWidth < 900
+      window.innerWidth < 768
     ) {
-      drawerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      drawerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [])
 
@@ -128,6 +128,28 @@ export default function BodyMap({ procedures }: BodyMapProps) {
             draggable={false}
             priority={false}
           />
+
+          {/* Tappable zone dots ON the silhouette — primary selector on mobile
+              (CSS-hidden ≥768px, where the connector labels take over). */}
+          <div className="bm-dots">
+            {ZONE_ORDER.map((id) => {
+              const z = ZONES[id]
+              const active = id === activeZone
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  className={`bm-dot${active ? ' active' : ''}`}
+                  style={{ top: `${z.top}%` }}
+                  aria-label={z.ariaLabel}
+                  aria-pressed={active}
+                  onClick={() => selectZone(id)}
+                >
+                  <span className="bm-dot__num">{z.num}</span>
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Connector labels — visible on desktop (CSS-hidden < 768px). The dot
