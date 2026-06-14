@@ -81,19 +81,16 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
   return (
     <>
       <nav id="navbar" className={solid ? 'scrolled' : ''}>
-        {/* Logo — intrinsic size 1959×1980 (≈1:1); display height constrained via CSS */}
-        <a href="/" className="nav-logo">
+        {/* Logo — intrinsic 1959×1980 (≈1:1); display height via inline style */}
+        <a href="/" className="nav-logo" aria-label="Maravo Clinic — Acasă">
           <Image
             src="/logo-gold.png"
             alt="Maravo Clinic"
             width={1959}
             height={1980}
-            style={{ height: '40px', width: 'auto' }}
+            style={{ height: '44px', width: 'auto' }}
             priority
           />
-          <div className="nav-wordmark">
-            MARAVO<small>Clinic · Timișoara</small>
-          </div>
         </a>
 
         {/* Desktop nav */}

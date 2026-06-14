@@ -61,14 +61,8 @@ button { font-family: inherit; cursor: pointer; }
   transition: background 0.4s, box-shadow 0.4s;
 }
 #navbar.scrolled { background: rgba(245,241,237,0.97); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(210,187,163,0.35); }
-.nav-logo { display: flex; align-items: center; gap: 10px; z-index: 201; }
-.nav-logo img { height: 40px; }
-.nav-wordmark { font-family: var(--serif); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--white); transition: color 0.4s; line-height: 1.1; }
-.nav-wordmark small { display: block; font-family: var(--sans); font-size: 9px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
-#navbar.scrolled .nav-wordmark { color: var(--black); }
-/* On the solid (scrolled / inner-page) navbar the subtitle sits on cream; taupe
-   fails contrast there, so darken it to an AA-passing muted. */
-#navbar.scrolled .nav-wordmark small { color: var(--text-muted-light); }
+.nav-logo { display: flex; align-items: center; z-index: 201; }
+.nav-logo img { height: 44px; }
 .nav-desktop { display: none; }
 .nav-cta { display: none; }
 /* The navbar is position:fixed and now opaque on every non-home page (see
