@@ -248,7 +248,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
         {/* 2-column layout: sticky rail + scrolling content */}
         <div className="proc-detail__layout">
           {/* Info rail */}
-          <aside className="proc-rail">
+          <div className="proc-rail">
             <h1 className="proc-detail__title">{proc.title} Timișoara</h1>
             {proc.excerpt && (
               <p className="proc-detail__excerpt">{proc.excerpt}</p>
@@ -295,7 +295,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
                 />
               </div>
             )}
-          </aside>
+          </div>
 
           {/* Content sections */}
           <div className="proc-detail__content">
