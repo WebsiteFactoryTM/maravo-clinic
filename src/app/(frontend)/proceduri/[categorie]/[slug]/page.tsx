@@ -11,6 +11,15 @@ import ProcedureCard from '@/components/procedure/ProcedureCard'
 import EquipmentCard from '@/components/procedure/EquipmentCard'
 import CtaButtons from '@/components/ui/CtaButtons'
 import {
+  FaCircleInfo,
+  FaUserGroup,
+  FaListCheck,
+  FaArrowsRotate,
+  FaStar,
+  FaCircleCheck,
+  FaCircleXmark,
+} from 'react-icons/fa6'
+import {
   defaultMetaTitle,
   defaultMetaDescription,
   procedureJsonLd,
@@ -236,51 +245,65 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           </ol>
         </nav>
 
-        {/* Hero */}
-        <header className="proc-detail__hero">
-          <h1 className="proc-detail__title">{proc.title} Timișoara</h1>
-          {proc.excerpt && (
-            <p className="proc-detail__excerpt">{proc.excerpt}</p>
-          )}
+        {/* 2-column layout: sticky rail + scrolling content */}
+        <div className="proc-detail__layout">
+          {/* Info rail */}
+          <aside className="proc-rail">
+            <h1 className="proc-detail__title">{proc.title} Timișoara</h1>
+            {proc.excerpt && (
+              <p className="proc-detail__excerpt">{proc.excerpt}</p>
+            )}
 
-          {/* Pictograms */}
-          {proc.meta && (
-            <PictogramRow
-              meta={{
-                duration: proc.meta.duration ?? null,
-                painLevel: proc.meta.painLevel ?? null,
-                painLabel: proc.meta.painLabel ?? null,
-                results: proc.meta.results ?? null,
-                recovery: proc.meta.recovery ?? null,
-              }}
-            />
-          )}
-
-          {/* Invasiveness badge */}
-          {invasiveness && (
-            <InvasivenessBadge invasiveness={invasiveness} />
-          )}
-
-          {/* CTA — top */}
-          {(whatsapp || phone) && (
-            <div className="proc-detail__cta-top">
-              <CtaButtons
-                whatsapp={whatsapp}
-                phone={phone}
-                procedureTitle={proc.title}
-                procedureSlug={proc.slug ?? slug}
-                variant="inline"
+            {/* Pictograms */}
+            {proc.meta && (
+              <PictogramRow
+                meta={{
+                  duration: proc.meta.duration ?? null,
+                  painLevel: proc.meta.painLevel ?? null,
+                  painLabel: proc.meta.painLabel ?? null,
+                  results: proc.meta.results ?? null,
+                  recovery: proc.meta.recovery ?? null,
+                }}
               />
-            </div>
-          )}
-        </header>
+            )}
 
-        {/* Content sections */}
-        <div className="proc-detail__content">
+            {/* Invasiveness badge */}
+            {invasiveness && (
+              <InvasivenessBadge invasiveness={invasiveness} />
+            )}
+
+            {/* Price */}
+            {proc.priceFrom != null && (
+              <div className="proc-rail__price">
+                <span className="proc-price__label">Preț de la</span>
+                <strong className="proc-price__value">{proc.priceFrom} lei</strong>
+                {proc.priceNote && (
+                  <span className="proc-price__note">{proc.priceNote}</span>
+                )}
+              </div>
+            )}
+
+            {/* CTA — rail */}
+            {(whatsapp || phone) && (
+              <div className="proc-rail__cta">
+                <CtaButtons
+                  whatsapp={whatsapp}
+                  phone={phone}
+                  procedureTitle={proc.title}
+                  procedureSlug={proc.slug ?? slug}
+                  variant="stacked"
+                />
+              </div>
+            )}
+          </aside>
+
+          {/* Content sections */}
+          <div className="proc-detail__content">
           {/* Ce este? */}
           {hasRichTextContent(proc.whatIsIt) && (
             <section className="proc-section" aria-labelledby="ce-este">
               <h2 id="ce-este" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaCircleInfo /></span>
                 Ce este?
               </h2>
               <div className="proc-section__body richtext">
@@ -293,6 +316,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           {hasRichTextContent(proc.whoIsItFor) && (
             <section className="proc-section" aria-labelledby="cui-i-se-potriveste">
               <h2 id="cui-i-se-potriveste" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaUserGroup /></span>
                 Cui i se potrivește?
               </h2>
               <div className="proc-section__body richtext">
@@ -305,6 +329,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           {proc.benefits && proc.benefits.length > 0 && (
             <section className="proc-section" aria-labelledby="beneficii">
               <h2 id="beneficii" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaListCheck /></span>
                 Beneficii
               </h2>
               <ul className="proc-benefits">
@@ -326,6 +351,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           {hasRichTextContent(proc.howItWorks) && (
             <section className="proc-section" aria-labelledby="cum-decurge">
               <h2 id="cum-decurge" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaArrowsRotate /></span>
                 Cum decurge procedura?
               </h2>
               <div className="proc-section__body richtext">
@@ -338,6 +364,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           {hasRichTextContent(proc.resultsText) && (
             <section className="proc-section" aria-labelledby="rezultate">
               <h2 id="rezultate" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaStar /></span>
                 Rezultate
               </h2>
               <div className="proc-section__body richtext">
@@ -350,6 +377,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           {proc.indications && (
             <section className="proc-section" aria-labelledby="indicatii">
               <h2 id="indicatii" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaCircleCheck /></span>
                 Indicații
               </h2>
               <p className="proc-section__body">{proc.indications}</p>
@@ -360,20 +388,10 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           {proc.contraindications && (
             <section className="proc-section" aria-labelledby="contraindicatii">
               <h2 id="contraindicatii" className="proc-section__heading">
+                <span className="proc-section__icon" aria-hidden="true"><FaCircleXmark /></span>
                 Contraindicații
               </h2>
               <p className="proc-section__body">{proc.contraindications}</p>
-            </section>
-          )}
-
-          {/* Price block */}
-          {proc.priceFrom != null && (
-            <section className="proc-price" aria-label="Preț">
-              <span className="proc-price__label">Preț de la</span>
-              <strong className="proc-price__value">{proc.priceFrom} lei</strong>
-              {proc.priceNote && (
-                <span className="proc-price__note">{proc.priceNote}</span>
-              )}
             </section>
           )}
 
@@ -434,6 +452,7 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
               </div>
             </section>
           )}
+          </div>
         </div>
 
         {/* CTA — bottom */}

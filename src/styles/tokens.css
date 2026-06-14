@@ -1826,3 +1826,28 @@ footer { background: var(--charcoal); padding: 56px 24px 28px; }
 .trust-pillar__text { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--text-muted-light); line-height: 1.7; }
 @media (min-width: 640px) { .trust-strip__grid { grid-template-columns: repeat(2, 1fr); gap: 32px 40px; } }
 @media (min-width: 1024px) { .trust-strip__grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ══ PROCEDURE DETAIL ══ */
+.proc-detail__layout { max-width: 1180px; margin: 0 auto; padding: 8px 24px 24px; display: grid; grid-template-columns: 1fr; gap: 36px; }
+.proc-detail__title { font-family: var(--serif); font-size: clamp(30px, 7vw, 52px); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 16px; }
+.proc-detail__excerpt { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--text-muted-light); line-height: 1.8; margin-bottom: 24px; }
+.proc-rail__price { margin-top: 24px; padding: 18px 20px; background: var(--cream-dark); border: 1px solid var(--taupe); display: flex; flex-direction: column; gap: 4px; }
+.proc-price__label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light-bg); }
+.proc-price__value { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--charcoal); }
+.proc-price__note { font-family: var(--sans); font-size: 12px; color: var(--text-muted-light); }
+.proc-rail__cta { margin-top: 24px; }
+.proc-detail__content { display: flex; flex-direction: column; gap: 40px; }
+.proc-section { scroll-margin-top: calc(var(--nav-h) + 12px); }
+.proc-section__heading { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: clamp(22px, 4.5vw, 30px); font-weight: 400; color: var(--charcoal); line-height: 1.2; margin-bottom: 16px; padding-left: 14px; border-left: 3px solid var(--gold); }
+.proc-section__icon { display: inline-flex; font-size: 0.8em; color: var(--gold); }
+.proc-section__body { font-family: var(--sans); font-size: 15px; font-weight: 300; color: var(--text); line-height: 1.8; }
+.proc-benefits { list-style: none; display: grid; grid-template-columns: 1fr; gap: 12px; }
+.proc-benefits__item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--white); border: 1px solid var(--cream-dark); font-family: var(--sans); font-size: 14px; color: var(--text); line-height: 1.6; }
+.proc-benefits__dot { color: var(--gold); flex-shrink: 0; }
+.equip-grid, .proc-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 640px) { .proc-benefits { grid-template-columns: repeat(2, 1fr); } .equip-grid, .proc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .proc-detail__layout { grid-template-columns: 320px 1fr; gap: 56px; align-items: start; }
+  .proc-rail { position: sticky; top: calc(var(--nav-h) + 20px); }
+  .equip-grid, .proc-grid { grid-template-columns: repeat(3, 1fr); }
+}
