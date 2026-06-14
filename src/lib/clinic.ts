@@ -16,6 +16,14 @@ export const CLINIC = {
   phoneHref: '+40775393323',
   whatsapp: '40775393323',
   email: 'info@maravoclinic.ro',
+  socials: [
+    { platform: 'facebook', url: 'https://www.facebook.com/DrCristianaVoinescu/' },
+    { platform: 'instagram', url: 'https://www.instagram.com/maravo_clinic' },
+    { platform: 'tiktok', url: 'https://www.tiktok.com/@maravoclinic' },
+  ],
+  // Keyless Google Maps embed for the clinic address (no API key required).
+  mapsEmbedUrl:
+    'https://www.google.com/maps?q=Strada+Salc%C3%A2milor+14-16,+300756+Timi%C8%99oara&output=embed',
   hours: [
     { day: 'Luni – Vineri', value: '09:00 – 20:00' },
     { day: 'Sâmbătă – Duminică', value: 'Închis' },
