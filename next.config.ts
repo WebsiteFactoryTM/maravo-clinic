@@ -18,6 +18,8 @@ const nextConfig: NextConfig = {
       { pathname: '/*.webp' },
       { pathname: '/*.jpg' },
       { pathname: '/*.jpeg' },
+      // Public image assets in subfolders (e.g. /img/about.webp)
+      { pathname: '/img/**' },
     ],
   },
   webpack: (webpackConfig) => {
