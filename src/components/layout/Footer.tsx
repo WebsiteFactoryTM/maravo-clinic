@@ -6,6 +6,7 @@
 
 import React from 'react'
 import type { SiteInfo, FooterColumn } from './nav-types'
+import SocialIcons from '@/components/ui/SocialIcons'
 
 interface FooterProps {
   siteInfo: SiteInfo
@@ -101,22 +102,7 @@ export default function Footer({ siteInfo, footerColumns }: FooterProps) {
         </div>
 
         {/* Socials */}
-        {siteInfo.socials.length > 0 && (
-          <div className="footer-socials">
-            {siteInfo.socials.map((s) => (
-              <a
-                key={s.platform}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-link"
-                aria-label={s.platform}
-              >
-                {s.platform}
-              </a>
-            ))}
-          </div>
-        )}
+        <SocialIcons socials={siteInfo.socials} className="footer-socials" />
 
         {/* WhatsApp CTA */}
         {whatsapp && (

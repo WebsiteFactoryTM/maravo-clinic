@@ -4,6 +4,7 @@ import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import '@/styles/globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import WhatsAppFab from '@/components/ui/WhatsAppFab'
 import { getPayloadClient } from '@/lib/payload'
 import { jsonLdHtml, BASE_URL, OG_IMAGE } from '@/lib/seo'
 import { CLINIC } from '@/lib/clinic'
@@ -151,6 +152,10 @@ async function fetchNavData() {
       h.day && h.value ? [{ day: h.day, value: h.value }] : [],
     )
 
+    const cmsSocials = (siteSettingsRaw?.socials ?? []).flatMap((s) =>
+      s.platform && s.url ? [{ platform: s.platform, url: s.url }] : [],
+    )
+
     const siteInfo: SiteInfo = {
       clinicName: siteSettingsRaw?.clinicName || CLINIC.name,
       address: siteSettingsRaw?.address || CLINIC.addressFull,
@@ -158,9 +163,7 @@ async function fetchNavData() {
       whatsapp: siteSettingsRaw?.whatsapp || process.env.WHATSAPP_NUMBER || CLINIC.whatsapp,
       email: siteSettingsRaw?.email || CLINIC.email,
       hours: cmsHours.length > 0 ? cmsHours : CLINIC.hours.map((h) => ({ day: h.day, value: h.value })),
-      socials: (siteSettingsRaw?.socials ?? []).flatMap((s) =>
-        s.platform && s.url ? [{ platform: s.platform, url: s.url }] : [],
-      ),
+      socials: cmsSocials.length > 0 ? cmsSocials : CLINIC.socials.map((s) => ({ platform: s.platform, url: s.url })),
     }
 
     // ── Categories ────────────────────────────────────────────────────────
@@ -217,7 +220,7 @@ async function fetchNavData() {
         whatsapp: process.env.WHATSAPP_NUMBER || CLINIC.whatsapp,
         email: CLINIC.email,
         hours: CLINIC.hours.map((h) => ({ day: h.day, value: h.value })),
-        socials: [],
+        socials: CLINIC.socials.map((s) => ({ platform: s.platform, url: s.url })),
       } satisfies SiteInfo,
       categories: [] as NavCategory[],
       procedures: [] as NavProcedure[],
@@ -245,6 +248,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           navLinks={navLinks}
         />
         {children}
+        <WhatsAppFab whatsapp={siteInfo.whatsapp} />
         <Footer
           siteInfo={siteInfo}
           footerColumns={footerColumns}
