@@ -47,8 +47,9 @@ next-env.d.ts
 # pnpm
 .pnpm-store/
 
-# Payload generated
-src/payload-types.ts
+# Payload generated — payload-types.ts is intentionally committed so that
+# clean CI/Vercel checkouts can type-check without a DB connection.
+# Regenerate with `pnpm generate:types` after changing collections.
 
 # Playwright
 node_modules/
