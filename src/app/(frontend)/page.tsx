@@ -173,8 +173,38 @@ export default async function HomePage() {
     })
   }
 
-  // ── Stats ─────────────────────────────────────────────────────────────────
-  const stats = homepage?.stats ?? []
+  // ── Stats (animated counter band) ──────────────────────────────────────────
+  // Like the hero badge, the counters reflect live /admin counts rather than
+  // hand-typed numbers. The procedure + technology (equipment) tallies come
+  // straight from the published collections.
+  const procedureCount = procedures.length
+  const equipmentCount = equipment.length
+
+  // CMS stat values may embed tokens — {proceduri} / {aparatura} (alias
+  // {tehnologii}) — that resolve to the current published counts.
+  const statTokens: Record<string, number> = {
+    proceduri: procedureCount,
+    aparatura: equipmentCount,
+    tehnologii: equipmentCount,
+  }
+  const applyStatTokens = (value: string) =>
+    value.replace(/\{(\w+)\}/g, (match, key: string) =>
+      key in statTokens ? String(statTokens[key]) : match,
+    )
+
+  const cmsStats = homepage?.stats ?? []
+  const stats =
+    cmsStats.length > 0
+      ? cmsStats.map((s) => ({
+          ...s,
+          value: s.value ? applyStatTokens(s.value) : s.value,
+        }))
+      : [
+          { value: `${procedureCount || 19}+`, label: 'Proceduri avansate' },
+          { value: `${equipmentCount || 7}`, label: 'Tehnologii medicale' },
+          { value: '100%', label: 'Aparatură certificată CE' },
+          { value: '1:1', label: 'Consultație personalizată' },
+        ]
 
   // ── Marquee items ─────────────────────────────────────────────────────────
   const marqueeItems = homepage?.marqueeItems ?? []

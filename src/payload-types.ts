@@ -796,8 +796,14 @@ export interface Homepage {
   };
   popularProcedures?: (number | Procedure)[] | null;
   featuredProcedures?: (number | Procedure)[] | null;
+  /**
+   * Lasă gol pentru valorile automate (nr. proceduri / tehnologii). În „value” poți folosi {proceduri} sau {aparatura} pentru a afișa automat numărul curent din site — ex: „{proceduri}+”.
+   */
   stats?:
     | {
+        /**
+         * Ex: „34+”, „100%” sau token automat „{proceduri}+” / „{aparatura}”.
+         */
         value?: string | null;
         label?: string | null;
         id?: string | null;

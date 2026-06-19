@@ -53,8 +53,18 @@ export const Homepage: GlobalConfig = {
     {
       name: 'stats',
       type: 'array',
+      admin: {
+        description:
+          'Lasă gol pentru valorile automate (nr. proceduri / tehnologii). În „value” poți folosi {proceduri} sau {aparatura} pentru a afișa automat numărul curent din site — ex: „{proceduri}+”.',
+      },
       fields: [
-        { name: 'value', type: 'text' },
+        {
+          name: 'value',
+          type: 'text',
+          admin: {
+            description: 'Ex: „34+”, „100%” sau token automat „{proceduri}+” / „{aparatura}”.',
+          },
+        },
         { name: 'label', type: 'text' },
       ],
     },
