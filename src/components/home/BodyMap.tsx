@@ -26,12 +26,12 @@ interface ZoneConfig {
   /** Vertical position (% of the silhouette height) of the connector + dot. */
   top: number
   /**
-   * Horizontal position (% of silhouette width) of the ON-BODY mobile dot.
-   * Defaults to 50 (centre). Override for laterally-placed zones (e.g. arms)
-   * so the dot lands on the actual body part instead of the torso centreline.
-   * Desktop connectors ignore this — they position via `side`.
+   * Horizontal position (% of the figure box width) of the MOBILE dot.
+   * Mirrors the desktop layout: dots sit just beside the relevant body part
+   * (alternating left/right) instead of on the centreline, so they never cover
+   * the face or torso. Desktop connectors ignore this — they position via `side`.
    */
-  left?: number
+  mobileLeft: number
 }
 
 // ── Static zone configuration ───────────────────────────────────────────────
@@ -48,6 +48,7 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     ariaLabel: 'Păr și scalp',
     side: 'left',
     top: 4,
+    mobileLeft: 30,
   },
   fata: {
     num: '02',
@@ -56,6 +57,7 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     ariaLabel: 'Față',
     side: 'right',
     top: 11,
+    mobileLeft: 76,
   },
   gat: {
     num: '03',
@@ -64,6 +66,7 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     ariaLabel: 'Gât și décolteu',
     side: 'left',
     top: 19,
+    mobileLeft: 24,
   },
   brate: {
     num: '04',
@@ -71,10 +74,8 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     desc: 'Tonifiere, epilare, redefinire',
     ariaLabel: 'Brațe',
     side: 'right',
-    // Sits over the figure's forearm (viewer-left), where there is a clear gap
-    // from the torso — not on the navel centreline.
     top: 33,
-    left: 22,
+    mobileLeft: 78,
   },
   abdomen: {
     num: '05',
@@ -82,7 +83,8 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     desc: 'Remodelare, lipoliză, tonifiere',
     ariaLabel: 'Abdomen',
     side: 'left',
-    top: 40,
+    top: 42,
+    mobileLeft: 22,
   },
   picioare: {
     num: '06',
@@ -91,6 +93,7 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     ariaLabel: 'Picioare',
     side: 'right',
     top: 80,
+    mobileLeft: 72,
   },
 }
 
@@ -146,7 +149,7 @@ export default function BodyMap({ procedures }: BodyMapProps) {
                   key={id}
                   type="button"
                   className={`bm-dot${active ? ' active' : ''}`}
-                  style={{ top: `${z.top}%`, left: `${z.left ?? 50}%` }}
+                  style={{ top: `${z.top}%`, left: `${z.mobileLeft}%` }}
                   aria-label={z.ariaLabel}
                   aria-pressed={active}
                   onClick={() => selectZone(id)}
