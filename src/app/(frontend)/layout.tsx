@@ -49,10 +49,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon2.webp', type: 'image/webp' },
       { url: '/favicon.ico', sizes: 'any' },
       { url: '/icon.png', type: 'image/png', sizes: '512x512' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/favicon2.webp',
     apple: '/apple-icon.png',
   },
   openGraph: {

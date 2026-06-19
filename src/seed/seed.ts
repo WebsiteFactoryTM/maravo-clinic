@@ -168,6 +168,125 @@ const EQUIPMENT = [
   },
 ] as const
 
+// ── Price data (source: PREȚURI PROCEDURI 2/3.pdf) ──────────────────────────────
+// `from` = prețul orientativ „de la" (ședință standard); `note` = detalii pe variante.
+// Keyed by procedure slug (slugify(title)).
+
+const PRICES: Record<string, { from: number; note?: string }> = {
+  'injectare-acid-hialuronic-buze': {
+    from: 800,
+    note: 'Preț/seringă, în funcție de produs (0,55–1 ml): 800–1500 lei.',
+  },
+  'fire-pdo-contur-buze': {
+    from: 1000,
+    note: '10 fire. Lip lift botox + contur fire PDO, 10 fire: 1250 lei.',
+  },
+  'injectare-botox-riduri-de-expresie': {
+    from: 700,
+    note: '1 zonă 700, 2 zone 1100, 3 zone 1400, 4 zone 1800 lei.',
+  },
+  'injectare-botox-maseteri-bruxism': {
+    from: 1500,
+    note: 'Bruxism 1500 lei; slimming facial / contur mandibular 1700 lei.',
+  },
+  'injectare-botox-gummy-smile-zambet-gingival': { from: 500 },
+  'injectare-botox-transpiratie-excesiva-hiperhidroza': {
+    from: 2000,
+    note: 'Axile 2000, palme 2200, tălpi 2700 lei.',
+  },
+  'volumetrie-faciala-cu-acid-hialuronic-pometi-mandibula-menton-tample': {
+    from: 1400,
+    note: '1 ml 1400 lei; 1,2 ml 1500 lei.',
+  },
+  'corectie-cearcane-cu-acid-hialuronic': {
+    from: 1000,
+    note: '0,5 ml 1000 lei; 1 ml 1500 lei.',
+  },
+  'injectare-acid-hialuronic-santuri-nazo-labiale-nazo-geniene': {
+    from: 900,
+    note: '0,55 ml 900, 1 ml 1300, 1,2 ml 1450 lei.',
+  },
+  'rinocorectie-acid-hialuronic': {
+    from: 1750,
+    note: '1 ml 1750 lei; 1,2 ml 1800 lei.',
+  },
+  'dizolvare-acid-hialuronic-hialuronidaza': { from: 1250 },
+  'prp-terapia-vampir': {
+    from: 750,
+    note: 'În funcție de kit: New Plasmogel 750 lei, Arthrex 1000 lei/ședință.',
+  },
+  'injectare-colagen-pentru-regenerare-si-fermitate': {
+    from: 1500,
+    note: 'Karisma. Pachet 3 ședințe: 3750 lei.',
+  },
+  'mezoterapie-faciala': {
+    from: 750,
+    note: 'În funcție de produs: 750–2000 lei/ședință.',
+  },
+  polinucleotide: { from: 1250, note: '2 ml. Pachet 3 ședințe: 3000 lei.' },
+  'sculptra-biostimulator-de-colagen': { from: 2500, note: 'Preț/flacon.' },
+  'harmonyca-lifting-si-biostimulare': { from: 1750, note: 'Preț/flacon.' },
+  'radiesse-volum-si-biostimulare': { from: 2000, note: 'Preț/fiolă.' },
+  'lanluma-x-volum-corporal-si-biostimulare': {
+    from: 6000,
+    note: '1 flacon 6000 lei; 2 flacoane 10500 lei.',
+  },
+  'lipoliza-injectabila': {
+    from: 750,
+    note: 'În funcție de produs: 750–2000 lei/ședință.',
+  },
+  'tratament-regenerare-par': {
+    from: 750,
+    note: 'Fără Dermapen 750 lei; cu Dermapen 950 lei.',
+  },
+  'dermapen-4-microneedling-medical': {
+    from: 600,
+    note: 'Mâini 600, față 750, față+gât 800, +decolteu 900 lei/ședință.',
+  },
+  'hydrafacial-syndeo': {
+    from: 500,
+    note: 'Signature 500, Deluxe 650, Platinum 750 lei.',
+  },
+  'epilare-definitiva-laser': {
+    from: 100,
+    note: 'În funcție de zonă. Full Body 1500 lei/ședință.',
+  },
+  'tratament-vascular-laser-cuperoza-vase-sparte': {
+    from: 250,
+    note: 'Cuperoză de la 250 lei; rozacee față 700 lei.',
+  },
+  'tratament-onicomicoza-laser-ciuperca-unghiei': { from: 150, note: 'Preț/unghie.' },
+  'tratament-veruci-plantare-laser': { from: 250 },
+  'rejuvenare-faciala-laser': {
+    from: 800,
+    note: 'Gât 800, față 1000, față+gât 1400, +decolteu 1600 lei.',
+  },
+  'tratament-pete-pigmentare-laser': {
+    from: 200,
+    note: 'În funcție de zonă: 200–600 lei.',
+  },
+  'hifu-lifting-facial-si-corporal': {
+    from: 1000,
+    note: '1 zonă 1000 lei; pachete până la 6 zone. Corporal 2000 lei/zonă.',
+  },
+  'remodelare-corporala-radiofrecventa-rf': {
+    from: 300,
+    note: 'Preț/ședință, în funcție de mărimea zonei (300–600 lei).',
+  },
+  'drenaj-limfatic-presoterapie': {
+    from: 150,
+    note: 'Preț/ședință; 10 ședințe 1000 lei.',
+  },
+  'crioterapie-leziuni-cutanate': {
+    from: 200,
+    note: '1 leziune 200, 2–3 leziuni 350, 4–10 leziuni 600, peste 10 leziuni 800 lei.',
+  },
+  consultatie: { from: 200 },
+}
+
+// Proceduri rămase în DB care NU există în PDF-urile sursă → se scot din publicare.
+const STRAY_SLUGS = ['fotorejuvenare']
+
 // ── Main seed function ─────────────────────────────────────────────────────────
 
 export async function seed(): Promise<void> {
@@ -264,6 +383,7 @@ export async function seed(): Promise<void> {
 
   for (const proc of procedures) {
     const slug = slugify(proc.title)
+    const price = PRICES[slug]
     const mapping = getMappingForTitle(proc.title)
     const categoryId = categoryIdBySlug.get(mapping.category)
 
@@ -311,6 +431,8 @@ export async function seed(): Promise<void> {
       indications: proc.indications ?? null,
       contraindications: proc.contraindications ?? null,
       faq: proc.faq ? proc.faq.map((f) => ({ question: f.question, answer: f.answer })) : undefined,
+      priceFrom: price?.from ?? null,
+      priceNote: price?.note ?? null,
       relatedEquipment: equipmentIds.length > 0 ? equipmentIds : undefined,
       status,
     }
@@ -344,6 +466,45 @@ export async function seed(): Promise<void> {
     }
   }
 
+  // ── 4. Delete stray categories (not in seed set, only if empty) ──────────────
+  let strayCatsDeleted = 0
+  const validCategorySlugs = new Set(CATEGORIES.map((c) => c.slug))
+  const allCategories = await payload.find({ collection: 'categories', limit: 0 })
+  for (const cat of allCategories.docs) {
+    if (cat.slug && validCategorySlugs.has(cat.slug)) continue
+    const used = await payload.find({
+      collection: 'procedures',
+      where: { category: { equals: cat.id } },
+      limit: 0,
+    })
+    if (used.totalDocs > 0) {
+      console.warn(`\n  [skip] Category "${cat.name}" not in seed but has ${used.totalDocs} procedures — left untouched`)
+      continue
+    }
+    await payload.delete({ collection: 'categories', id: cat.id })
+    strayCatsDeleted++
+    console.log(`\n  [deleted] Stray empty category "${cat.name}" (${cat.slug})`)
+  }
+
+  // ── 5. Unpublish stray procedures (not in source PDFs) ───────────────────────
+  let strayUnpublished = 0
+  for (const straySlug of STRAY_SLUGS) {
+    const existing = await payload.find({
+      collection: 'procedures',
+      where: { slug: { equals: straySlug } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0 && existing.docs[0].status === 'published') {
+      await payload.update({
+        collection: 'procedures',
+        id: existing.docs[0].id,
+        data: { status: 'draft' },
+      })
+      strayUnpublished++
+      console.log(`\n  [unpublished] ${existing.docs[0].title} (not in source PDFs)`)
+    }
+  }
+
   // ── Summary ──────────────────────────────────────────────────────────────────
   console.log('\n═══════════════════════════════════════════')
   console.log('  Seed complete')
@@ -354,6 +515,7 @@ export async function seed(): Promise<void> {
     `  Procedures : ${procCreated} created, ${procUpdated} updated (total ${procedures.length})`,
   )
   console.log(`             : ${pubCount} published, ${draftCount} draft`)
+  console.log(`  Stray      : ${strayUnpublished} procs unpublished, ${strayCatsDeleted} empty categories deleted`)
   console.log('═══════════════════════════════════════════\n')
 }
 

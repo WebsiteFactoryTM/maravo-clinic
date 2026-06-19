@@ -127,8 +127,15 @@ export default async function DesprePage() {
       {/* Doctor E-E-A-T block (replaces the plain "Echipa medicală" section) */}
       <FadeUp>
         <section className="despre-doctor" aria-labelledby="despre-doctor">
-          <div className="despre-doctor__media" aria-hidden="true">
-            <span className="despre-doctor__monogram">MV</span>
+          <div className="despre-doctor__media">
+            <Image
+              src="/img/dr-cristiana-voinescu.webp"
+              alt="Dr. Cristiana Voinescu — coordonator medical Maravo Clinic Timișoara"
+              width={377}
+              height={630}
+              className="despre-doctor__img"
+              sizes="(min-width: 768px) 260px, 100vw"
+            />
           </div>
           <div className="despre-doctor__body">
             <span className="section-tag">Coordonator medical</span>

@@ -94,7 +94,7 @@ export default function MobileMenu({
             aria-controls="mob-accordion"
             onClick={() => setAccordionOpen((prev) => !prev)}
           >
-            Proceduri <span className="mob-arrow">›</span>
+            Proceduri <span className="mob-arrow" aria-hidden="true">▾</span>
           </button>
 
           {/* Procedures accordion */}
