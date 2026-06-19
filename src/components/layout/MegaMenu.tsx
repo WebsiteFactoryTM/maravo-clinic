@@ -13,6 +13,7 @@
  */
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
+import CategoryIcon from '@/components/ui/CategoryIcon'
 import type { NavCategory, NavProcedure } from './nav-types'
 
 interface MegaMenuProps {
@@ -128,7 +129,9 @@ export default function MegaMenu({
               onMouseEnter={() => setActiveCat(cat.slug)}
               onClick={() => setActiveCat(cat.slug)}
             >
-              {cat.icon && <span className="mega-cat-icon">{cat.icon}</span>}
+              <span className="mega-cat-icon">
+                <CategoryIcon slug={cat.slug} />
+              </span>
               {cat.name}
             </button>
           ))}

@@ -1,8 +1,8 @@
 import React from 'react'
 import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
-import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import CtaButtons from '@/components/ui/CtaButtons'
+import TarifeExplorer, { type TarifeSection } from '@/components/tarife/TarifeExplorer'
 import type { Category, Procedure, SiteSetting } from '@/payload-types'
 
 export const revalidate = 3600
@@ -50,9 +50,22 @@ export default async function TarifePage() {
     byCategory.set(cat.id, list)
   }
 
-  // Keep only categories that have at least one procedure, in CMS order.
-  const sections = categories
-    .map((cat) => ({ cat, procs: byCategory.get(cat.id) ?? [] }))
+  // Keep only categories that have at least one procedure, in CMS order, and
+  // shape them for the (client) explorer.
+  const sections: TarifeSection[] = categories
+    .map((cat): TarifeSection => ({
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug ?? null,
+      icon: cat.icon,
+      procs: (byCategory.get(cat.id) ?? []).map((proc) => ({
+        id: proc.id,
+        title: proc.title,
+        href: cat.slug && proc.slug ? `/proceduri/${cat.slug}/${proc.slug}` : null,
+        priceFrom: proc.priceFrom ?? null,
+        priceNote: proc.priceNote ?? null,
+      })),
+    }))
     .filter((s) => s.procs.length > 0)
 
   return (
@@ -73,56 +86,7 @@ export default async function TarifePage() {
             Lista de tarife va fi disponibilă în curând. Pentru o ofertă personalizată, contactează-ne.
           </p>
         ) : (
-          sections.map(({ cat, procs }) => (
-            <section
-              key={cat.id}
-              className="tarife-cat"
-              aria-labelledby={`tarife-cat-${cat.id}`}
-            >
-              <div className="tarife-cat__head">
-                {cat.icon && (
-                  <span className="tarife-cat__icon" aria-hidden="true">
-                    {cat.icon}
-                  </span>
-                )}
-                <h2 className="tarife-cat__title" id={`tarife-cat-${cat.id}`}>
-                  {cat.name}
-                </h2>
-              </div>
-
-              <ul className="tarife-rows">
-                {procs.map((proc) => {
-                  const href = cat.slug && proc.slug ? `/proceduri/${cat.slug}/${proc.slug}` : null
-                  return (
-                    <li key={proc.id} className="tarife-row">
-                      {href ? (
-                        <Link href={href} className="tarife-row__name">
-                          {proc.title}
-                        </Link>
-                      ) : (
-                        <span className="tarife-row__name">{proc.title}</span>
-                      )}
-
-                      <span className="tarife-row__price">
-                        {proc.priceFrom != null ? (
-                          <>
-                            <span className="tarife-row__amount">de la {proc.priceFrom} lei</span>
-                            {proc.priceNote && (
-                              <span className="tarife-row__note">{proc.priceNote}</span>
-                            )}
-                          </>
-                        ) : (
-                          <span className="tarife-row__amount tarife-row__amount--soft">
-                            Preț la consultație
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  )
-                })}
-              </ul>
-            </section>
-          ))
+          <TarifeExplorer sections={sections} />
         )}
 
         <p className="tarife-disclaimer">

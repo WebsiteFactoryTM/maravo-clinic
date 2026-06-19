@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react'
 import ProcedureCard from './ProcedureCard'
+import CategoryIcon from '@/components/ui/CategoryIcon'
 import type { Media } from '@/payload-types'
 
 export interface ProcedureExplorerItem {
@@ -85,11 +86,9 @@ export default function ProcedureExplorer({ procedures, categories }: ProcedureE
             onClick={() => setActiveCategory(activeCategory === cat.slug ? null : cat.slug)}
             aria-pressed={activeCategory === cat.slug}
           >
-            {cat.icon && (
-              <span className="cat-pill__icon" aria-hidden="true">
-                {cat.icon}
-              </span>
-            )}
+            <span className="cat-pill__icon" aria-hidden="true">
+              <CategoryIcon slug={cat.slug} />
+            </span>
             {cat.name}
           </button>
         ))}

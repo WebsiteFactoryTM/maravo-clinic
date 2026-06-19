@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import ProcedureCard from '@/components/procedure/ProcedureCard'
+import CategoryIcon from '@/components/ui/CategoryIcon'
 import { defaultMetaTitle, defaultMetaDescription } from '@/lib/seo'
 import type { Category, Procedure, Media } from '@/payload-types'
 
@@ -117,11 +118,9 @@ export default async function CategoryPage({ params }: PageProps) {
 
       {/* Header */}
       <section className="cat-page__hero">
-        {cat.icon && (
-          <span className="cat-page__icon" aria-hidden="true">
-            {cat.icon}
-          </span>
-        )}
+        <span className="cat-page__icon" aria-hidden="true">
+          <CategoryIcon slug={cat.slug} />
+        </span>
         <h1 className="cat-page__title">{cat.name} Timișoara</h1>
         {cat.description && (
           <p className="cat-page__description">{cat.description}</p>

@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: maravo
       POSTGRES_DB: maravo
     ports:
-      - "5434:5432"
+      - "5435:5432"
     volumes:
       - maravo-pgdata:/var/lib/postgresql/data
 volumes:

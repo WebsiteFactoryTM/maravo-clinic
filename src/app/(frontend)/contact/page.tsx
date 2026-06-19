@@ -156,23 +156,6 @@ export default async function ContactPage({ searchParams }: PageProps) {
               <CtaButtons whatsapp={whatsapp} phone={phone} variant="stacked" />
             </div>
           )}
-
-          {mapsEmbedUrl ? (
-            <div className="contact-map">
-              <iframe
-                src={mapsEmbedUrl}
-                title={`Harta către ${clinicName}`}
-                className="contact-map__frame"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
-            </div>
-          ) : (
-            <p className="contact-map__placeholder">
-              Harta va fi disponibilă în curând. Ne găsești în {address}.
-            </p>
-          )}
         </section>
 
         {/* Lead form */}
@@ -188,6 +171,45 @@ export default async function ContactPage({ searchParams }: PageProps) {
           />
         </section>
       </div>
+
+      <section className="contact-locate" aria-labelledby="contact-locate-title">
+        <div className="contact-locate__head">
+          <div>
+            <span className="section-tag">Locație</span>
+            <h2 className="contact-locate__title" id="contact-locate-title">
+              Unde ne găsești
+            </h2>
+            <p className="contact-locate__address">{address}</p>
+          </div>
+          {address && (
+            <a
+              className="contact-locate__link"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Deschide în Google Maps →
+            </a>
+          )}
+        </div>
+
+        {mapsEmbedUrl ? (
+          <div className="contact-map">
+            <iframe
+              src={mapsEmbedUrl}
+              title={`Harta către ${clinicName}`}
+              className="contact-map__frame"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        ) : (
+          <p className="contact-map__placeholder">
+            Harta va fi disponibilă în curând. Ne găsești în {address}.
+          </p>
+        )}
+      </section>
     </main>
   )
 }

@@ -3,6 +3,7 @@ import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import ProcedureExplorer from '@/components/procedure/ProcedureExplorer'
+import CategoryIcon from '@/components/ui/CategoryIcon'
 import BodyMap from '@/components/home/BodyMap'
 import type { BodyMapProcedure } from '@/components/home/BodyMap'
 import type { Category, Procedure, Media } from '@/payload-types'
@@ -110,11 +111,9 @@ export default async function ProcedureHubPage() {
                 className="cat-tile"
                 aria-label={`Proceduri ${cat.name}`}
               >
-                {cat.icon && (
-                  <span className="cat-tile__icon" aria-hidden="true">
-                    {cat.icon}
-                  </span>
-                )}
+                <span className="cat-tile__icon" aria-hidden="true">
+                  <CategoryIcon slug={cat.slug} />
+                </span>
                 <span className="cat-tile__name">{cat.name}</span>
                 {cat.description && (
                   <span className="cat-tile__desc">{cat.description}</span>
