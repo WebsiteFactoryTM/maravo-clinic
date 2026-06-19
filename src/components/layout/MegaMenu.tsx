@@ -14,6 +14,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import CategoryIcon from '@/components/ui/CategoryIcon'
+import { normalizeText } from '@/lib/normalizeText'
 import type { NavCategory, NavProcedure } from './nav-types'
 
 interface MegaMenuProps {
@@ -92,12 +93,19 @@ export default function MegaMenu({
     return () => document.removeEventListener('keydown', handler)
   }, [isOpen, onClose])
 
-  // Filter procedures by active category + search term
-  const filtered = procedures.filter((p) => {
-    const catMatch = p.categorySlug === activeCat
-    const searchMatch = !searchTerm || p.title.toLowerCase().includes(searchTerm.toLowerCase())
-    return catMatch && searchMatch
-  })
+  // When the user is searching, match across ALL categories (ignoring the active
+  // one). With no search term, show only the active category's procedures.
+  const isSearching = searchTerm.trim().length > 0
+  const normalizedTerm = normalizeText(searchTerm.trim())
+  const filtered = procedures.filter((p) =>
+    isSearching
+      ? normalizeText(p.title).includes(normalizedTerm)
+      : p.categorySlug === activeCat,
+  )
+
+  // Map category slug → display name, so cross-category search hits can show
+  // which category they belong to.
+  const catNameBySlug = new Map(categories.map((c) => [c.slug, c.name]))
 
   // Reset search term whenever the menu closes so reopening shows an unfiltered list.
   useEffect(() => {
@@ -164,6 +172,11 @@ export default function MegaMenu({
                   onClick={onClose}
                 >
                   {proc.title}
+                  {isSearching && (
+                    <span className="mega-proc-cat">
+                      {catNameBySlug.get(proc.categorySlug)}
+                    </span>
+                  )}
                 </a>
               ))
             )}

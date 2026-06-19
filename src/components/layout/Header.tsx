@@ -20,6 +20,8 @@ import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import MegaMenu from './MegaMenu'
 import MobileMenu from './MobileMenu'
+import SearchModal from '@/components/search/SearchModal'
+import SearchIcon from '@/components/ui/SearchIcon'
 import type { NavCategory, NavProcedure, NavLink } from './nav-types'
 
 interface HeaderProps {
@@ -32,6 +34,7 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
   const [scrolled, setScrolled] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   // The transparent (white-on-dark) navbar style only works over the homepage's
   // dark hero. Every other page has a light (cream) background directly under the
@@ -77,6 +80,13 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
     // Return focus to the hamburger button when the drawer closes.
     hamburgerRef.current?.focus()
   }, [])
+
+  // Opening search also dismisses the mobile drawer (the trigger lives in the navbar).
+  const openSearch = useCallback(() => {
+    setSearchOpen(true)
+    setMobileOpen(false)
+  }, [])
+  const closeSearch = useCallback(() => setSearchOpen(false), [])
 
   return (
     <>
@@ -135,24 +145,38 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
           ))}
         </ul>
 
-        {/* CTA */}
-        <a href="/contact" className="nav-cta">
-          Programează-te
-        </a>
+        {/* Right-side actions: search (always), CTA (desktop), hamburger (mobile) */}
+        <div className="nav-actions">
+          <button
+            type="button"
+            className="nav-search-btn"
+            aria-label="Caută"
+            aria-haspopup="dialog"
+            aria-expanded={searchOpen}
+            onClick={openSearch}
+          >
+            <SearchIcon className="nav-search-icon" />
+          </button>
 
-        {/* Hamburger */}
-        <button
-          ref={hamburgerRef}
-          className={`hamburger${mobileOpen ? ' open' : ''}`}
-          id="hamburger"
-          aria-label="Meniu"
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((prev) => !prev)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+          {/* CTA */}
+          <a href="/contact" className="nav-cta">
+            Programează-te
+          </a>
+
+          {/* Hamburger */}
+          <button
+            ref={hamburgerRef}
+            className={`hamburger${mobileOpen ? ' open' : ''}`}
+            id="hamburger"
+            aria-label="Meniu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </nav>
 
       {/* Mega menu (desktop) */}
@@ -172,6 +196,9 @@ export default function Header({ categories, procedures, navLinks }: HeaderProps
         procedures={procedures}
         navLinks={navLinks}
       />
+
+      {/* Site-wide search popup */}
+      <SearchModal isOpen={searchOpen} onClose={closeSearch} />
     </>
   )
 }
