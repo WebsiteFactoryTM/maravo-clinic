@@ -102,7 +102,9 @@ export function breadcrumbJsonLd(crumbs: BreadcrumbItem[]) {
 // ── Full page-metadata builder ────────────────────────────────────────────────
 
 export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-export const OG_IMAGE = `${BASE_URL}/logo-gold.png`
+/** 1200×630 branded share card (see public/og-image.png). */
+export const OG_IMAGE = `${BASE_URL}/og-image.png`
+export const OG_IMAGE_ALT = 'Maravo Clinic Timișoara — clinică estetică premium'
 
 export interface BuildMetadataInput {
   /** Final title (already brand-stamped, e.g. via defaultMetaTitle). */
@@ -124,7 +126,12 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
   const { title, path, type = 'website' } = input
   const description = defaultMetaDescription(input.description)
   const canonical = path === '/' ? BASE_URL : `${BASE_URL}${path}`
-  const image = input.ogImage ?? { url: OG_IMAGE }
+  const image = input.ogImage ?? { url: OG_IMAGE, alt: OG_IMAGE_ALT }
+  // Only the default share card has known 1200×630 dimensions; custom
+  // per-page images (e.g. article media) may vary, so omit dims for those.
+  const ogImage = input.ogImage
+    ? { url: image.url, ...(image.alt ? { alt: image.alt } : {}) }
+    : { url: image.url, width: 1200, height: 630, alt: image.alt }
 
   return {
     title,
@@ -137,7 +144,7 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
       locale: 'ro_RO',
       title,
       description,
-      images: [{ url: image.url, ...(image.alt ? { alt: image.alt } : {}) }],
+      images: [ogImage],
     },
     twitter: {
       card: 'summary_large_image',

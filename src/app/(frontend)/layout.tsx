@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer'
 import WhatsAppFab from '@/components/ui/WhatsAppFab'
 import Reveal from '@/components/ui/Reveal'
 import { getPayloadClient } from '@/lib/payload'
-import { jsonLdHtml, BASE_URL, OG_IMAGE } from '@/lib/seo'
+import { jsonLdHtml, BASE_URL, OG_IMAGE, OG_IMAGE_ALT } from '@/lib/seo'
 import { CLINIC } from '@/lib/clinic'
 import type {
   NavCategory,
@@ -48,9 +48,12 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   icons: {
-    icon: '/favicon.webp',
-    shortcut: '/favicon.webp',
-    apple: '/logo-gold.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
   },
   openGraph: {
     type: 'website',
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
     url: BASE_URL,
     title: 'Maravo Clinic Timișoara | Clinică Estetică Premium',
     description: DEFAULT_DESCRIPTION,
-    images: [{ url: OG_IMAGE }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: OG_IMAGE_ALT }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -91,7 +94,7 @@ function buildClinicJsonLd(site: SiteInfo): Record<string, unknown> {
     name: site.clinicName || 'Maravo Clinic',
     url: BASE_URL,
     image: OG_IMAGE,
-    logo: OG_IMAGE,
+    logo: `${BASE_URL}/logo-gold.png`,
     medicalSpecialty: 'Dermatology',
     areaServed: 'Timișoara',
     address,
