@@ -25,6 +25,13 @@ interface ZoneConfig {
   side: 'left' | 'right'
   /** Vertical position (% of the silhouette height) of the connector + dot. */
   top: number
+  /**
+   * Horizontal position (% of silhouette width) of the ON-BODY mobile dot.
+   * Defaults to 50 (centre). Override for laterally-placed zones (e.g. arms)
+   * so the dot lands on the actual body part instead of the torso centreline.
+   * Desktop connectors ignore this — they position via `side`.
+   */
+  left?: number
 }
 
 // ── Static zone configuration ───────────────────────────────────────────────
@@ -64,7 +71,10 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     desc: 'Tonifiere, epilare, redefinire',
     ariaLabel: 'Brațe',
     side: 'right',
-    top: 35,
+    // Sits over the figure's forearm (viewer-left), where there is a clear gap
+    // from the torso — not on the navel centreline.
+    top: 33,
+    left: 22,
   },
   abdomen: {
     num: '05',
@@ -72,7 +82,7 @@ const ZONES: Record<BodyZoneId, ZoneConfig> = {
     desc: 'Remodelare, lipoliză, tonifiere',
     ariaLabel: 'Abdomen',
     side: 'left',
-    top: 45,
+    top: 40,
   },
   picioare: {
     num: '06',
@@ -136,7 +146,7 @@ export default function BodyMap({ procedures }: BodyMapProps) {
                   key={id}
                   type="button"
                   className={`bm-dot${active ? ' active' : ''}`}
-                  style={{ top: `${z.top}%` }}
+                  style={{ top: `${z.top}%`, left: `${z.left ?? 50}%` }}
                   aria-label={z.ariaLabel}
                   aria-pressed={active}
                   onClick={() => selectZone(id)}
