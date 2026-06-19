@@ -468,7 +468,7 @@ export async function seed(): Promise<void> {
 
   // ── 4. Delete stray categories (not in seed set, only if empty) ──────────────
   let strayCatsDeleted = 0
-  const validCategorySlugs = new Set(CATEGORIES.map((c) => c.slug))
+  const validCategorySlugs = new Set<string>(CATEGORIES.map((c) => c.slug))
   const allCategories = await payload.find({ collection: 'categories', limit: 0 })
   for (const cat of allCategories.docs) {
     if (cat.slug && validCategorySlugs.has(cat.slug)) continue
