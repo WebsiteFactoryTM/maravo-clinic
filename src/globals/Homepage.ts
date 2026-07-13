@@ -38,18 +38,8 @@ export const Homepage: GlobalConfig = {
         { name: 'href', type: 'text' },
       ],
     },
-    {
-      name: 'popularProcedures',
-      type: 'relationship',
-      relationTo: 'procedures',
-      hasMany: true,
-    },
-    {
-      name: 'featuredProcedures',
-      type: 'relationship',
-      relationTo: 'procedures',
-      hasMany: true,
-    },
+    // Procedurile din secțiunea „Proceduri populare” se aleg din pagina fiecărei
+    // proceduri (bifa `popular`), nu de aici — o singură sursă de adevăr.
     {
       name: 'stats',
       type: 'array',

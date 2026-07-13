@@ -9,7 +9,7 @@ export const Procedures: CollectionConfig = {
   slug: 'procedures',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'status'],
+    defaultColumns: ['title', 'category', 'order', 'popular', 'status'],
     group: 'Conținut',
   },
   access: { read: () => true },
@@ -184,16 +184,23 @@ export const Procedures: CollectionConfig = {
       hasMany: true,
     },
 
-    // ── Flags ─────────────────────────────────────────────────────────────────
+    // ── Afișare ───────────────────────────────────────────────────────────────
+    {
+      name: 'order',
+      type: 'number',
+      label: 'Ordine afișare (în categorie)',
+      admin: {
+        position: 'sidebar',
+        description:
+          'Mai mic = mai sus (1, 2, 3…). Ordonează procedura în interiorul categoriei ei — în meniu, pe pagina categoriei, în tarife. Lasă gol dacă nu contează: procedurile fără ordine apar la final, alfabetic.',
+      },
+    },
     {
       name: 'popular',
       type: 'checkbox',
+      label: 'Apare în „Proceduri populare” pe homepage',
       defaultValue: false,
-    },
-    {
-      name: 'featured',
-      type: 'checkbox',
-      defaultValue: false,
+      admin: { position: 'sidebar' },
     },
 
     // ── SEO ───────────────────────────────────────────────────────────────────

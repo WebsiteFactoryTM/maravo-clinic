@@ -13,6 +13,7 @@ import CtaButtons from '@/components/ui/CtaButtons'
 import ProcedureStickyCta from '@/components/procedure/ProcedureStickyCta'
 import { CLINIC } from '@/lib/clinic'
 import { capitalizeFirst, splitClinicalList } from '@/lib/clinical-text'
+import { sortProcedures } from '@/lib/procedure-sort'
 import {
   FaCircleInfo,
   FaUserGroup,
@@ -205,9 +206,13 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
     .map(resolveEquipment)
     .filter((e): e is Equipment => e !== null)
 
-  const relatedProcedures = (proc.relatedProcedures ?? [])
-    .map(resolveProcedure)
-    .filter((p): p is Procedure => p !== null && p.status === 'published')
+  // syncRelationship auto-fills this list, so the stored array order is just
+  // "whenever the link happened" — apply the admin-set order instead.
+  const relatedProcedures = sortProcedures(
+    (proc.relatedProcedures ?? [])
+      .map(resolveProcedure)
+      .filter((p): p is Procedure => p !== null && p.status === 'published'),
+  )
 
   const invasiveness = proc.meta?.invasiveness ?? null
 

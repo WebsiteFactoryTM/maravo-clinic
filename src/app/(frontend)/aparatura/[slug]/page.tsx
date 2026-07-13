@@ -14,6 +14,7 @@ import {
   jsonLdHtml,
 } from '@/lib/seo'
 import { resolveMedia } from '@/lib/media'
+import { sortProcedures } from '@/lib/procedure-sort'
 import type { Equipment, Procedure, Category, Media, SiteSetting } from '@/payload-types'
 
 export const revalidate = 3600
@@ -174,15 +175,18 @@ export default async function EquipmentDetailPage({ params }: PageProps) {
     resolveMedia(g.image as Media | number | null | undefined),
   ).filter((img): img is Media => img !== null)
 
-  // Resolve related procedures (filter to published + category resolved)
-  const relatedProcedures = (eq.relatedProcedures ?? [])
-    .map(resolveProcedure)
-    .filter((p): p is Procedure => {
-      if (p === null) return false
-      if (p.status !== 'published') return false
-      const cat = resolveCategory(p.category)
-      return cat !== null && !!cat.slug
-    })
+  // Resolve related procedures (filter to published + category resolved).
+  // syncRelationship fills this array in link-creation order, so re-sort it.
+  const relatedProcedures = sortProcedures(
+    (eq.relatedProcedures ?? [])
+      .map(resolveProcedure)
+      .filter((p): p is Procedure => {
+        if (p === null) return false
+        if (p.status !== 'published') return false
+        const cat = resolveCategory(p.category)
+        return cat !== null && !!cat.slug
+      }),
+  )
 
   // Derive plain-text description for JSON-LD (never dump raw lexical JSON)
   const richDesc = richTextToPlainText(eq.description)

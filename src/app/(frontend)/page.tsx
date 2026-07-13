@@ -1,6 +1,7 @@
 import React from 'react'
 import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import { getPayloadClient } from '@/lib/payload'
+import { sortProcedures } from '@/lib/procedure-sort'
 import type { Procedure, Equipment, Post, Category } from '@/payload-types'
 import type { BodyMapProcedure } from '@/components/home/BodyMap'
 import type { PopularItem } from '@/components/home/PopularCarousel'
@@ -55,6 +56,7 @@ async function fetchHomeData() {
               excerpt: true,
               icon: true,
               popular: true,
+              order: true,
               meta: true,
             },
           })
@@ -147,31 +149,24 @@ export default async function HomePage() {
   const whatsapp =
     siteSettings?.whatsapp ?? process.env.WHATSAPP_NUMBER ?? '40000000000'
 
+  // Admin-set order: by category, then by the procedure's own order, then title.
+  const orderedProcedures = sortProcedures(procedures)
+
   // ── BodyMap procedures ─────────────────────────────────────────────────────
-  const bodyMapProcedures: BodyMapProcedure[] = procedures.flatMap((p) => {
+  const bodyMapProcedures: BodyMapProcedure[] = orderedProcedures.flatMap((p) => {
     const bm = toBodyMapProcedure(p)
     return bm ? [bm] : []
   })
 
   // ── Popular procedures ─────────────────────────────────────────────────────
-  let popularItems: PopularItem[]
-  const cmsPop = homepage?.popularProcedures
-  if (cmsPop && cmsPop.length > 0) {
-    // CMS-selected procedures (may be Procedure objects at depth 2)
-    popularItems = (cmsPop as Array<number | Procedure>).flatMap((p) => {
-      if (typeof p === 'number') return []
+  // The `popular` checkbox on each procedure is the only source of truth. Nothing
+  // ticked → the section is hidden (see the `popularItems.length > 0` guard below).
+  const popularItems: PopularItem[] = orderedProcedures
+    .filter((p) => p.popular)
+    .flatMap((p) => {
       const item = toPopularItem(p)
       return item ? [item] : []
     })
-  } else {
-    // Fall back: flag-based → first 8
-    const flagged = procedures.filter((p) => p.popular)
-    const source = flagged.length > 0 ? flagged : procedures.slice(0, 8)
-    popularItems = source.flatMap((p) => {
-      const item = toPopularItem(p)
-      return item ? [item] : []
-    })
-  }
 
   // ── Stats (animated counter band) ──────────────────────────────────────────
   // Like the hero badge, the counters reflect live /admin counts rather than

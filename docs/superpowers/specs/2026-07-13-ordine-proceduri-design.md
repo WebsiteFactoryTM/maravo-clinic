@@ -43,8 +43,14 @@ Starea de fapt, verificată în cod:
 
 ### `procedures` (`src/collections/Procedures.ts`)
 
-- **ADD** `order`: `number`, `defaultValue: 0`, label „Ordine afișare (în categorie)”,
-  `admin.position: 'sidebar'`.
+- **ADD** `order`: `number`, **fără `defaultValue`** (gol = NULL), label
+  „Ordine afișare (în categorie)”, `admin.position: 'sidebar'`.
+
+  **Gol înseamnă „fără preferință” și sortează ULTIMUL, nu primul.** Un
+  `defaultValue: 0` ar fi fost o capcană: un editor care fixează trei proceduri
+  1-2-3 se așteaptă ca celelalte treizeci să cadă *sub* ele — dar cu 0 implicit
+  toate cele neatinse ar fi sărit deasupra. Postgres sortează nativ `NULLS LAST`
+  la `ORDER BY ... ASC`, deci SQL-ul și helper-ul JS sunt de acord fără efort.
 - **RELABEL** `popular`: label „Apare în «Proceduri populare» pe homepage”,
   `admin.position: 'sidebar'`.
 - **REMOVE** `featured` (mort).
@@ -71,10 +77,15 @@ WHERE id IN (
 -- 2. abia acum se pot șterge relațiile
 DELETE FROM homepage_rels WHERE path IN ('popularProcedures', 'featuredProcedures');
 
--- 3. schema
-ALTER TABLE procedures ADD COLUMN "order" numeric DEFAULT 0;
+-- 3. schema (fără DEFAULT — vezi nota de mai sus)
+ALTER TABLE procedures ADD COLUMN "order" numeric;
 ALTER TABLE procedures DROP COLUMN featured;
 ```
+
+Payload nu poate genera asta dintr-un singur `migrate:create`: dacă `order` se
+adaugă și `featured` se șterge în același diff, drizzle-kit întreabă interactiv
+dacă e o redenumire. De aceea sunt **două migrări** — una care adaugă, una care
+șterge — iar backfill-ul e adăugat manual în a doua, înaintea `DROP TABLE`.
 
 `order` e cuvânt rezervat SQL — trebuie ghilimelat. Precedentul există:
 `categories.order` funcționează deja așa.
@@ -97,7 +108,7 @@ nouă fișiere:
    `llm.txt`: același fetch (cu `depth: 1`, ca `category` să vină populată), apoi
    sortare în JS după `(category.order, procedure.order, title)`.
 
-`title` e tie-break. Consecință utilă: cât timp toate procedurile au `order = 0`
+`title` e tie-break. Consecință utilă: cât timp nicio procedură nu are `order`
 (imediat după migrare), site-ul devine **alfabetic** — deja mai bun și, mai ales,
 stabil față de `-createdAt` de acum.
 

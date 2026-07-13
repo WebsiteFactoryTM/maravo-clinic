@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
+import { PROCEDURE_SORT } from '@/lib/procedure-sort'
 import ProcedureCard from '@/components/procedure/ProcedureCard'
 import CategoryIcon from '@/components/ui/CategoryIcon'
 import { defaultMetaTitle, defaultMetaDescription } from '@/lib/seo'
@@ -86,6 +87,7 @@ export default async function CategoryPage({ params }: PageProps) {
         { category: { equals: cat.id } },
       ],
     },
+    sort: PROCEDURE_SORT,
     limit: 200,
     depth: 1,
   })

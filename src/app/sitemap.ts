@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getPayloadClient } from '@/lib/payload'
+import { PROCEDURE_SORT } from '@/lib/procedure-sort'
 import type { Category } from '@/payload-types'
 
 export const revalidate = 3600
@@ -50,6 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ── Categories ───────────────────────────────────────────────────────────
   const categories = await payload.find({
     collection: 'categories',
+    sort: 'order',
     limit: 0,
     depth: 0,
   })
@@ -67,6 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const procedures = await payload.find({
     collection: 'procedures',
     where: { status: { equals: 'published' } },
+    sort: PROCEDURE_SORT,
     limit: 0,
     depth: 1,
   })

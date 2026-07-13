@@ -1,6 +1,7 @@
 import React from 'react'
 import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import { getPayloadClient } from '@/lib/payload'
+import { PROCEDURE_SORT } from '@/lib/procedure-sort'
 import CtaButtons from '@/components/ui/CtaButtons'
 import TarifeExplorer, { type TarifeSection } from '@/components/tarife/TarifeExplorer'
 import type { Category, Procedure, SiteSetting } from '@/payload-types'
@@ -29,7 +30,9 @@ export default async function TarifePage() {
       where: { status: { equals: 'published' } },
       limit: 0,
       depth: 1,
-      sort: 'title',
+      // Rows are grouped into per-category sections below, so the in-category
+      // order is what shows; sections themselves follow `categories.order`.
+      sort: PROCEDURE_SORT,
     }),
     payload.findGlobal({ slug: 'site-settings' }).catch(() => null) as Promise<SiteSetting | null>,
   ])

@@ -1,4 +1,5 @@
 import { getPayloadClient } from '@/lib/payload'
+import { PROCEDURE_SORT } from '@/lib/procedure-sort'
 import type { Category } from '@/payload-types'
 
 export const revalidate = 3600
@@ -38,6 +39,7 @@ export async function GET(): Promise<Response> {
   const procedures = await payload.find({
     collection: 'procedures',
     where: { status: { equals: 'published' } },
+    sort: PROCEDURE_SORT,
     limit: 0,
     depth: 1,
   })

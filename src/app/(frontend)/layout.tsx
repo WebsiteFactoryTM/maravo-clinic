@@ -9,6 +9,7 @@ import Reveal from '@/components/ui/Reveal'
 import { getPayloadClient } from '@/lib/payload'
 import { jsonLdHtml, BASE_URL, OG_IMAGE, OG_IMAGE_ALT } from '@/lib/seo'
 import { CLINIC } from '@/lib/clinic'
+import { PROCEDURE_SORT } from '@/lib/procedure-sort'
 import type {
   NavCategory,
   NavProcedure,
@@ -145,9 +146,12 @@ async function fetchNavData() {
         .find({
           collection: 'procedures',
           where: { status: { equals: 'published' } },
+          // Menus render one category at a time, so the in-category order is all
+          // that matters here — SQL sort is enough, no JS pass needed.
+          sort: PROCEDURE_SORT,
           limit: 0,
           depth: 1,
-          select: { title: true, slug: true, category: true },
+          select: { title: true, slug: true, category: true, order: true },
         })
         .catch(() => ({ docs: [] })),
     ])

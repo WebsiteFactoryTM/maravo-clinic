@@ -2,6 +2,7 @@ import React from 'react'
 import { buildMetadata, defaultMetaTitle } from '@/lib/seo'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
+import { sortProcedures } from '@/lib/procedure-sort'
 import ProcedureExplorer from '@/components/procedure/ProcedureExplorer'
 import CategoryIcon from '@/components/ui/CategoryIcon'
 import BodyMap from '@/components/home/BodyMap'
@@ -40,7 +41,9 @@ export default async function ProcedureHubPage() {
   ])
 
   const categories = categoriesResult.docs as Category[]
-  const procedures = proceduresResult.docs as Procedure[]
+  // Flat list spanning every category, so it needs the category-aware JS sort
+  // rather than a plain SQL `sort` (Payload can't sort on `category.order`).
+  const procedures = sortProcedures(proceduresResult.docs as Procedure[])
 
   // Build serialisable explorer items — only include procedures whose
   // category resolved (depth 1 means category is populated as an object).

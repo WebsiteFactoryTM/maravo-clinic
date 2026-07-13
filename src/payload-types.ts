@@ -350,8 +350,11 @@ export interface Procedure {
   priceNote?: string | null;
   relatedEquipment?: (number | Equipment)[] | null;
   relatedProcedures?: (number | Procedure)[] | null;
+  /**
+   * Mai mic = mai sus (1, 2, 3…). Ordonează procedura în interiorul categoriei ei — în meniu, pe pagina categoriei, în tarife. Lasă gol dacă nu contează: procedurile fără ordine apar la final, alfabetic.
+   */
+  order?: number | null;
   popular?: boolean | null;
-  featured?: boolean | null;
   seo?: {
     metaTitle?: string | null;
     metaDescription?: string | null;
@@ -648,8 +651,8 @@ export interface ProceduresSelect<T extends boolean = true> {
   priceNote?: T;
   relatedEquipment?: T;
   relatedProcedures?: T;
+  order?: T;
   popular?: T;
-  featured?: T;
   seo?:
     | T
     | {
@@ -794,8 +797,6 @@ export interface Homepage {
     label?: string | null;
     href?: string | null;
   };
-  popularProcedures?: (number | Procedure)[] | null;
-  featuredProcedures?: (number | Procedure)[] | null;
   /**
    * Lasă gol pentru valorile automate (nr. proceduri / tehnologii). În „value” poți folosi {proceduri} sau {aparatura} pentru a afișa automat numărul curent din site — ex: „{proceduri}+”.
    */
@@ -901,8 +902,6 @@ export interface HomepageSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
-  popularProcedures?: T;
-  featuredProcedures?: T;
   stats?:
     | T
     | {

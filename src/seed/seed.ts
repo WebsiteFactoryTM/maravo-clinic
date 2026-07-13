@@ -388,6 +388,17 @@ export async function seed(): Promise<void> {
   let pubCount = 0
   let draftCount = 0
 
+  // Initial display order = the procedure's position within its category in
+  // proceduri.txt. Only ever written on CREATE — see the update branch below.
+  const orderInCategory = new Map<string, number>()
+  const nextOrderPerCategory = new Map<string, number>()
+  for (const proc of procedures) {
+    const cat = getMappingForTitle(proc.title).category
+    const next = (nextOrderPerCategory.get(cat) ?? 0) + 1
+    nextOrderPerCategory.set(cat, next)
+    orderInCategory.set(slugify(proc.title), next)
+  }
+
   for (const proc of procedures) {
     const slug = slugify(proc.title)
     const price = PRICES[slug]
@@ -452,6 +463,8 @@ export async function seed(): Promise<void> {
 
     if (existing.docs.length > 0) {
       const doc = existing.docs[0]
+      // `order` and `popular` are curated in /admin — re-seeding must not undo
+      // the clinic's arrangement, so they are absent from the update payload.
       await payload.update({
         collection: 'procedures',
         id: doc.id,
@@ -464,8 +477,12 @@ export async function seed(): Promise<void> {
     } else {
       await payload.create({
         collection: 'procedures',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data: procData as any,
+        data: {
+          ...procData,
+          order: orderInCategory.get(slug) ?? 0,
+          popular: false,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any,
         context: { skipSync: false },
       })
       procCreated++
