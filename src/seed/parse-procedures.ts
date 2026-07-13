@@ -134,43 +134,44 @@ function parseBullets(text: string): string[] {
     .filter((l) => l.length > 0 && !l.startsWith('Procedura este potrivită'))
 }
 
+/** Text after the last sentence terminator — the question trailing a chunk. */
+function tailAfterSentenceEnd(chunk: string): string {
+  const idx = Math.max(chunk.lastIndexOf('.'), chunk.lastIndexOf('!'))
+  return chunk.slice(idx + 1).trim()
+}
+
+/** Text up to the last sentence terminator — the answer leading a chunk. */
+function headBeforeSentenceEnd(chunk: string): string {
+  const idx = Math.max(chunk.lastIndexOf('.'), chunk.lastIndexOf('!'))
+  return idx === -1 ? '' : chunk.slice(0, idx + 1).trim()
+}
+
 /**
- * Parse FAQ block.
- * Pattern: question sentence ending with "?" followed by the answer.
- * FAQ lines may be on the same line separated by newlines or inline.
+ * Parse the FAQ block into Q/A pairs.
+ *
+ * The source packs several pairs onto one physical line:
+ *   "Se umflă buzele? Ușor, câteva zile. Când se vede forma finală? 7–28 zile."
+ * Splitting on "?" yields chunks that each hold the tail of the previous answer
+ * *and* the next question; the boundary between the two is the last sentence
+ * terminator in the chunk. Splitting on only the first "?" per line (the old
+ * behaviour) let the first answer swallow every question that followed it.
  */
 function parseFaq(text: string): FaqItem[] {
-  const items: FaqItem[] = []
-  // Split on patterns like "Text? Answer text." - each Q ends with ?
-  // Lines can be: "Întrebare? Răspuns." or multi-line
-  const lines = text.split('\n').filter((l) => l.trim().length > 0)
+  const flat = text.replace(/\s*\n\s*/g, ' ').trim()
+  if (!flat.includes('?')) return []
 
-  let i = 0
-  while (i < lines.length) {
-    const line = lines[i].trim()
-    // Look for a question mark in the line
-    const qIdx = line.indexOf('?')
-    if (qIdx !== -1) {
-      const question = line.substring(0, qIdx + 1).trim()
-      const answerInline = line.substring(qIdx + 1).trim()
-      if (question.length > 1) {
-        // Gather answer: what's after ? on the same line, possibly more lines
-        let answer = answerInline
-        // Check if answer continues on next line
-        while (
-          answer.length === 0 &&
-          i + 1 < lines.length &&
-          !lines[i + 1].includes('?')
-        ) {
-          i++
-          answer = lines[i].trim()
-        }
-        if (question.length > 1) {
-          items.push({ question, answer: answer || '' })
-        }
-      }
-    }
-    i++
+  const chunks = flat.split('?')
+  const lastIdx = chunks.length - 1
+  const items: FaqItem[] = []
+
+  for (let i = 0; i < lastIdx; i++) {
+    const question = tailAfterSentenceEnd(chunks[i])
+    if (question.length === 0) continue
+
+    const next = chunks[i + 1]
+    const answer = i + 1 === lastIdx ? next.trim() : headBeforeSentenceEnd(next)
+
+    items.push({ question: `${question}?`, answer: answer.trim() })
   }
 
   return items
@@ -181,10 +182,16 @@ function parseFaq(text: string): FaqItem[] {
  * separate indications and contraindications strings.
  */
 function parseIndicatii(text: string): { indications: string; contraindications: string } {
-  const indMatch = text.match(/Indicații\s*:\s*([^C\n]+)/i)
-  const contrMatch = text.match(/Contraindicații\s*:\s*(.+)/is)
+  // Both labels sit on their own line, so anchor to line starts: an unanchored
+  // /Indicații/i also matches the tail of "Contraindicații".
+  //
+  // The previous capture was `([^C\n]+)` under the /i flag, which excludes
+  // lowercase "c" as well — so "buze subțiri, lipsă contur, asimetrii" was cut
+  // at "contur", and any value *starting* with "c" captured nothing at all.
+  const indMatch = text.match(/^\s*Indicații\s*:\s*(.+)$/im)
+  const contrMatch = text.match(/^\s*Contraindicații\s*:\s*(.+)$/im)
   return {
-    indications: indMatch ? indMatch[1].trim() : text.trim(),
+    indications: indMatch ? indMatch[1].trim() : '',
     contraindications: contrMatch ? contrMatch[1].trim() : '',
   }
 }

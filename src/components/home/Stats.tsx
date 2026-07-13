@@ -15,7 +15,7 @@ interface StatsProps {
 const DEFAULT_STATS: StatItem[] = [
   { value: '19+', label: 'Proceduri avansate' },
   { value: '7', label: 'Tehnologii medicale' },
-  { value: '100%', label: 'Aparatură certificată CE' },
+  { value: '100%', label: 'Aparatură certificată FDA și CE' },
   { value: '1:1', label: 'Consultație personalizată' },
 ]
 

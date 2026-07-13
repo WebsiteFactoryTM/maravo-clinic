@@ -16,7 +16,7 @@ export default function EquipmentGrid({ equipment }: EquipmentGridProps) {
       <div className="about-content about-content--no-pb">
         <span className="section-tag">Tehnologie de ultimă generație</span>
         <h2 className="about-title fade-up" id="equipment-heading">
-          Aparatură <em>certificată medical</em>
+          Aparatură <em>certificată FDA și CE</em>
         </h2>
       </div>
       <div className="procedures-grid equipment-grid">

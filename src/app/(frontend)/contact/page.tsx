@@ -11,8 +11,8 @@ export const revalidate = 3600
 
 export const metadata = buildMetadata({
   title: defaultMetaTitle('Contact Timișoara'),
-  description:
-    'Programări și informații Maravo Clinic: Str. Salcâmilor 14, Timișoara, +40 775 393 323. Sună, scrie pe WhatsApp sau completează formularul.',
+  // Derived from CLINIC so the NAP in search results can't drift from the page body.
+  description: `Programări și informații ${CLINIC.name}: ${CLINIC.addressFull}, ${CLINIC.phone}. Sună, scrie pe WhatsApp sau completează formularul.`,
   path: '/contact',
 })
 

@@ -1,19 +1,19 @@
 import { test, expect } from 'vitest'
 import { buildWhatsAppMessage } from '../../src/components/ui/CtaButtons'
+import { CLINIC } from '../../src/lib/clinic'
 
 test('builds procedure-specific WhatsApp message when procedureTitle is provided', () => {
   const msg = buildWhatsAppMessage('Botox facial')
-  expect(msg).toBe('Bună, aș dori o programare pentru Botox facial la Maravo Clinic.')
+  expect(msg).toBe('Bună ziua, doresc mai multe informații despre procedura Botox facial.')
 })
 
-test('builds generic WhatsApp message when no procedureTitle', () => {
-  const msg = buildWhatsAppMessage()
-  expect(msg).toBe('Bună, aș dori o programare la Maravo Clinic.')
+test('builds the generic clinic message when no procedureTitle', () => {
+  expect(buildWhatsAppMessage()).toBe('Bună ziua, doresc mai multe informații despre proceduri.')
+  expect(buildWhatsAppMessage()).toBe(CLINIC.whatsappMessage)
 })
 
 test('builds generic WhatsApp message when procedureTitle is undefined', () => {
-  const msg = buildWhatsAppMessage(undefined)
-  expect(msg).toBe('Bună, aș dori o programare la Maravo Clinic.')
+  expect(buildWhatsAppMessage(undefined)).toBe(CLINIC.whatsappMessage)
 })
 
 test('WhatsApp URL encodes the message correctly', () => {
@@ -23,7 +23,6 @@ test('WhatsApp URL encodes the message correctly', () => {
   const href = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`
   expect(href).toContain('https://wa.me/40712345678?text=')
   expect(href).toContain(encodeURIComponent('Lifting facial'))
-  expect(href).toContain(encodeURIComponent('Maravo Clinic'))
 })
 
 test('procedureSlug contact URL: with slug', () => {

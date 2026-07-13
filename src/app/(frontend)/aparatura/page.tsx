@@ -9,7 +9,7 @@ export const revalidate = 3600
 export const metadata = buildMetadata({
   title: defaultMetaTitle('Aparatură estetică Timișoara'),
   description:
-    'Aparatură medicală de top la Maravo Clinic Timișoara: Lutronic Clarity II, HIFU, radiofrecvență, HydraFacial. Programează o consultație.',
+    'Aparatură medicală certificată FDA și CE la Maravo Clinic Timișoara: Lutronic Clarity II, Asterasys Liftera, Lumenis NuEra Tight, HydraFacial Syndeo, BTL Lymphastim, Deka Tetra Pro. Programează o consultație.',
   path: '/aparatura',
 })
 

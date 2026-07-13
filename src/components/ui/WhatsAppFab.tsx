@@ -1,9 +1,10 @@
 import React from 'react'
 import { FaWhatsapp } from 'react-icons/fa6'
+import { CLINIC } from '@/lib/clinic'
 
 export default function WhatsAppFab({
   whatsapp,
-  message = 'Bună ziua! Aș dori o programare la Maravo Clinic.',
+  message = CLINIC.whatsappMessage,
 }: {
   whatsapp?: string | null
   message?: string

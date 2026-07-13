@@ -2159,3 +2159,68 @@ a.tarife-row__name:hover { color: var(--gold-dark); }
   .blog-featured__img { aspect-ratio: auto; height: 100%; min-height: 340px; }
   .blog-featured__body { padding: 44px; align-self: center; }
 }
+
+/* ══ CTA BUTTONS — icon + label ══ */
+/* .cta-buttons--stacked sets display:block; icon buttons need flex to space the glyph. */
+.cta-btn-whatsapp,
+.cta-buttons--stacked .cta-btn-whatsapp {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+}
+
+/* ══ INDICAȚII / CONTRAINDICAȚII ══ */
+.proc-clinical-list { list-style: none; display: grid; grid-template-columns: 1fr; gap: 10px; }
+.proc-clinical-list__item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 16px; background: var(--white); border: 1px solid var(--cream-dark);
+  font-family: var(--sans); font-size: 14px; font-weight: 300;
+  color: var(--text); line-height: 1.6;
+}
+.proc-clinical-list__icon { display: inline-flex; margin-top: 2px; font-size: 15px; flex-shrink: 0; }
+.proc-clinical-list--yes .proc-clinical-list__icon { color: var(--gold); }
+.proc-clinical-list--no .proc-clinical-list__icon { color: var(--text-muted-light); }
+.proc-clinical-list--no .proc-clinical-list__item { background: var(--cream); }
+@media (min-width: 640px) { .proc-clinical-list { grid-template-columns: repeat(2, 1fr); } }
+
+/* ══ STICKY BOOKING BAR (procedure pages) ══ */
+.proc-sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 190;
+  background: var(--white); border-top: 1px solid var(--taupe);
+  box-shadow: 0 -6px 24px rgba(0,0,0,0.10);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+}
+.proc-sticky-cta__inner {
+  max-width: 1040px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: flex-end; gap: 20px;
+}
+.proc-sticky-cta__label { display: none; min-width: 0; flex: 1; flex-direction: column; gap: 2px; }
+.proc-sticky-cta__eyebrow {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold-light-bg);
+}
+.proc-sticky-cta__title {
+  font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--charcoal);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.proc-sticky-cta__actions { display: flex; align-items: center; gap: 10px; flex: 1; }
+.proc-sticky-cta__call,
+.proc-sticky-cta__book {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  white-space: nowrap;
+}
+.proc-sticky-cta__book { flex: 1; }
+/* Phone is icon-only until there's room for the label. */
+.proc-sticky-cta__call-text { display: none; }
+
+/* Reserve room so the bar never covers the footer, and retire the sitewide
+   WhatsApp FAB — the bar already carries a WhatsApp CTA in the same corner. */
+body:has(.proc-sticky-cta) { padding-bottom: 76px; }
+body:has(.proc-sticky-cta) .wa-fab { display: none; }
+
+@media (min-width: 768px) {
+  .proc-sticky-cta { padding: 12px 24px calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .proc-sticky-cta__label { display: flex; }
+  .proc-sticky-cta__actions { flex: 0 0 auto; }
+  .proc-sticky-cta__book { flex: 0 0 auto; }
+  .proc-sticky-cta__call-text { display: inline; }
+  body:has(.proc-sticky-cta) { padding-bottom: 84px; }
+}

@@ -10,6 +10,9 @@ import FaqAccordion from '@/components/procedure/FaqAccordion'
 import ProcedureCard from '@/components/procedure/ProcedureCard'
 import EquipmentCard from '@/components/procedure/EquipmentCard'
 import CtaButtons from '@/components/ui/CtaButtons'
+import ProcedureStickyCta from '@/components/procedure/ProcedureStickyCta'
+import { CLINIC } from '@/lib/clinic'
+import { capitalizeFirst, splitClinicalList } from '@/lib/clinical-text'
 import {
   FaCircleInfo,
   FaUserGroup,
@@ -163,8 +166,11 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
     slug: 'site-settings',
   }) as SiteSetting
 
-  const whatsapp = settings.whatsapp ?? ''
-  const phone = settings.phone ?? ''
+  // CMS first, then env, then the in-code business facts. Without the CLINIC
+  // fallback an unpopulated `site-settings` global silently hides every CTA.
+  const whatsapp =
+    settings.whatsapp ?? process.env.WHATSAPP_NUMBER ?? CLINIC.whatsapp
+  const phone = settings.phone ?? process.env.CLINIC_PHONE ?? CLINIC.phoneHref
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
   const pageUrl = `${siteUrl}/proceduri/${categorie}/${slug}`
@@ -177,8 +183,14 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
   })
 
   const faqItems = (proc.faq ?? []).flatMap((f) =>
-    f.question && f.answer ? [{ question: f.question, answer: f.answer }] : [],
+    f.question && f.answer
+      ? [{ question: capitalizeFirst(f.question), answer: capitalizeFirst(f.answer) }]
+      : [],
   )
+
+  // Stored as one comma-separated lowercase run — split into capitalized items.
+  const indications = splitClinicalList(proc.indications)
+  const contraindications = splitClinicalList(proc.contraindications)
   const jsonLdFaq = faqItems.length > 0 ? faqJsonLd(faqItems) : null
 
   const jsonLdBreadcrumb = breadcrumbJsonLd([
@@ -374,24 +386,42 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           )}
 
           {/* Indicatii */}
-          {proc.indications && (
+          {indications.length > 0 && (
             <section className="proc-section" aria-labelledby="indicatii">
               <h2 id="indicatii" className="proc-section__heading">
                 <span className="proc-section__icon" aria-hidden="true"><FaCircleCheck /></span>
                 Indicații
               </h2>
-              <p className="proc-section__body">{proc.indications}</p>
+              <ul className="proc-clinical-list proc-clinical-list--yes">
+                {indications.map((item) => (
+                  <li key={item} className="proc-clinical-list__item">
+                    <span className="proc-clinical-list__icon" aria-hidden="true">
+                      <FaCircleCheck />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </section>
           )}
 
           {/* Contraindicatii */}
-          {proc.contraindications && (
+          {contraindications.length > 0 && (
             <section className="proc-section" aria-labelledby="contraindicatii">
               <h2 id="contraindicatii" className="proc-section__heading">
                 <span className="proc-section__icon" aria-hidden="true"><FaCircleXmark /></span>
                 Contraindicații
               </h2>
-              <p className="proc-section__body">{proc.contraindications}</p>
+              <ul className="proc-clinical-list proc-clinical-list--no">
+                {contraindications.map((item) => (
+                  <li key={item} className="proc-clinical-list__item">
+                    <span className="proc-clinical-list__icon" aria-hidden="true">
+                      <FaCircleXmark />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </section>
           )}
 
@@ -471,6 +501,14 @@ export default async function ProcedureDetailPage({ params }: PageProps) {
           </section>
         )}
       </main>
+
+      {whatsapp && (
+        <ProcedureStickyCta
+          whatsapp={whatsapp}
+          phone={phone}
+          procedureTitle={proc.title}
+        />
+      )}
     </>
   )
 }

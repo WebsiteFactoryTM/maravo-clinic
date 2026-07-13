@@ -202,7 +202,7 @@ export default async function HomePage() {
       : [
           { value: `${procedureCount || 19}+`, label: 'Proceduri avansate' },
           { value: `${equipmentCount || 7}`, label: 'Tehnologii medicale' },
-          { value: '100%', label: 'Aparatură certificată CE' },
+          { value: '100%', label: 'Aparatură certificată FDA și CE' },
           { value: '1:1', label: 'Consultație personalizată' },
         ]
 

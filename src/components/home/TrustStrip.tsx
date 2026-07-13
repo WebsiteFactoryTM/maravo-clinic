@@ -3,7 +3,7 @@ import { FaShieldHeart, FaCertificate, FaWandMagicSparkles, FaUserDoctor } from 
 
 const PILLARS = [
   { Icon: FaShieldHeart, title: 'Siguranță medicală', text: 'Protocoale stricte și produse de la branduri recunoscute internațional.' },
-  { Icon: FaCertificate, title: 'Tehnologie certificată CE', text: 'Aparatură medicală de ultimă generație, certificată și întreținută.' },
+  { Icon: FaCertificate, title: 'Tehnologie certificată FDA și CE', text: 'Aparatură medicală de ultimă generație, certificată și întreținută.' },
   { Icon: FaWandMagicSparkles, title: 'Rezultate naturale', text: 'Estetică subtilă și echilibrată — armonie, nu exagerare.' },
   { Icon: FaUserDoctor, title: 'Medic dedicat', text: 'Fiecare tratament e efectuat sau supervizat de medic, după consultație.' },
 ]

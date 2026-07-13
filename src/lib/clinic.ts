@@ -2,7 +2,7 @@
 // These are used as FALLBACK DEFAULTS only — CMS `site-settings` overrides them
 // at runtime. Sourced from the client's live site (maravoclinic.ro).
 
-const street = 'Strada Salcâmilor 14'
+const street = 'Strada Salcâmilor 14-16'
 const city = 'Timișoara'
 const county = 'Timiș'
 
@@ -15,6 +15,8 @@ export const CLINIC = {
   phone: '+40 775 393 323',
   phoneHref: '+40775393323',
   whatsapp: '40775393323',
+  // Default prefilled text for every wa.me deep link that has no procedure context.
+  whatsappMessage: 'Bună ziua, doresc mai multe informații despre proceduri.',
   email: 'info@maravoclinic.ro',
   socials: [
     { platform: 'facebook', url: 'https://www.facebook.com/DrCristianaVoinescu/' },
@@ -23,7 +25,7 @@ export const CLINIC = {
   ],
   // Keyless Google Maps embed for the clinic address (no API key required).
   mapsEmbedUrl:
-    'https://www.google.com/maps?q=Strada+Salc%C3%A2milor+14,+Timi%C8%99oara&output=embed',
+    'https://www.google.com/maps?q=Strada+Salc%C3%A2milor+14-16,+Timi%C8%99oara&output=embed',
   hours: [
     { day: 'Luni – Vineri', value: '09:00 – 20:00' },
     { day: 'Sâmbătă – Duminică', value: 'Închis' },

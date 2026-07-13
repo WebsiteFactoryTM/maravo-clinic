@@ -51,8 +51,8 @@ export default function AboutTeaser({ heading, body, image }: AboutTeaserProps) 
             <span className="pillar-num">01</span>
             <div className="pillar-text">
               <strong>Tehnologie certificată medical</strong>
-              Aparatură Lutronic Clarity II, Lumenis, BTL — certificate CE, utilizate în clinici de
-              top din Europa.
+              Aparatură Lutronic, Lumenis, BTL, HydraFacial, Asterasys, Deka — certificată FDA și CE,
+              utilizată în clinici de top din Europa.
             </div>
           </div>
           <div className="about-pillar fade-up">

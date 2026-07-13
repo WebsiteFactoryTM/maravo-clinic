@@ -1,4 +1,6 @@
 import React from 'react'
+import { FaWhatsapp } from 'react-icons/fa6'
+import { CLINIC } from '@/lib/clinic'
 
 interface CtaButtonsProps {
   whatsapp: string
@@ -10,9 +12,9 @@ interface CtaButtonsProps {
 
 function buildWhatsAppMessage(procedureTitle?: string): string {
   if (procedureTitle) {
-    return `Bună, aș dori o programare pentru ${procedureTitle} la Maravo Clinic.`
+    return `Bună ziua, doresc mai multe informații despre procedura ${procedureTitle}.`
   }
-  return 'Bună, aș dori o programare la Maravo Clinic.'
+  return CLINIC.whatsappMessage
 }
 
 export default function CtaButtons({
@@ -37,11 +39,12 @@ export default function CtaButtons({
         className="btn-primary cta-btn-whatsapp"
         aria-label={
           procedureTitle
-            ? `Contactează-ne pe WhatsApp pentru ${procedureTitle}`
-            : 'Contactează-ne pe WhatsApp'
+            ? `Doresc o programare pentru ${procedureTitle} — scrie-ne pe WhatsApp`
+            : 'Doresc o programare — scrie-ne pe WhatsApp'
         }
       >
-        WhatsApp
+        <FaWhatsapp aria-hidden="true" />
+        Doresc o programare
       </a>
 
       <a
@@ -57,11 +60,11 @@ export default function CtaButtons({
         className="btn-outline cta-btn-booking"
         aria-label={
           procedureTitle
-            ? `Programează-te pentru ${procedureTitle}`
-            : 'Programează-te'
+            ? `Formular de contact pentru ${procedureTitle}`
+            : 'Formular de contact'
         }
       >
-        Programează-te
+        Formular contact
       </a>
     </div>
   )

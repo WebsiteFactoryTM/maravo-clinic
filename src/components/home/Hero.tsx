@@ -20,7 +20,7 @@ export default function Hero({
   procedureCount,
 }: HeroProps) {
   const resolvedTag = tag ?? 'Clinică estetică · Timișoara'
-  const resolvedTitle = title ?? 'Frumusețea ta,\n*redefinită*\nîn Timișoara.'
+  const resolvedTitle = title ?? 'Confidence looks\n*Good on You!*'
   const resolvedSubtitle =
     subtitle ??
     'Tratamente estetice premium cu tehnologie de ultimă generație. Rezultate vizibile, îngrijire personalizată, expertiză medicală.'

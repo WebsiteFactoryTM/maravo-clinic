@@ -125,18 +125,25 @@ const EQUIPMENT = [
       'Sistem laser medical cu două lungimi de undă (Alexandrite 755 nm + Nd:YAG 1064 nm) pentru epilare definitivă, tratamente vasculare, rejuvenare și leziuni pigmentare.',
   },
   {
-    name: 'HIFU Liftera (Asterasys)',
+    name: 'Asterasys Liftera',
     slug: 'hifu-liftera-asterasys',
     manufacturer: 'Asterasys',
     purpose:
       'Sistem HIFU cu ultrasunete microfocalizate care acționează la nivel SMAS pentru lifting facial și corporal non-invaziv.',
   },
   {
-    name: 'NuEra Tight (Lumenis)',
+    name: 'Lumenis NuEra Tight',
     slug: 'nuera-tight-lumenis',
     manufacturer: 'Lumenis',
     purpose:
       'Dispozitiv de radiofrecvență bipolară controlată pentru remodelare corporală, reducere celulită și îmbunătățirea fermității cutanate.',
+  },
+  {
+    name: 'Deka Tetra Pro',
+    slug: 'deka-tetra-pro',
+    manufacturer: 'Deka',
+    purpose:
+      'Laser CO2 fracționat pentru resurfacing cutanat, reducerea ridurilor fine, a cicatricilor acneice și îmbunătățirea texturii pielii.',
   },
   {
     name: 'BTL Lymphastim',

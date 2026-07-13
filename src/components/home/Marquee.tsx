@@ -2,13 +2,13 @@ import React from 'react'
 
 const DEFAULT_ITEMS = [
   'Lutronic Clarity II',
-  'HIFU Lifting',
+  'Asterasys Liftera',
+  'Lumenis NuEra Tight',
+  'HydraFacial Syndeo',
+  'BTL Lymphastim',
+  'Deka Tetra Pro',
   'Acid hialuronic',
   'Toxină botulinică',
-  'Radiofrecvență',
-  'Mezoterapie',
-  'HydraFacial',
-  'Epilare definitivă',
 ]
 
 interface MarqueeProps {

@@ -13,7 +13,7 @@ export const revalidate = 3600
 export const metadata = buildMetadata({
   title: defaultMetaTitle('Despre — clinică estetică premium Timișoara'),
   description:
-    'Maravo Clinic, clinică de estetică medicală premium în Timișoara. Echipă coordonată de Dr. Cristiana Voinescu, tehnologie certificată CE.',
+    'Maravo Clinic, clinică de estetică medicală premium în Timișoara. Echipă coordonată de Dr. Cristiana Voinescu, tehnologie certificată FDA și CE.',
   path: '/despre',
 })
 
@@ -35,7 +35,7 @@ const ABOUT_CONTENT = {
   values: [
     {
       title: 'Siguranță medicală',
-      text: 'Protocoale stricte, aparatură certificată CE și produse de la branduri recunoscute internațional — siguranța ta este pe primul loc.',
+      text: 'Protocoale stricte, aparatură certificată FDA și CE și produse de la branduri recunoscute internațional — siguranța ta este pe primul loc.',
     },
     {
       title: 'Rezultate naturale',
@@ -50,15 +50,15 @@ const ABOUT_CONTENT = {
       text: 'Un spațiu intim și o experiență premium, de la prima programare până la urmărirea rezultatelor.',
     },
   ],
-  // Reference to the equipment portfolio — keep aligned with the 7 seeded devices.
+  // Reference to the equipment portfolio — keep aligned with the seeded devices.
   technology: [
     'Lutronic Clarity II — laser dual pentru leziuni vasculare și pigmentare',
-    'Tehnologie HIFU pentru lifting non-chirurgical',
-    'Radiofrecvență (RF) pentru fermitatea pielii',
+    'Asterasys Liftera — HIFU pentru lifting non-chirurgical',
+    'Lumenis NuEra Tight — radiofrecvență pentru fermitatea pielii',
+    'HydraFacial Syndeo — curățare, exfoliere și hidratare intensă',
+    'BTL Lymphastim — presoterapie și drenaj limfatic',
+    'Deka Tetra Pro — laser CO2 fracționat pentru resurfacing cutanat',
     'Tratamente injectabile — toxină botulinică & acid hialuronic',
-    'Proceduri regenerative pentru revitalizarea tenului',
-    'Soluții pentru remodelare corporală',
-    'Tratamente dedicate îngrijirii părului',
   ],
 } as const
 
@@ -158,7 +158,7 @@ export default async function DesprePage() {
             Tehnologie & certificări
           </h2>
           <p>
-            Lucrăm exclusiv cu aparatură medicală certificată CE și cu produse de la branduri
+            Lucrăm exclusiv cu aparatură medicală certificată FDA și CE și cu produse de la branduri
             recunoscute la nivel internațional. Portofoliul nostru de echipamente acoperă o gamă largă
             de nevoi estetice și dermatologice:
           </p>
