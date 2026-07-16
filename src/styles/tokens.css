@@ -1541,6 +1541,21 @@ a.tarife-row__name:hover { color: var(--gold-dark); }
 }
 .tarife-empty__reset:hover { color: var(--charcoal); }
 
+/* Payment-in-instalments is a selling point, not fine print — it reads at full
+   contrast, above the muted legal disclaimer that follows it. */
+.tarife-note {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.7;
+  margin-top: 32px;
+  padding: 14px 18px;
+  background: var(--cream-dark);
+  border: 1px solid var(--taupe);
+  border-radius: 4px;
+}
+
 .tarife-disclaimer {
   font-family: var(--sans);
   font-size: 12px;

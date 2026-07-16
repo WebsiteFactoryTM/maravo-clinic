@@ -190,7 +190,7 @@ const PRICES: Record<string, { from: number; note?: string }> = {
   },
   'injectare-botox-riduri-de-expresie': {
     from: 700,
-    note: '1 zonă 700, 2 zone 1100, 3 zone 1400, 4 zone 1800 lei.',
+    note: '1 zonă 700, 2 zone 1100, 3 zone 1400, 4 zone 1800 lei. Complementar: lip lift 500 lei; lip lift + marionette + nose lift + menton 700 lei; etaj inferior complet 2500 lei.',
   },
   'injectare-botox-maseteri-bruxism': {
     from: 1500,

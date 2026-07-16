@@ -92,6 +92,8 @@ export default async function TarifePage() {
           <TarifeExplorer sections={sections} />
         )}
 
+        <p className="tarife-note">Plată în rate disponibilă pentru toate procedurile.</p>
+
         <p className="tarife-disclaimer">
           Tarifele afișate au caracter informativ și nu reprezintă o ofertă fermă. Pentru proceduri
           combinate sau pachete de tratament, contactează-ne pentru o evaluare individuală.
